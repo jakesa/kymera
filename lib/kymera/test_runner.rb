@@ -2,32 +2,25 @@ module Kymera
 
   class Runner
 
-    def initialize(tests, task=nil)
+    def initialize(task, tests)
+      @task = task
       @tests = tests
       @thread_max = Kymera::processor_count * 2
       @threads = []
-      @task = task
     end
 
     def run
-      #@tests.each do |test|
-      #  Kymera::wait_for {!thread_limit?}
-      #  @threads << Thread.new(test) {|t| }
-      #end
-      #
-      #@threads.each do |thread|
-      #  thread.join
-      #end
 
       1.upto(@thread_max) {
-        @threads << Thread.new(@tests.shift) {|test| 'run test' }
+        @threads << Thread.new(@tasks.shift) { |task| task.runner.run }
 
       }
 
       until @tests.nil?
-        
+        @threads << Thread.new(@tasks.shift) { |task| task.runner.run } unless thread_limit?
       end
 
+      get_results
 
     end
 
@@ -45,6 +38,14 @@ module Kymera
         end
       end
       count
+    end
+
+    def get_results
+      results =[]
+      @threads.each do |thread|
+        results << thread.value
+      end
+      results
     end
 
   end

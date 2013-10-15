@@ -17,5 +17,6 @@ module Kymera
         $stdout << "\n"
         refined_tests
     end
+
   end
 end
