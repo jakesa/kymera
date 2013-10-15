@@ -1,23 +1,43 @@
+require 'cucumber'
 module Kymera
 
   class Runner
 
-    def initialize(task, tests)
-      @task = task
+    def initialize(tests, options)
+      @options = options
       @tests = tests
       @thread_max = Kymera::processor_count * 2
       @threads = []
+
     end
 
     def run
-
+      #The below is debugging code
+      #$stdout << "\nMax threads: #{@thread_max}\n"
+      #$stdout << "Options: #{@options}\n"
+      #$stdout << "Tests: #{@tests}\n"
+      #$stdout << "Output: #{@options + ' ' + @tests.shift}\n"
       1.upto(@thread_max) {
-        @threads << Thread.new(@tasks.shift) { |task| task.runner.run }
+        test = @tests.shift
+        break if test.nil?
+        options = @options + ' ' + test
+        @threads << Thread.new(options) { |opt| Cucumber::Cli::execute}
 
       }
 
-      until @tests.nil?
-        @threads << Thread.new(@tasks.shift) { |task| task.runner.run } unless thread_limit?
+      #$stdout << "This is the @tests variable: #{@tests}\n"
+      until @tests.empty?
+        options = @options + ' ' + @tests.shift
+        @threads << Thread.new(options) { |opt| `bundle exec cucumber #{opt}` } unless thread_limit?
+      end
+
+      @threads.each do |thread|
+        thread.join
+      end
+
+      @threads.each do |thread|
+        p thread
+        puts thread.value
       end
 
       get_results
@@ -33,6 +53,7 @@ module Kymera
     def active_thread_count
       count = 0
       @threads.each do |thread|
+
         if thread.alive?
           count =+ 1
         end

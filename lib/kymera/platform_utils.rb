@@ -1,6 +1,6 @@
 module Kymera
 
-  def processor_count
+  def self.processor_count
     @processor_count ||= case RbConfig::CONFIG['host_os']
        when /darwin9/
          `hwprefs cpu_count`.to_i
@@ -23,7 +23,7 @@ module Kymera
      end
   end
 
-  def wait_for(&block)
+  def self.wait_for(&block)
     found = false
     i = 0
     until i == 60 || found
