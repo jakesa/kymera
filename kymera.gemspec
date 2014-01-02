@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Kymera::VERSION
   spec.authors       = ["jakesa"]
   spec.email         = ["jakes55214@yahoo.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = 'Execute cucumber tests in parallel'
+  spec.summary       = 'Execute cucumber tests in parallel'
   spec.homepage      = ""
   spec.license       = "MIT"
 

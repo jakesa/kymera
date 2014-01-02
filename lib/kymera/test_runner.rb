@@ -17,19 +17,31 @@ module Kymera
       #$stdout << "Options: #{@options}\n"
       #$stdout << "Tests: #{@tests}\n"
       #$stdout << "Output: #{@options + ' ' + @tests.shift}\n"
+      count = 0
+      $stdout << "#{@thread_max}\n"
       1.upto(@thread_max) {
+        count +=1
+        $stdout << "#{count}\n"
+
         test = @tests.shift
         break if test.nil?
-        options = @options + ' ' + test
-        @threads << Thread.new(options) { |opt| Cucumber::Cli::execute}
+        options = @options << test
+        @threads << Thread.new(options) { |opt| "bundle exec #{Cucumber::Cli::Main.new(opt).execute!}"}
 
       }
 
       #$stdout << "This is the @tests variable: #{@tests}\n"
-      until @tests.empty?
-        options = @options + ' ' + @tests.shift
-        @threads << Thread.new(options) { |opt| `bundle exec cucumber #{opt}` } unless thread_limit?
-      end
+
+      #until @tests.empty?
+      #  while !thread_limit?
+      #    options = @options + ' ' + @tests.shift
+      #    $stdout << "\nNumber of current threads: #{active_thread_count}"
+      #    $stdout << "\nNumber of threads: #{@threads.count}"
+      #    $stdout << "\nTests empty? #{@tests.empty?}\n"
+      #    $stdout << "Threads at their limit? #{thread_limit?}"
+      #    @threads << Thread.new(options) { |opt| Cucumber::Cli::Main.new(opt).execute!} unless thread_limit?
+      #  end
+      #end
 
       @threads.each do |thread|
         thread.join

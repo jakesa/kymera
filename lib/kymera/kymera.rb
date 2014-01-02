@@ -8,7 +8,7 @@ module Kymera
 
     def initialize(tests, options)
       @tests = tests
-      @options = options
+      @options = options.split(',')
     end
 
     def execute
