@@ -19,44 +19,84 @@ module Kymera
       #$stdout << "Output: #{@options + ' ' + @tests.shift}\n"
       count = 0
       $stdout << "#{@thread_max}\n"
+      comp_results = ''
       1.upto(@thread_max) {
         count +=1
         $stdout << "#{count}\n"
 
         test = @tests.shift
         break if test.nil?
-        options = @options << test
-        @threads << Thread.new(options) { |opt| "bundle exec #{Cucumber::Cli::Main.new(opt).execute!}"}
 
+        @threads << Thread.new(test, @options) do |tst, opt|
+          #results = ''
+          #options = ''
+          #opt.each do |option|
+          #  options += " #{option}"
+          #end
+          #
+          #io = IO.popen("bundle exec cucumber #{tst} #{options}")
+          #
+          #until io.eof? do
+          #  result = io.gets
+          #  puts result
+          #  results += result
+          #end
+          #comp_results += results
+          result = run_test(tst, opt)
+          comp_results += result
+        end
       }
 
       #$stdout << "This is the @tests variable: #{@tests}\n"
 
-      #until @tests.empty?
-      #  while !thread_limit?
-      #    options = @options + ' ' + @tests.shift
-      #    $stdout << "\nNumber of current threads: #{active_thread_count}"
-      #    $stdout << "\nNumber of threads: #{@threads.count}"
-      #    $stdout << "\nTests empty? #{@tests.empty?}\n"
-      #    $stdout << "Threads at their limit? #{thread_limit?}"
-      #    @threads << Thread.new(options) { |opt| Cucumber::Cli::Main.new(opt).execute!} unless thread_limit?
-      #  end
-      #end
+
+        #while !thread_limit?
+        #  test = @tests.shift
+        #  #$stdout << "\nNumber of current threads: #{active_thread_count}"
+        #  #$stdout << "\nNumber of threads: #{@threads.count}"
+        #  #$stdout << "\nTests empty? #{@tests.empty?}\n"
+        #  #$stdout << "Threads at their limit? #{thread_limit?}"
+        #  @threads << Thread.new(test,@options) do |tst,opt|
+        #    unless thread_limit? do
+        #      result = run_test(tst, opt)
+        #      comp_results << result
+        #    end
+        #    end
+        #  end
+        #end unless @tests.empty?
+
 
       @threads.each do |thread|
-        thread.join
+        thread.join(120)
       end
 
-      @threads.each do |thread|
-        p thread
-        puts thread.value
-      end
-
-      get_results
+      #TODO: JS - This is a stub at the moment until I get real result handling implemented
+      puts "#################################################################################################"
+      puts "These are the final results"
+      puts "#################################################################################################"
+      puts comp_results
 
     end
 
     private
+
+    def run_test(test, options)
+      results = ''
+      _options = ''
+      options.each do |option|
+        _options += " #{option}"
+      end
+
+      io = IO.popen("bundle exec cucumber #{test} #{_options}")
+
+      until io.eof? do
+        result = io.gets
+        puts result
+        results += result
+      end
+      results
+    end
+
 
     def thread_limit?
       active_thread_count >= @thread_max
