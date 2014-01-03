@@ -22,8 +22,6 @@ module Kymera
       @comp_results = ''
       1.upto(@thread_max) {
         count +=1
-        #$stdout << "#{count}\n"
-
         test = @tests.shift
         break if test.nil?
 
@@ -34,6 +32,7 @@ module Kymera
       }
 
       run_queue
+
       @threads.each do |thread|
         thread.join
       end
@@ -66,16 +65,15 @@ module Kymera
     end
 
     def run_queue
-      if !@tests.empty? && !thread_limit?
-        puts "Run Queue"
-        test = @tests.shift
-        @threads << Thread.new(test,@options) do |tst,opt|
-          result = run_test(tst, opt)
-          @comp_results << result
-        end
-        run_queue
-      elsif !@tests.empty? && thread_limit?
-        run_queue
+      until @tests.empty? do
+          unless thread_limit?
+            puts "Run Queue"
+            test = @tests.shift
+            @threads << Thread.new(test,@options) do |tst,opt|
+              result = run_test(tst, opt)
+              @comp_results << result
+            end
+          end
       end
     end
 
