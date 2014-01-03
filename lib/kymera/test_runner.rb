@@ -18,63 +18,31 @@ module Kymera
       #$stdout << "Tests: #{@tests}\n"
       #$stdout << "Output: #{@options + ' ' + @tests.shift}\n"
       count = 0
-      $stdout << "#{@thread_max}\n"
-      comp_results = ''
+      puts "Thread Max: #{@thread_max}"
+      @comp_results = ''
       1.upto(@thread_max) {
         count +=1
-        $stdout << "#{count}\n"
+        #$stdout << "#{count}\n"
 
         test = @tests.shift
         break if test.nil?
 
         @threads << Thread.new(test, @options) do |tst, opt|
-          #results = ''
-          #options = ''
-          #opt.each do |option|
-          #  options += " #{option}"
-          #end
-          #
-          #io = IO.popen("bundle exec cucumber #{tst} #{options}")
-          #
-          #until io.eof? do
-          #  result = io.gets
-          #  puts result
-          #  results += result
-          #end
-          #comp_results += results
           result = run_test(tst, opt)
-          comp_results += result
+          @comp_results += result
         end
       }
 
-      #$stdout << "This is the @tests variable: #{@tests}\n"
-
-
-        #while !thread_limit?
-        #  test = @tests.shift
-        #  #$stdout << "\nNumber of current threads: #{active_thread_count}"
-        #  #$stdout << "\nNumber of threads: #{@threads.count}"
-        #  #$stdout << "\nTests empty? #{@tests.empty?}\n"
-        #  #$stdout << "Threads at their limit? #{thread_limit?}"
-        #  @threads << Thread.new(test,@options) do |tst,opt|
-        #    unless thread_limit? do
-        #      result = run_test(tst, opt)
-        #      comp_results << result
-        #    end
-        #    end
-        #  end
-        #end unless @tests.empty?
-
-
+      run_queue
       @threads.each do |thread|
-        thread.join(120)
+        thread.join
       end
 
       #TODO: JS - This is a stub at the moment until I get real result handling implemented
       puts "#################################################################################################"
       puts "These are the final results"
       puts "#################################################################################################"
-      puts comp_results
+      puts @comp_results
 
     end
 
@@ -91,10 +59,24 @@ module Kymera
 
       until io.eof? do
         result = io.gets
-        puts result
+        #puts result
         results += result
       end
       results
+    end
+
+    def run_queue
+      if !@tests.empty? && !thread_limit?
+        puts "Run Queue"
+        test = @tests.shift
+        @threads << Thread.new(test,@options) do |tst,opt|
+          result = run_test(tst, opt)
+          @comp_results << result
+        end
+        run_queue
+      elsif !@tests.empty? && thread_limit?
+        run_queue
+      end
     end
 
 
@@ -107,7 +89,7 @@ module Kymera
       @threads.each do |thread|
 
         if thread.alive?
-          count =+ 1
+          count += 1
         end
       end
       count
