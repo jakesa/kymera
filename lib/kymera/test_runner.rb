@@ -9,6 +9,7 @@ module Kymera
       @thread_max = Kymera::processor_count * 2
       @threads = []
       ENV["AUTOTEST"] = "1" if $stdout.tty?
+      @start_time = Time.now
     end
 
     def run
@@ -27,23 +28,27 @@ module Kymera
       }
       run_queue
       clean_queue
-      wait_for_threads
       @threads.each do |thread|
-        puts "Waiting on thread: #{thread}"
+        #puts "Waiting on thread: #{thread}" #debugging
         thread.join
-        puts "Thread #{thread} finished"
+        #puts "Thread #{thread} finished" #debugging
       end
 
       #TODO: JS - This is a stub at the moment until I get real result handling implemented
       puts "#################################################################################################"
-      puts "These are the final results"
-      puts "#################################################################################################"
-      #puts Kymera::ResultsParser.summarize_results(@comp_results)
-      @comp_results
+      puts "Results"
+      puts Kymera::ResultsParser.summarize_results(@comp_results)
+      report_time_taken
     end
 
     private
 
+    def report_time_taken
+      run_time = ((Time.now - @start_time)/60).to_s.match(/(\d+.\d{2})/)[0]
+      puts "Took #{run_time}m"
+    end
+
+    #JS - This is a debugging method
     def wait_for_threads
       puts "This is the main thread: #{Thread.main}"
       puts "This is the thread list: \n#{Thread.list}"
