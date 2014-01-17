@@ -1,3 +1,5 @@
+require 'socket'
+
 module Kymera
 
   def self.processor_count
@@ -21,6 +23,11 @@ module Kymera
          $stderr.puts "Unknown architecture ( #{RbConfig::CONFIG["host_os"]} ) assuming one processor."
          1
      end
+  end
+
+
+  def self.host_name
+    Socket.gethostname
   end
 
   def self.wait_for(&block)
