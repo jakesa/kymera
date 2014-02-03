@@ -37,7 +37,7 @@ module Kymera
         puts "Number of groups: #{@test_groups.count}"
         run_in_groups(@test_groups, @options)
         run_group_queue(@test_groups, @options)
-        check_all_queues
+        #check_all_queues
         wait_for_threads
       else
         run_using_cell(@tests, @options)
@@ -187,6 +187,8 @@ module Kymera
       end
     end
 
+
+    #TODO: JS-this is a work in progress. Its an attempt at optimizing test execution
     def check_all_queues
       puts "Checking queues..."
       until actors_not_running?

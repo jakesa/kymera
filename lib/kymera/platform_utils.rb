@@ -26,6 +26,17 @@ module Kymera
   end
 
 
+  def self.ip_address
+    ips = Socket.ip_address_list
+    ip = ''
+    ips.each do |i|
+      ip = i.ip_address if i.ipv4? && i.ip_address.start_with?("10")
+    end
+    ip
+  end
+
+
+
   def self.host_name
     Socket.gethostname
   end
