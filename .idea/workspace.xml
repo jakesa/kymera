@@ -94,7 +94,7 @@
       <file leaf-file-name="node.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/kymera/node.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="7" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.65452653" vertical-offset="0" max-vertical-offset="1071">
+            <state line="47" column="9" selection-start="1326" selection-end="1326" vertical-scroll-proportion="0.433923" vertical-offset="382" max-vertical-offset="1394">
               <folding />
             </state>
           </provider>
@@ -700,7 +700,9 @@
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/rubystubs193/module.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="898" column="8" selection-start="30699" selection-end="30699" vertical-scroll-proportion="0.3326316" vertical-offset="14950" max-vertical-offset="18088" />
+        <state line="898" column="8" selection-start="30699" selection-end="30699" vertical-scroll-proportion="0.3326316" vertical-offset="14950" max-vertical-offset="18088">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/rubystubs193/thread.rb">
@@ -759,7 +761,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/node.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="7" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.65452653" vertical-offset="0" max-vertical-offset="1071">
+        <state line="47" column="9" selection-start="1326" selection-end="1326" vertical-scroll-proportion="0.433923" vertical-offset="382" max-vertical-offset="1394">
           <folding />
         </state>
       </provider>
