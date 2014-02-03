@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe8b228f-39c5-4d1c-a114-7c0c9683636f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/actors.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/node.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/actor.rb" afterPath="$PROJECT_DIR$/lib/kymera/actor.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera.rb" afterPath="$PROJECT_DIR$/lib/kymera.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/platform_utils.rb" afterPath="$PROJECT_DIR$/lib/kymera/platform_utils.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/test_runner.rb" afterPath="$PROJECT_DIR$/lib/kymera/test_runner.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/version.rb" afterPath="$PROJECT_DIR$/lib/kymera/version.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/node.rb" afterPath="$PROJECT_DIR$/lib/kymera/node.rb" />
     </list>
     <ignored path="kymera.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,7 +94,7 @@
       <file leaf-file-name="node.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/kymera/node.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="12" selection-start="501" selection-end="501" vertical-scroll-proportion="0.33224756" vertical-offset="0" max-vertical-offset="1037">
+            <state line="37" column="7" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.65452653" vertical-offset="0" max-vertical-offset="1071">
               <folding />
             </state>
           </provider>
@@ -160,10 +153,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1912" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -408,7 +401,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -766,7 +759,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/node.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="12" selection-start="501" selection-end="501" vertical-scroll-proportion="0.33224756" vertical-offset="0" max-vertical-offset="1037">
+        <state line="37" column="7" selection-start="1054" selection-end="1054" vertical-scroll-proportion="0.65452653" vertical-offset="0" max-vertical-offset="1071">
           <folding />
         </state>
       </provider>
