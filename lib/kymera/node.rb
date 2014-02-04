@@ -18,9 +18,7 @@ module Kymera
         @redis = Redis.new(:host => @redis_address, :port => @redis_port)
       else
         puts "WARNING: There was no redis information passed in. "
-
       end
-
 
     end
 
@@ -33,7 +31,7 @@ module Kymera
       else
         @redis_address = redis_address
         @redis_port = redis_port
-        @redis = Redis.new(:host => @redis_address, :port => @redis_port)
+        set_up_redis
       end
 
       server_address = "tcp://#{Kymera.ip_address}:5521"
@@ -53,23 +51,35 @@ module Kymera
 
     def register_node(redis_address = @redis_address, redis_port = @redis_port)
       if redis_address.nil? || redis_port.nil?
-        raise "A redis address and port number are required because Node was instantiate with a redis address or port."
+        raise "A redis address and port number are required because Node was not instantiate with a redis address or port."
       else
         @redis_address = redis_address
         @redis_port = redis_port
-        @redis = Redis.new(:host => @redis_address, :port => @redis_port)
+        set_up_redis
       end
 
       DCell.start :id => "node_#{Kymera.host_name}", :addr => "tcp://#{Kymera.ip_address}:5521",
                   :directory => {
                        :id   => 'node_server',
                        :addr => @redis.get(:node_server)
-                   }
+                   },
+                  :registry => {
+                      :adapter => 'redis',
+                      :host    => @redis_address,
+                      :port    => @redis_port.to_i
+                  }
 
     end
 
     def register_actors
       ActorGroup.run!
+    end
+
+    private
+
+    def set_up_redis
+      redis = Redis.new(:host => @redis_address, :port => @redis_port)
+      @redis = Redis::Namespace.new 'dcell_production', :redis => redis
     end
 
   end
