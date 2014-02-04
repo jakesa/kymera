@@ -1,5 +1,6 @@
 require 'cucumber'
 require_relative 'actor'
+require_relative 'config'
 module Kymera
 
   class Runner
@@ -12,12 +13,17 @@ module Kymera
       ENV["AUTOTEST"] = "1" if $stdout.tty?
       @start_time = Time.now
       @actors = []
-      if @runner_options[:number_of_actors].nil?
-        @actors << Actor.new("#{Kymera::host_name}", @thread_max)
+      if @runner_options[:distributed]
+        @actors = Kymera::Config.get_nodes
       else
-        count = 0
-        @runner_options[:number_of_actors].to_i.times{@actors << Actor.new("#{Kymera::host_name}_#{count += 1}", @thread_max, false) }
+        if @runner_options[:number_of_actors].nil?
+          @actors << Actor.new("#{Kymera::host_name}", @thread_max)
+        else
+          count = 0
+          @runner_options[:number_of_actors].to_i.times{@actors << Actor.new("#{Kymera::host_name}_#{count += 1}", @thread_max, false) }
+        end
       end
+
       @test_groups = []
       @group_size = @runner_options[:group_size].nil? ? 0 : @runner_options[:group_size]
       @threads = []
