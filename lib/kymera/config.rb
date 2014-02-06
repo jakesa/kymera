@@ -18,17 +18,11 @@ module Kymera
       [ENV['REDIS_ADDRESS'], ENV['REDIS_PORT']]
     end
 
-    def self.set_up_redis
-      redis_address, redis_port = self.get_redis_address
-      redis = Redis.new(:host => redis_address, :port => redis_port)
-      Redis::Namespace.new 'dcell_production', :redis => redis
-    end
-
-    #def self.get_nodes
-    #  redis = self.set_up_redis
-    #  redis.hkeys 'nodes'
+    #def self.set_up_redis
+    #  redis_address, redis_port = self.get_redis_address
+    #  redis = Redis.new(:host => redis_address, :port => redis_port)
+    #  Redis::Namespace.new 'dcell_production', :redis => redis
     #end
-
 
   end
 

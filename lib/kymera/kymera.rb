@@ -10,6 +10,10 @@ module Kymera
       @tests = tests
       @options = options.split(',')
       @runner_options = runner_options
+      #This is a registers the requesting machine with the Node network.  When done in this way, no actors will be registerd for this machine. This will throw an exception
+      #if the proper setup has not been preformed.
+      #Kymera::Node.register_node if @runner_options[:distributed]
+
     end
 
     def execute

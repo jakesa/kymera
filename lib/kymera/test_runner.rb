@@ -14,7 +14,8 @@ module Kymera
       @start_time = Time.now
       @actors = []
       if @runner_options[:distributed]
-        @actors = Kymera::Config.get_nodes
+        @actors = Kymera::Node.get_nodes
+        raise "There appear to be no Nodes with Actors registered to the Node network" if @actors.empty?
       else
         if @runner_options[:number_of_actors].nil?
           @actors << Actor.new("#{Kymera::host_name}", @thread_max)
@@ -41,8 +42,12 @@ module Kymera
         puts "Group size: #{@group_size}"
         group_tests
         puts "Number of groups: #{@test_groups.count}"
-        run_in_groups(@test_groups, @options)
-        run_group_queue(@test_groups, @options)
+        if @runner_options[:distributed]
+          run_distributed(@test_groups, @options)
+        else
+          run_in_groups(@test_groups, @options)
+          run_group_queue(@test_groups, @options)
+        end
         #check_all_queues
         wait_for_threads
       else
@@ -102,19 +107,23 @@ module Kymera
     #  }
     #end
 
-    #def run_distributed
-    #  1.upto(@thread_max) {
-    #    count +=1
-    #    test = @tests.shift
-    #    break if test.nil?
-    #
-    #    @threads << Thread.new(test, @options) do |tst, opt|
-    #      result = run_test(tst, opt)
-    #      @comp_results += result
-    #    end
-    #  }
-    #end
-    #
+    def run_distributed(tests, options)
+      count = 0
+      p @actors
+      @actors.each { |actor|
+        count +=1
+        p tests
+        test = tests.shift
+        p test
+        break if test.nil?
+
+        @threads << Thread.new(test, options) do |tst, opt|
+          result = actor[:actor_pool].run_tests(tst, opt)
+          @comp_results += result
+        end
+      }
+    end
+
     def run_in_groups(test_groups, options)
       count = 0
       1.upto(@actors.count){
@@ -140,6 +149,7 @@ module Kymera
     end
 
     def wait_for_threads
+      p @threads
       @threads.each {|t| t.join}
     end
 

@@ -31,7 +31,6 @@ module Kymera
 
       # Checks to see if the redis info was passed in. If it was not, it raises an error saying as much. Otherwise it will setup the redis client.
       if redis_address.nil? || redis_port.nil?
-        p 1
         redis_address, redis_port = Kymera::Config.get_redis_address
         #raise "A redis address and port number are required because Node was instantiate with a redis address or port."
       #else
@@ -40,15 +39,12 @@ module Kymera
       #  @redis_port = redis_port
       end
 
-      p 3
       server_address = "tcp://#{Kymera.ip_address}:5521"
 
       # This starts the node server using dcell.  If there was a problem it raises an error. However, when connecting to the redis server, if it is not there will just hang rather than raise an error
       # TODO - Add some timeout logic
       begin
-        p 4
-        p redis_address
-        p redis_port
+
         DCell.start :id => 'node_server', :addr => server_address,
                     :registry => {
                         :adapter => 'redis',
@@ -66,24 +62,24 @@ module Kymera
 
     #TODO - Clean up the retun value of this function. It's currntly a bunch a gobbly gook that wouldnt be useful to the user
     # This method registers the machine as a node capable of running tests with actors.  While this can be done on the same machine as the node_server, it is not recommended.
-    def self.register_node(redis_address = @redis_address, redis_port = @redis_port)
+    def self.register_node(redis_address = nil, redis_port = nil)
       if redis_address.nil? || redis_port.nil?
-        @redis_address, @redis_port = Kymera::Config.get_redis_address
-      else
-        @redis_address = redis_address
-        @redis_port = redis_port
-        set_up_redis
+        redis_address, redis_port = Kymera::Config.get_redis_address
+      #else
+      #  @redis_address = redis_address
+      #  @redis_port = redis_port
+      #
       end
-
+      redis = set_up_redis(redis_address, redis_port)
       DCell.start :id => "node_#{Kymera.host_name}", :addr => "tcp://#{Kymera.ip_address}:5521",
                   :directory => {
                        :id   => 'node_server',
-                       :addr => @redis.get(:node_server)
+                       :addr => redis.get(:node_server)
                    },
                   :registry => {
                       :adapter => 'redis',
-                      :host    => @redis_address,
-                      :port    => @redis_port.to_i
+                      :host    => redis_address,
+                      :port    => redis_port.to_i
                   }
 
 
@@ -93,14 +89,37 @@ module Kymera
       ActorGroup.run!
     end
 
+
+    #TODO - This unregister logic needs to be cleaned up a bit.  This current method causes the irb to hang.
+    #def self.unregister_node
+    #  begin
+    #    node = DCell.me
+    #    redis_address, redis_port = Kymera::Config.get_redis_address
+    #    redis = set_up_redis(redis_address, redis_port)
+    #    result = redis.hdel('nodes', node.id)
+    #  rescue
+    #    raise 'It appears that the config has not been set up or that the computer has not been registered to the node network.'
+    #  end
+    #  if result == 1
+    #    'Success'
+    #    raise SystemExit
+    #  else
+    #    'Failed'
+    #  end
+    #end
+
+
+
+    # This method returns all of the nodes that have a registered actor pool
     def self.get_nodes
       _nodes = []
       begin
         nodes = DCell.registry.nodes
         nodes.each do |node|
-          _nodes << DCell::Node[node]
+          _nodes << DCell::Node[node] if DCell::Node[node].all.include? :actor_pool
         end
-      rescue
+      rescue => e
+        puts e
         raise 'It appears that the config has not been set up or that the computer has not been registered to the node network.'
       end
       _nodes
@@ -109,9 +128,9 @@ module Kymera
     private
 
     # This adds the namespace to the redis instance that dcell uses.  Without this wrapper, the calls to the redis database would fail.
-    def set_up_redis
-      redis = Redis.new(:host => @redis_address, :port => @redis_port)
-      @redis = Redis::Namespace.new 'dcell_production', :redis => redis
+    def self.set_up_redis(redis_address, redis_port)
+      redis = Redis.new(:host => redis_address, :port => redis_port)
+      Redis::Namespace.new 'dcell_production', :redis => redis
     end
 
   end

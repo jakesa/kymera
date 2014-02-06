@@ -65,7 +65,7 @@ module Kymera
       end
 
       puts "Running test: #{test}"
-      io = IO.popen("bundle exec cucumber #{test} #{_options}")
+      io = Object::IO.popen("bundle exec cucumber #{test} #{_options}")
       until io.eof? do
         result = io.gets
         #TODO: JS - the below piece of code should be triggered by some kind of parameter that is passed as runtime
