@@ -37,13 +37,13 @@ module Kymera
     def run
       @comp_results = ''
       puts "Running tests with #{@actors.count} actors using #{@thread_max} processes per actor"
-      #puts "Running tests distributed across the network" if @runner_options[:distributed]
       if @group_size > 0
         puts "Group size: #{@group_size}"
         group_tests
         puts "Number of groups: #{@test_groups.count}"
         if @runner_options[:distributed]
           run_distributed(@test_groups, @options)
+          #run_group_queue(@test_groups, @options)
         else
           run_in_groups(@test_groups, @options)
           run_group_queue(@test_groups, @options)
@@ -54,16 +54,19 @@ module Kymera
         run_using_cell(@tests, @options)
       end
 
-      close_actors
+
       #puts @comp_results
       report_results
+      Kymera::Node.unregister_node if @runner_options[:distributed]
+      close_actors
     end
 
     private
 
     def report_results
-      puts "#################################################################################################"
-      puts "Results"
+      puts "######################################"
+      puts "              Results"
+      puts "######################################"
       puts Kymera::ResultsParser.summarize_results(@comp_results)
       report_time_taken
     end
@@ -80,41 +83,14 @@ module Kymera
       end
     end
 
-    #def group_size
-    #  size = (@tests.count/@thread_max)
-    #  if size < 1
-    #    size = 1
-    #  elsif size == 1
-    #    size = 2
-    #  elsif size > 5
-    #    size = 5
-    #  end
-    #  size
-    #end
-
-    #def run_locally
-    #  1.upto(@thread_max){
-    #    tests = @test_groups.pop
-    #    break if tests.nil?
-    #    @threads << Thread.new(tests, @options){|_tests, options|
-    #      results = ''
-    #      _tests.each do |test|
-    #        result = run_test(test, options)
-    #        results += result
-    #      end
-    #      @comp_results += results
-    #    }
-    #  }
-    #end
-
     def run_distributed(tests, options)
       count = 0
-      p @actors
+      #p @actors
       @actors.each { |actor|
         count +=1
-        p tests
+        #p tests
         test = tests.shift
-        p test
+        #p test
         break if test.nil?
 
         @threads << Thread.new(test, options) do |tst, opt|
@@ -149,7 +125,7 @@ module Kymera
     end
 
     def wait_for_threads
-      p @threads
+      #p @threads
       @threads.each {|t| t.join}
     end
 
@@ -170,7 +146,7 @@ module Kymera
     #  Process.wait2(io.pid)
     #  results
     #end
-
+    #
     #def run_queue
     #  until @tests.empty? do
     #      unless thread_limit?
@@ -184,7 +160,7 @@ module Kymera
     #      end
     #  end
     #end
-
+    #
 
     def run_group_queue(test_groups, options)
 

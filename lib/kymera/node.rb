@@ -91,22 +91,23 @@ module Kymera
 
 
     #TODO - This unregister logic needs to be cleaned up a bit.  This current method causes the irb to hang.
-    #def self.unregister_node
-    #  begin
-    #    node = DCell.me
-    #    redis_address, redis_port = Kymera::Config.get_redis_address
-    #    redis = set_up_redis(redis_address, redis_port)
-    #    result = redis.hdel('nodes', node.id)
-    #  rescue
-    #    raise 'It appears that the config has not been set up or that the computer has not been registered to the node network.'
-    #  end
-    #  if result == 1
-    #    'Success'
-    #    raise SystemExit
-    #  else
-    #    'Failed'
-    #  end
-    #end
+    def self.unregister_node
+      #begin
+        node = DCell.me
+        redis_address, redis_port = Kymera::Config.get_redis_address
+        redis = set_up_redis(redis_address, redis_port)
+        result = redis.hdel('nodes', node.id)
+      #rescue => e
+      #  puts e
+      #  raise 'It appears that the config has not been set up or that the computer has not been registered to the node network.'
+      #end
+      if result == 1
+        'Node Successfully Unregistered'
+        raise SystemExit
+      else
+        'Failed'
+      end
+    end
 
 
 
