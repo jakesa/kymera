@@ -17,15 +17,15 @@ module Kymera
     end
 
     def is_active?
-      alive = []
-      puts @threads
-      @threads.each {|t| puts t.alive?; puts t.alive?.class; alive << t.alive?}
-      alive.include? true
+      active_thread_count > 0
     end
 
     def run_tests(tests, options)
       #puts "These are the tests: #{tests}"
       @results = '' #This is to reset the results for multiple runs on this actor
+
+      puts "Tests passed in: #{tests}"
+
       if tests.nil? or tests == ''
         raise "There were no tests passed in."
       end

@@ -14,8 +14,8 @@ module Kymera
       @start_time = Time.now
       @actors = []
       if @runner_options[:distributed]
-        @actors = Kymera::Node.get_nodes
-        raise "There appear to be no Nodes with Actors registered to the Node network" if @actors.empty?
+        @nodes = Kymera::Node.get_nodes
+        raise "There appear to be no Nodes with Actors registered to the Node network" if @nodes.empty?
       else
         if @runner_options[:number_of_actors].nil?
           @actors << Actor.new("#{Kymera::host_name}", @thread_max)
@@ -43,7 +43,7 @@ module Kymera
         puts "Number of groups: #{@test_groups.count}"
         if @runner_options[:distributed]
           run_distributed(@test_groups, @options)
-          #run_group_queue(@test_groups, @options)
+          #run_group_dist_queue(@test_groups, @options)
         else
           run_in_groups(@test_groups, @options)
           run_group_queue(@test_groups, @options)
@@ -58,7 +58,7 @@ module Kymera
       #puts @comp_results
       report_results
       Kymera::Node.unregister_node if @runner_options[:distributed]
-      close_actors
+      close_actors unless @runner_options[:distributed]
     end
 
     private
@@ -86,17 +86,17 @@ module Kymera
     def run_distributed(tests, options)
       count = 0
       #p @actors
-      @actors.each { |actor|
+      @nodes.each { |node|
         count +=1
         #p tests
         test = tests.shift
         #p test
         break if test.nil?
-
-        @threads << Thread.new(test, options) do |tst, opt|
-          result = actor[:actor_pool].run_tests(tst, opt)
-          @comp_results += result
-        end
+          @threads << Thread.new(test, options) do |tst, opt|
+            puts "This is the test passed to the actor: #{tst}"
+            result = node.run_tests(tst, opt)
+            @comp_results += result
+          end
       }
     end
 
@@ -113,6 +113,7 @@ module Kymera
         count += 1
       }
     end
+
 
     def run_using_cell(tests, options)
       results = @actors[0].run_tests(tests,options)
@@ -179,6 +180,22 @@ module Kymera
       end
     end
 
+    def run_group_dist_queue(test_groups, options)
+      until test_groups.empty? do
+        unless get_available_dist_actors.empty?
+          get_available_dist_actors.each do |actor|
+            tests = test_groups.shift
+            #clean_queue
+            @threads << Thread.new(tests, options){|_tests, _options|
+              puts "Run Queue remaining: #{test_groups.count}"
+              results = actor.run_tests(_tests, _options)
+              @comp_results << results
+            } unless tests.nil?
+          end
+        end
+      end
+    end
+
 
     #TODO: JS-this is a work in progress. Its an attempt at optimizing test execution
     def check_all_queues
@@ -201,6 +218,14 @@ module Kymera
 
     def get_available_actors
       @actors.select {|actor| actor.tests.empty?}
+    end
+
+    def get_available_dist_actors
+      actors = []
+      @nodes.each do |node|
+        node.actors.each {|actor| actors << node[actor] if node[actor].tests.empty}
+      end
+      actors
     end
 
     def get_still_running_actors

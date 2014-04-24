@@ -60,7 +60,7 @@ module Kymera
     end
 
 
-    #TODO - Clean up the retun value of this function. It's currntly a bunch a gobbly gook that wouldnt be useful to the user
+    #TODO - Clean up the retun value of this function. It's currntly a bunch of junk that wouldnt be useful to the user
     # This method registers the machine as a node capable of running tests with actors.  While this can be done on the same machine as the node_server, it is not recommended.
     def self.register_node(redis_address = nil, redis_port = nil)
       if redis_address.nil? || redis_port.nil?
@@ -85,12 +85,23 @@ module Kymera
 
     end
 
+    #def self.register_actors
+    #  ActorGroup.run!
+    #end
+
     def self.register_actors
-      ActorGroup.run!
+      processor_count = Kymera::processor_count * 2
+      count = 1
+      begin
+        1.upto(processor_count){ Actor.supervise_as("actor_#{Kymera::host_name}_#{count}".to_sym, "actor_#{Kymera::host_name}_#{count}", 2); count += 1}
+        puts "The following actors were created: #{get_local_actors}"
+      rescue => e
+        puts e
+        puts "There was a problem with creating one or more of the actors"
+      end
     end
 
 
-    #TODO - This unregister logic needs to be cleaned up a bit.  This current method causes the irb to hang.
     def self.unregister_node
       #begin
         node = DCell.me
@@ -102,11 +113,15 @@ module Kymera
       #  raise 'It appears that the config has not been set up or that the computer has not been registered to the node network.'
       #end
       if result == 1
-        'Node Successfully Unregistered'
+        puts 'Node Successfully Unregistered'
         raise SystemExit
       else
         'Failed'
       end
+    end
+
+    def self.unregister_actors
+      DCell.me.actors {|actor| actor.terminate}
     end
 
 
@@ -117,13 +132,29 @@ module Kymera
       begin
         nodes = DCell.registry.nodes
         nodes.each do |node|
-          _nodes << DCell::Node[node] if DCell::Node[node].all.include? :actor_pool
+          _nodes << DCell::Node[node] if DCell::Node[node].all.include? ("actor_#{node.gsub('node_', '')}_1".to_sym)
         end
       rescue => e
         puts e
         raise 'It appears that the config has not been set up or that the computer has not been registered to the node network.'
       end
       _nodes
+    end
+
+
+    def get_all_actors
+      actors = []
+      begin
+        nodes = self.get_nodes
+        nodes.each do |node|
+          node.actors.each {|actor| actors << actor}
+        end
+      end
+      actors
+    end
+
+    def self.get_local_actors
+      DCell.me.actors
     end
 
     private
