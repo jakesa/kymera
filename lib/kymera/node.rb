@@ -130,9 +130,18 @@ module Kymera
     def self.get_nodes
       _nodes = []
       begin
+        p "###############Getting Nodes###################################"
         nodes = DCell.registry.nodes
         nodes.each do |node|
-          _nodes << DCell::Node[node] if DCell::Node[node].all.include? ("actor_#{node.gsub('node_', '')}_1".to_sym)
+          p "######{node}########"
+          p "actor_#{node.gsub('node_', '')}_1".to_sym
+          p DCell::Node[node].all.include? ("actor_#{node.gsub('node_', '')}_1".to_sym)
+           if DCell::Node[node].all.include? ("actor_#{node.gsub('node_', '')}_1".to_sym)
+             p "Inside the loop: #{node}"
+             DCell::Node[node].all.each do |n|
+               _nodes << DCell::Node[node][n] if n.to_s.include?("actor_#{node.gsub('node_', '')}")
+             end
+           end
         end
       rescue => e
         puts e

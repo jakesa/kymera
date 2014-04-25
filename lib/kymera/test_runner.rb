@@ -15,6 +15,7 @@ module Kymera
       @actors = []
       if @runner_options[:distributed]
         @nodes = Kymera::Node.get_nodes
+        #p "Those are the nodes that were returned #{@nodes}"
         raise "There appear to be no Nodes with Actors registered to the Node network" if @nodes.empty?
       else
         if @runner_options[:number_of_actors].nil?
