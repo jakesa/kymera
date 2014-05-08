@@ -18,11 +18,15 @@ module Kymera
 
     def execute
       tests = Kymera::TestParser.new(@tests, @options).parse_tests
-      results = Kymera::Runner.new(tests, @options, @runner_options).run
-      $stdout << results
+
+      #start_time = Time.now
+       @results = Kymera::Runner.new(tests, @options, @runner_options).run
+      #while t.alive?
+      #  $stdout << "\rRun time(#{(Time.now - start_time).gmtime.strftime('%T')}"
+      #end
+      #t.join
+      $stdout << @results
     end
-
-
 
   end
 

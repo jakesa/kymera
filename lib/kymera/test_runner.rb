@@ -36,6 +36,8 @@ module Kymera
     end
 
     def run
+      start_time = Time.now
+      t = Thread.new {
       @comp_results = ''
       puts "Running tests with #{@actors.count} actors using #{@thread_max} processes per actor"
       if @group_size > 0
@@ -59,7 +61,18 @@ module Kymera
       #puts @comp_results
       report_results
       Kymera::Node.unregister_node if @runner_options[:distributed]
+
+      #TODO: The below line may be a problem. Closing actors like this is proving to be problamatic
       close_actors unless @runner_options[:distributed]
+      }
+
+      while t.alive? do
+        $stdout << "\rRun time(#{Time.at(Time.now - start_time).gmtime.strftime('%T')})\r"
+        t.join(1)
+      end
+
+
+
     end
 
     private

@@ -102,16 +102,13 @@ module Kymera
     end
 
 
+    #unregister_node will remove this node from the node server making it unavailable for test execution
     def self.unregister_node
-      #begin
-        node = DCell.me
-        redis_address, redis_port = Kymera::Config.get_redis_address
-        redis = set_up_redis(redis_address, redis_port)
-        result = redis.hdel('nodes', node.id)
-      #rescue => e
-      #  puts e
-      #  raise 'It appears that the config has not been set up or that the computer has not been registered to the node network.'
-      #end
+      node = DCell.me
+      redis_address, redis_port = Kymera::Config.get_redis_address
+      redis = set_up_redis(redis_address, redis_port)
+      result = redis.hdel('nodes', node.id)
+
       if result == 1
         puts 'Node Successfully Unregistered'
         raise SystemExit
@@ -120,9 +117,11 @@ module Kymera
       end
     end
 
-    def self.unregister_actors
-      DCell.me.actors {|actor| actor.terminate}
-    end
+
+    #TODO: This is not working correctly. Will have to come back and take a look later
+    #def self.unregister_actors
+    #  DCell.me.actors.each {|actor| DCell.me[actor].terminate}
+    #end
 
 
 
