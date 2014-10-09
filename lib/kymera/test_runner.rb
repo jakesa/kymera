@@ -12,17 +12,19 @@ module Kymera
       @thread_max =  @runner_options[:max_thread_size].nil? ? Kymera::processor_count * 2 : @runner_options[:max_thread_size]
       ENV["AUTOTEST"] = "1" if $stdout.tty?
       @start_time = Time.now
-      @actors = []
+      @nodes = []
       if @runner_options[:distributed]
         @nodes = Kymera::Node.get_nodes
         #p "Those are the nodes that were returned #{@nodes}"
+
         raise "There appear to be no Nodes with Actors registered to the Node network" if @nodes.empty?
       else
         if @runner_options[:number_of_actors].nil?
-          @actors << Actor.new("#{Kymera::host_name}", @thread_max)
+          p "number of actors were nil"
+          @nodes << Actor.new("#{Kymera::host_name}", @thread_max)
         else
           count = 0
-          @runner_options[:number_of_actors].to_i.times{@actors << Actor.new("#{Kymera::host_name}_#{count += 1}", @thread_max, false) }
+          @runner_options[:number_of_actors].to_i.times{@nodes << Actor.new("#{Kymera::host_name}_#{count += 1}", @thread_max, false) }
         end
       end
 
@@ -39,17 +41,18 @@ module Kymera
       start_time = Time.now
       t = Thread.new {
       @comp_results = ''
-      puts "Running tests with #{@actors.count} actors using #{@thread_max} processes per actor"
+      puts "Running tests with #{@nodes.count} actors using #{@thread_max} processes per actor"
       if @group_size > 0
         puts "Group size: #{@group_size}"
         group_tests
         puts "Number of groups: #{@test_groups.count}"
         if @runner_options[:distributed]
           run_distributed(@test_groups, @options)
-          #run_group_dist_queue(@test_groups, @options)
+          run_group_dist_queue(@test_groups, @options)
         else
           run_in_groups(@test_groups, @options)
-          run_group_queue(@test_groups, @options)
+          #run_group_queue(@test_groups, @options)
+          run_group_dist_queue(@test_groups, @options)
         end
         #check_all_queues
         wait_for_threads
@@ -86,7 +89,7 @@ module Kymera
     end
 
     def close_actors
-      @actors.each {|actor| actor.terminate}
+      @nodes.each {|actor| actor.terminate}
     end
 
 
@@ -99,29 +102,29 @@ module Kymera
 
     def run_distributed(tests, options)
       count = 0
-      #p @actors
-      @nodes.each { |node|
-        count +=1
+      1.upto(@nodes.count){
+
         #p tests
         test = tests.shift
         #p test
         break if test.nil?
-          @threads << Thread.new(test, options) do |tst, opt|
+          @threads << Thread.new(test, options, count) do |tst, opt, ct|
             puts "This is the test passed to the actor: #{tst}"
-            result = node.run_tests(tst, opt)
+            result = @nodes[ct].run_tests(tst, opt)
             @comp_results += result
           end
+        count +=1
       }
     end
 
     def run_in_groups(test_groups, options)
       count = 0
-      1.upto(@actors.count){
+      1.upto(@nodes.count){
         puts "This is the count: #{count}"
         tests = test_groups.pop
         break if tests.nil? || tests.empty?
         @threads << Thread.new(tests, options, count) {|tst, opt, ct|
-          result = @actors[ct].run_tests(tst, opt)
+          result = @nodes[ct].run_tests(tst, opt)
           @comp_results << result
         }
         count += 1
@@ -130,7 +133,7 @@ module Kymera
 
 
     def run_using_cell(tests, options)
-      results = @actors[0].run_tests(tests,options)
+      results = @nodes[0].run_tests(tests,options)
       @comp_results << results
     end
 
@@ -195,16 +198,35 @@ module Kymera
     end
 
     def run_group_dist_queue(test_groups, options)
-      until test_groups.empty? do
-        unless get_available_dist_actors.empty?
-          get_available_dist_actors.each do |actor|
-            tests = test_groups.shift
-            #clean_queue
-            @threads << Thread.new(tests, options){|_tests, _options|
+      while !test_groups.empty? do
+        p "Checking queue\n"
+        #unless get_available_dist_actors.empty?
+        #  get_available_dist_actors.each do |actor|
+        #    tests = test_groups.shift
+        #    clean_queue
+        #    @threads << Thread.new(tests, options, actor){|_tests, _options, act|
+        #      puts "Run Queue remaining: #{test_groups.count}"
+        #      results = act.run_tests(_tests, _options)
+        #      @comp_results << results
+        #    } unless tests.nil?
+        #  end
+        if get_available_dist_actors.empty?
+          p "There were no available actors\n"
+        else
+          tests = test_groups.shift
+          if tests.nil?
+            p "There were no tests to run\n"
+          else
+            p "Cleaning thread queue\n"
+            clean_queue
+            p "Starting new test\n"
+            get_available_dist_actors.each do |actor|
+            @threads << Thread.new(tests, options, actor){|_tests, _options, act|
               puts "Run Queue remaining: #{test_groups.count}"
-              results = actor.run_tests(_tests, _options)
-              @comp_results << results
-            } unless tests.nil?
+              results = act.run_tests(_tests, _options)
+              @comp_results << results}
+            end
+
           end
         end
       end
@@ -231,25 +253,25 @@ module Kymera
     end
 
     def get_available_actors
-      @actors.select {|actor| actor.tests.empty?}
+      @nodes.select {|actor| actor.tests.empty?}
     end
 
     def get_available_dist_actors
-      actors = []
-      @nodes.each do |node|
-        node.actors.each {|actor| actors << node[actor] if node[actor].tests.empty}
-      end
-      actors
+      #actors = []
+      #@nodes.each do |node|
+      #  node.actors.each {|actor| actors << node[actor] if node[actor].tests.empty}
+      #end
+      #actors
+      @nodes.select {|actor| actor.tests.empty?}
     end
 
     def get_still_running_actors
-      @actors.select {|actor| puts actor.id; puts actor.tests;!actor.tests.empty?}
+      @nodes.select {|actor| puts actor.id; puts actor.tests;!actor.tests.empty?}
     end
 
     def actors_not_running?
       actors = []
-      puts @actors
-      @actors.each {|a| puts a.is_active?; actors << a.is_active?}
+      @nodes.each {|a| puts a.is_active?; actors << a.is_active?}
       puts actors
       puts actors.include? true
       !actors.include? true

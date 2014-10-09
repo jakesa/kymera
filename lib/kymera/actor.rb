@@ -1,13 +1,11 @@
-require 'celluloid'
 
 module Kymera
 
   class Actor
-    include Celluloid
 
     attr_accessor :id, :results, :process_count, :tests
 
-    def initialize(id, process_count, output = true, tests = [])
+    def initialize(id, process_count, output = false, tests = [])
       @id = id
       @process_count = process_count
       @threads = []

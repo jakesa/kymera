@@ -3,7 +3,6 @@ require_relative 'actor'
 module Kymera
 
   class Agent
-    include 'celluloid'
 
     attr_reader :actors, :results, :tests
     def initialize(actor_count = Kymera::processor_count)
