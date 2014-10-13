@@ -102,7 +102,7 @@ module Kymera
       #Note: the output of this is just for debugging (to see that its actually looping). Will take out at a later time
       while !@close do
         text = "\r"
-        text << "working"
+        text << "Online"
         space = " "
         0.upto(2) do
           STDOUT.print text

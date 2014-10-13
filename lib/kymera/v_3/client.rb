@@ -14,6 +14,7 @@ module Kymera
     def send_message(message)
       @socket.send_string(message)
       reply = ''
+      #This is the handle for getting the reply back
       unless @socket.recv_string(reply) == -1
         @socket.recv_string(reply)
         puts reply

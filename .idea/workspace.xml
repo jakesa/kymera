@@ -6,20 +6,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe8b228f-39c5-4d1c-a114-7c0c9683636f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/v_3/client.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/spec/client_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/v_3/worker.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/spec/worker_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_3/broker.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_3/broker.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/spec/broker_spec.rb" afterPath="$PROJECT_DIR$/lib/spec/broker_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_2/client.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_2/client.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_3/kymera.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_3/kymera.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_3/messaging_system_config.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_3/messaging_system_config.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_2/worker.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_2/worker.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_3/client.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_3/client.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/kymera.iml" afterPath="$PROJECT_DIR$/.idea/kymera.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_3/worker.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_3/worker.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="kymera.iws" />
     <ignored path=".idea/workspace.xml" />
+    <file path="/Dummy.txt" changelist="fe8b228f-39c5-4d1c-a114-7c0c9683636f" time="1412935190513" ignored="false" />
+    <file path="/worker.rb" changelist="fe8b228f-39c5-4d1c-a114-7c0c9683636f" time="1413013918699" ignored="false" />
+    <file path="/broker.rb" changelist="fe8b228f-39c5-4d1c-a114-7c0c9683636f" time="1412942244850" ignored="false" />
+    <file path="/client.rb" changelist="fe8b228f-39c5-4d1c-a114-7c0c9683636f" time="1412946208443" ignored="false" />
+    <file path="/broker_spec.rb" changelist="fe8b228f-39c5-4d1c-a114-7c0c9683636f" time="1413008139476" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,13 +28,13 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/kymera@Run_spec__broker_spec___kymera.coverage" NAME="Run spec 'broker_spec': kymera Coverage Results" MODIFIED="1412877035304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" MODULE_NAME="kymera" />
-    <SUITE FILE_PATH="coverage/kymera@req_rep__1_.coverage" NAME="req_rep (1) Coverage Results" MODIFIED="1403049763761" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/spec" MODULE_NAME="kymera" />
-    <SUITE FILE_PATH="coverage/kymera@hello_world.coverage" NAME="hello_world Coverage Results" MODIFIED="1403020505781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/spec" MODULE_NAME="kymera" />
-    <SUITE FILE_PATH="coverage/kymera@Kymera__Cli__kymera.coverage" NAME="Kymera::Cli: kymera Coverage Results" MODIFIED="1388712811535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" MODULE_NAME="kymera" />
-    <SUITE FILE_PATH="coverage/kymera@pub_sub.coverage" NAME="pub_sub Coverage Results" MODIFIED="1403109013155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/spec" MODULE_NAME="kymera" />
-    <SUITE FILE_PATH="coverage/kymera@hello_world_client__1_.coverage" NAME="hello_world_client (1) Coverage Results" MODIFIED="1403048444150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/spec" MODULE_NAME="kymera" />
-    <SUITE FILE_PATH="coverage/kymera@Run_spec__socket_controller_spec___kymera.coverage" NAME="Run spec 'socket_controller_spec': kymera Coverage Results" MODIFIED="1403649700439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" MODULE_NAME="kymera" />
+    <SUITE FILE_PATH="coverage/kymera@hello_world_client__1_.coverage" NAME="hello_world_client (1) Coverage Results" MODIFIED="1403048444150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/spec" />
+    <SUITE FILE_PATH="coverage/kymera@Run_spec__socket_controller_spec___kymera.coverage" NAME="Run spec 'socket_controller_spec': kymera Coverage Results" MODIFIED="1403649700439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" />
+    <SUITE FILE_PATH="coverage/kymera@Run_spec__broker_spec___kymera.coverage" NAME="Run spec 'broker_spec': kymera Coverage Results" MODIFIED="1412877035304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" />
+    <SUITE FILE_PATH="coverage/kymera@hello_world.coverage" NAME="hello_world Coverage Results" MODIFIED="1403020505781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/spec" />
+    <SUITE FILE_PATH="coverage/kymera@pub_sub.coverage" NAME="pub_sub Coverage Results" MODIFIED="1403109013155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/spec" />
+    <SUITE FILE_PATH="coverage/kymera@Kymera__Cli__kymera.coverage" NAME="Kymera::Cli: kymera Coverage Results" MODIFIED="1388712811535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" />
+    <SUITE FILE_PATH="coverage/kymera@req_rep__1_.coverage" NAME="req_rep (1) Coverage Results" MODIFIED="1403049763761" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/spec" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -51,34 +51,25 @@
       <file leaf-file-name="client.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_2/client.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="9" selection-start="689" selection-end="748" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+            <state line="24" column="9" selection-start="689" selection-end="748" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="broker.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="broker.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/broker.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="111" column="11" selection-start="3709" selection-end="3709" vertical-scroll-proportion="0.6485549" vertical-offset="1326" max-vertical-offset="2329">
+            <state line="62" column="42" selection-start="2222" selection-end="2222" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="worker.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/kymera/v_2/worker.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="61" selection-start="1132" selection-end="1159" vertical-scroll-proportion="0.0" vertical-offset="87" max-vertical-offset="1938">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="worker.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="worker.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/worker.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="14" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+            <state line="38" column="29" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.625">
               <folding />
             </state>
           </provider>
@@ -87,7 +78,7 @@
       <file leaf-file-name="client.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/client.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="38" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+            <state line="16" column="52" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -96,7 +87,7 @@
       <file leaf-file-name="socket_controller_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/spec/socket_controller_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="57" selection-start="57" selection-end="57" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+            <state line="0" column="57" selection-start="57" selection-end="57" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -105,7 +96,7 @@
       <file leaf-file-name="broker_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/spec/broker_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="19" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
+            <state line="8" column="0" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -114,7 +105,7 @@
       <file leaf-file-name="worker_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/spec/worker_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="13" selection-start="131" selection-end="131" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
+            <state line="2" column="13" selection-start="79" selection-end="79" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -123,7 +114,7 @@
       <file leaf-file-name="client_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/spec/client_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="42" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
+            <state line="3" column="42" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -132,7 +123,7 @@
       <file leaf-file-name="messaging_system_config.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/messaging_system_config.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="7" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+            <state line="8" column="7" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -156,29 +147,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/spec/prelim_tests_spec.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/results_parser.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/test_parser.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/server.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/platform_utils.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/config.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/version.rb" />
-        <option value="$PROJECT_DIR$/kymera.gemspec" />
-        <option value="$PROJECT_DIR$/Gemfile" />
-        <option value="$PROJECT_DIR$/lib/kymera/kymera.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/test_runner.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/actors.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/actor.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/agent.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/node.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/receiver.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/requester.rb" />
-        <option value="$PROJECT_DIR$/lib/spec/hello_world.rb" />
-        <option value="$PROJECT_DIR$/lib/spec/hello_world_client.rb" />
-        <option value="$PROJECT_DIR$/lib/spec/req_rep.rb" />
-        <option value="$PROJECT_DIR$/lib/spec/pub_sub.rb" />
-        <option value="$PROJECT_DIR$/lib/spec/socket_controller_spec.rb" />
         <option value="$PROJECT_DIR$/lib/spec/worker_client_spec.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/v_2/platform_utils.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/v_2/socket_controller.rb" />
@@ -191,18 +159,18 @@
         <option value="$PROJECT_DIR$/lib/kymera/v_3/messaging_system_config.rb" />
         <option value="$PROJECT_DIR$/lib/spec/worker_spec.rb" />
         <option value="$PROJECT_DIR$/lib/spec/client_spec.rb" />
-        <option value="$PROJECT_DIR$/lib/spec/broker_spec.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/v_3/client.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/v_3/worker.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/v_3/broker.rb" />
+        <option value="$PROJECT_DIR$/lib/kymera/v_3/client.rb" />
+        <option value="$PROJECT_DIR$/lib/spec/broker_spec.rb" />
+        <option value="$PROJECT_DIR$/lib/kymera/v_3/worker.rb" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1083" />
-    <option name="y" value="507" />
-    <option name="width" value="1080" />
-    <option name="height" value="1056" />
+    <option name="x" value="184" />
+    <option name="y" value="22" />
+    <option name="width" value="1307" />
+    <option name="height" value="964" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -230,6 +198,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -344,19 +313,18 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="options.lastSelected" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="FullScreen" value="false" />
+    <property name="options.lastSelected" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
     <property name="SearchEverywhereHistory" value="s&#10;@" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FullScreen" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -373,8 +341,12 @@
       <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
       <envs />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/spec/req_rep.rb" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
@@ -391,8 +363,12 @@
       <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
       <envs />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/spec/req_rep.rb" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
@@ -409,8 +385,12 @@
       <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
       <envs />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/spec/pub_sub.rb" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
@@ -430,8 +410,12 @@
         <env name="JRUBY_OPTS" value="-X+O" />
       </envs>
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/spec/socket_controller_spec.rb" />
@@ -443,7 +427,6 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
@@ -461,8 +444,12 @@
         <env name="JRUBY_OPTS" value="-X+O" />
       </envs>
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/spec/broker_spec.rb" />
@@ -474,7 +461,6 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
       <RunnerSettings RunnerId="RubyRunner" />
       <ConfigurationWrapper RunnerId="RubyRunner" />
@@ -490,8 +476,12 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
       <envs />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
@@ -503,7 +493,6 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
       <method />
     </configuration>
@@ -516,14 +505,15 @@
       <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
       <envs />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest">
@@ -536,8 +526,12 @@
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
       <envs />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="" />
@@ -545,7 +539,6 @@
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_METHOD_NAME" VALUE="" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RTEST_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_OPTIONS" VALUE="" />
       <method />
     </configuration>
@@ -561,8 +554,12 @@
         <env name="ANSICON" value="" />
       </envs>
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*.feature" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
@@ -575,7 +572,6 @@
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="VERBOSE_OPTION" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="CUCUMBER_RUNNER_PATH" VALUE="" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_RUNNER" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="SETTINGS_VERSION" VALUE="2" />
@@ -625,27 +621,27 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1083" y="507" width="1080" height="1056" extended-state="0" />
+    <frame x="184" y="22" width="1307" height="964" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24266145" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20301348" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -657,311 +653,159 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
-      <TodoPanelSettings />
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
     </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="UPDATE_FILTER_SCOPE_NAME" />
+    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
+    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/kymera/platform_utils.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="25" selection-start="427" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="697" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/results_parser.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/test_runner.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="51" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/platform_utils.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="25" selection-start="427" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Rakefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/rubystubs193/module.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="898" column="8" selection-start="30699" selection-end="30699" vertical-scroll-proportion="0.3326316" vertical-offset="14950" max-vertical-offset="18088" />
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/rubystubs193/thread.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="208" column="8" selection-start="7089" selection-end="7089" vertical-scroll-proportion="0.3326316" vertical-offset="3220" max-vertical-offset="8432" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kymera.gemspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="22" selection-start="842" selection-end="852" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="32" selection-start="345" selection-end="345" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/version.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="18" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/platform_utils.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="11" selection-start="895" selection-end="895" vertical-scroll-proportion="0.44409284" vertical-offset="55" max-vertical-offset="1003" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="344" selection-end="344" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/agent.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1700" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/receiver.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="136" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/actor.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="23" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1955" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/results_parser.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="9" selection-start="1385" selection-end="1385" vertical-scroll-proportion="0.756396" vertical-offset="0" max-vertical-offset="1377" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/node.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="0" selection-start="1458" selection-end="1458" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/test_runner.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="23" selection-start="1105" selection-end="1105" vertical-scroll-proportion="-0.1134594" vertical-offset="612" max-vertical-offset="5355">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/test_parser.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="74" selection-start="219" selection-end="219" vertical-scroll-proportion="0.189099" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/kymera.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="81" selection-start="794" selection-end="866" vertical-scroll-proportion="0.4538376" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/requester.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/v_2/results_parser.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1377" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/v_2/test_parser.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="899" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/config.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="3" selection-start="840" selection-end="840" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/spec/worker_client_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="139" selection-end="447" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/spec/req_rep.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="59" selection-start="763" selection-end="763" vertical-scroll-proportion="0.0" vertical-offset="138" max-vertical-offset="1190" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/spec/pub_sub.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="17" selection-start="3013" selection-end="3013" vertical-scroll-proportion="0.0" vertical-offset="988" max-vertical-offset="1955" />
-      </provider>
-    </entry>
-    <entry file="file://C:/Ruby193/lib/ruby/gems/1.9.1/gems/ffi-rzmq-2.0.1/lib/ffi-rzmq/socket.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="202" column="21" selection-start="6671" selection-end="6671" vertical-scroll-proportion="0.0" vertical-offset="3009" max-vertical-offset="10489">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Ruby193/lib/ruby/gems/1.9.1/gems/ffi-rzmq-core-1.0.3/lib/ffi-rzmq-core/libzmq.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="39" selection-start="3319" selection-end="3319" vertical-scroll-proportion="0.0" vertical-offset="933" max-vertical-offset="2125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Ruby193/lib/ruby/gems/1.9.1/gems/ffi-rzmq-2.0.1/lib/ffi-rzmq/context.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="44" selection-start="2653" selection-end="2653" vertical-scroll-proportion="0.0" vertical-offset="823" max-vertical-offset="2414">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Ruby193/lib/ruby/gems/1.9.1/gems/ffi-1.9.3-x86-mingw32/lib/ffi/library.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="9" selection-start="3123" selection-end="3123" vertical-scroll-proportion="0.0" vertical-offset="3424" max-vertical-offset="8585">
-          <folding />
-        </state>
+        <state line="109" column="17" selection-start="3013" selection-end="3013" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/v_2/platform_utils.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="0" selection-start="1273" selection-end="1273" vertical-scroll-proportion="0.0" vertical-offset="138" max-vertical-offset="1037">
-          <folding />
-        </state>
+        <state line="55" column="0" selection-start="1273" selection-end="1273" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/spec/start_client_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="16" selection-start="365" selection-end="365" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-          <folding />
-        </state>
+        <state line="12" column="16" selection-start="365" selection-end="365" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/v_2/socket_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="7" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Ruby193/lib/ruby/gems/1.9.1/gems/ffi-rzmq-core-1.0.3/lib/ffi-rzmq-core/constants.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="30" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="3723">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Ruby193/lib/ruby/gems/1.9.1/gems/ffi-rzmq-2.0.1/lib/ffi-rzmq/device.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="50" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
-          <folding />
-        </state>
+        <state line="16" column="7" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/kymera.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="155" selection-end="155" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <folding />
-        </state>
+        <state line="7" column="0" selection-start="155" selection-end="155" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/messaging_system_config.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="7" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+        <state line="8" column="7" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/spec/start_worker_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="66" selection-start="209" selection-end="223" vertical-scroll-proportion="0.09681094" vertical-offset="0" max-vertical-offset="878">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/v_2/worker.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="61" selection-start="1132" selection-end="1159" vertical-scroll-proportion="0.0" vertical-offset="87" max-vertical-offset="1938">
-          <folding />
-        </state>
+        <state line="5" column="66" selection-start="209" selection-end="223" vertical-scroll-proportion="0.09681094" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/spec/socket_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="57" selection-start="57" selection-end="57" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/spec/broker_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/spec/worker_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="131" selection-end="131" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
+        <state line="0" column="57" selection-start="57" selection-end="57" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/spec/client_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="42" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
+        <state line="3" column="42" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/v_2/client.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="9" selection-start="689" selection-end="748" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+        <state line="24" column="9" selection-start="689" selection-end="748" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/client.rb">
+    <entry file="file://$PROJECT_DIR$/lib/kymera/v_2/worker.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="38" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+        <state line="60" column="31" selection-start="1994" selection-end="2032" vertical-scroll-proportion="0.56985295">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/worker.rb">
+    <entry file="file://$PROJECT_DIR$/lib/spec/broker_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="14" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+        <state line="8" column="0" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/spec/worker_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="13" selection-start="79" selection-end="79" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/broker.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="11" selection-start="3709" selection-end="3709" vertical-scroll-proportion="0.6485549" vertical-offset="1326" max-vertical-offset="2329">
+        <state line="62" column="42" selection-start="2222" selection-end="2222" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/client.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="52" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/kymera/v_3/worker.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="29" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.625">
           <folding />
         </state>
       </provider>
