@@ -6,16 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe8b228f-39c5-4d1c-a114-7c0c9683636f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/v_4/cucumber_test_runner.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/v_4/kymera.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/v_4/test_parser.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/v_4/worker.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/spec/worker_test_run_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/spec/broker_spec.rb" afterPath="$PROJECT_DIR$/lib/spec/broker_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/spec/client_spec.rb" afterPath="$PROJECT_DIR$/lib/spec/client_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_4/szmq/szmq.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_4/szmq/szmq.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/spec/worker_spec.rb" afterPath="$PROJECT_DIR$/lib/spec/worker_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/spec/json_message_example.txt" />
     </list>
     <ignored path="kymera.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,10 +65,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="worker.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="worker.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/worker.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="82" selection-start="916" selection-end="916" vertical-scroll-proportion="0.5250266" vertical-offset="0" max-vertical-offset="939">
+            <state line="31" column="27" selection-start="965" selection-end="965" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="json_message_example.txt" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/spec/json_message_example.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="4" selection-start="123" selection-end="123" vertical-scroll-proportion="0.074074075" vertical-offset="0" max-vertical-offset="918">
               <folding />
             </state>
           </provider>
@@ -114,15 +114,6 @@
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/cucumber_test_runner.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="12" column="32" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="results_parser.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/kymera/results_parser.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="132" max-vertical-offset="1377">
               <folding />
             </state>
           </provider>
@@ -176,6 +167,7 @@
         <option value="$PROJECT_DIR$/lib/kymera/v_4/kymera.rb" />
         <option value="$PROJECT_DIR$/lib/spec/worker_test_run_spec.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/v_4/worker.rb" />
+        <option value="$PROJECT_DIR$/lib/spec/json_message_example.txt" />
       </list>
     </option>
   </component>
@@ -967,7 +959,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/worker.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="82" selection-start="916" selection-end="916" vertical-scroll-proportion="0.5250266" vertical-offset="0" max-vertical-offset="939">
+        <state line="31" column="27" selection-start="965" selection-end="965" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/spec/json_message_example.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="4" selection-start="123" selection-end="123" vertical-scroll-proportion="0.074074075" vertical-offset="0" max-vertical-offset="918">
           <folding />
         </state>
       </provider>

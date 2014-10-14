@@ -1,0 +1,5 @@
+{"test" : "./feature/login_and_session/login.feature",
+    "runner" : "cucumber",
+    "options" : ["-p default"]
+    }
+    
