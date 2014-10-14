@@ -16,23 +16,58 @@ class SZMQ
     SSocket.new(address, type)
   end
 
-  #Takes two SSocket objects. One representing the client and other representing the worker
+  #Takes two SSocket objects. One representing the client and other representing the worker. Upon receiving a INT command (ctrl + c), the proxy still be shut down
+  #and the frontend and backend sockets will be closed
   def start_proxy(frontend_socket, backend_socket)
-    ZMQ::Device.new(frontend_socket.send(:get_socket), backend_socket.send(:get_socket))
+
+    trap ("INT") do
+      puts "\nStopping proxy..."
+      frontend_socket.close
+      backend_socket.close
+      @close = true
+    end
+
+    frontend_socket.bind
+    backend_socket.bind
+
+    Thread.new{ZMQ::Device.new(backend_socket.send(:get_socket), frontend_socket.send(:get_socket))}
+
+    while !@close do
+      text = "\r"
+      text << "Online"
+      space = " "
+      0.upto(2) do
+        STDOUT.print text
+        sleep 0.5
+        STDOUT.print "\r#{space * (text.length - 1)}"
+        sleep 0.5
+      end
+    end
   end
 
 
+  private
+
+  def error_check(rc)
+    if ZMQ::Util.resultcode_ok?(rc)
+      false
+    else
+      STDERR.puts "Operation failed, [#{ZMQ::Util.errno}] description [#{ZMQ::Util.error_string}]"
+      caller(1).each { |callstack| STDERR.puts(callstack)}
+    end
+  end
 end
 
 class SSocket
 
-  @socket_types = %w(request reply dealer router pub sub push pull)
-
   def initialize(address, type)
+    @socket_types = %w(request reply dealer router pub sub push pull)
     @context = SZMQ.context
     @address = address
+    @socket_type_string = type
+    @socket_type = get_socket_type(type)
     if @socket_types.include?(type.downcase)
-      @socket = @context.socket(ZMQ::get_socket_type(type))
+      @socket = @context.socket(@socket_type)
       @socket.setsockopt(ZMQ::LINGER, 0)
     else
       raise "#{type} is not a valid socket type"
@@ -57,53 +92,64 @@ class SSocket
     error_check(@socket.close)
   end
 
-  def send(message, wait_for_reply = true)
-    if wait_for_reply
+  def send_message(message)
+    trap ("INT") do
+      puts "Received interrupt..."
+      @socket.close
+    end
+    if @socket_type == ZMQ::REQ
       @socket.send_string(message)
       reply = ''
-      @socket.recv_string(reply)
-      reply
+      #unless @socket.recv_string(reply) == -1
+        @socket.recv_string(reply)
+        reply
+      #end
     else
       @socket.send_string(message, ZMQ::DONTWAIT)
       nil
     end
   end
 
-  #This is a blocking method call and will continue waiting for messages unless it receives and INT command (ctrl + c). reply is set to true by default and will send a reply to the sender with
-  #the outcome of the block passed in.  If no block is passed in, and reply is set to true, the reply will send "0"
-  def receive(reply = true, &block)
+  #This method listens for messages coming in and then processes them will the block passed into the method. If no block is passed, messages will be received but
+  #will then be dropped on the floor. If the socket is of type REP and no block is given, the receive method will reply with "0" indicating that the message was received
+  #currently, the result of the block is sent back as a reply for REP sockets.  This may change later
+  #TODO - Currently, the send_string method is causing the interupt to be delayed until the next message is received. need to find a way to fix this
+  #TODO - add support for SUB sockets
+  def receive(&block)
+
     trap ("INT") do
       puts "Received interrupt..."
       @close = true
     end
+    received_message = ''
 
-    if reply
+    if @socket_type == ZMQ::PULL
       loop do
         break if @close
-        unless @socket.recv_string(reply) == -1
-          reply_message = ''
-          @socket.recv_string(reply)
-          if block_given?
-            reply_message = yield(reply)
-          else
-            reply_message = "0"
+        @socket.recv_string(received_message)
+        if block_given?
+          yield(received_message)
+        end
+      end
+
+    elsif @socket_type == ZMQ::REP
+        reply_message = ''
+        loop do
+          break if @close
+          unless @socket.recv_string(received_message) == -1
+            @socket.recv_string(received_message)
+            if block_given?
+              reply_message = yield(received_message)
+            else
+              reply_message = "0"
+            end
           end
           @socket.send_string(reply_message)
         end
-      end
-    elsif !reply
-      loop do
-        break if @close
-        unless @socket.recv_string(reply) == -1
-          @socket.recv_string(reply)
-          if block_given?
-            yield(reply)
-          end
-        end
-      end
+    else
+      raise "Socket type of #{@socket_type_string} does not receive messages"
     end
   end
-
 
 
   private
@@ -123,22 +169,22 @@ class SSocket
 
   def get_socket_type(type)
     case type
-      when request
-        REQ
-      when reply
-        REP
-      when dealer
-        DEALER
-      when router
-        ROUTER
-      when pub
-        PUB
-      when sub
-        SUB
-      when push
-        PUSH
-      when pull
-        PULL
+      when 'request'
+        ZMQ::REQ
+      when 'reply'
+        ZMQ::REP
+      when 'dealer'
+        ZMQ::DEALER
+      when 'router'
+        ZMQ::ROUTER
+      when 'pub'
+        ZMQ::PUB
+      when 'sub'
+        ZMQ::SUB
+      when 'push'
+        ZMQ::PUSH
+      when 'pull'
+        ZMQ::PULL
       else
         nil
     end
