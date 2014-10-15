@@ -18,7 +18,7 @@ module Kymera
         io = Object::IO.popen("bundle exec cucumber #{test} #{_options}")
         until io.eof? do
           result = io.gets
-          puts result
+          #puts result
           _results += result
         end
         Process.wait2(io.pid)
