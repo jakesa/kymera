@@ -1,6 +1,6 @@
 require_relative '../../lib/kymera/v_4/kymera'
 
-worker = Kymera::Worker.new('tcp://127.0.0.1:5552', 'tcp://127.0.0.1:5556')
+worker = Kymera::Worker.new('tcp://127.0.0.1:5552', 'tcp://127.0.0.1:5556', 'tcp://127.0.0.1:7000')
 worker.listen
 
 #zmq = Kymera::SZMQ.new

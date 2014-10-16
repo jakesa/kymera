@@ -46,6 +46,22 @@ module Kymera
       #end
     end
 
+    def start_pub_sub_proxy(front_end, back_end)
+      trap ("INT") do
+        puts "\nStopping proxy..."
+        front_end.close
+        back_end.close
+        @close = true
+      end
+
+      front_end.bind
+      back_end.bind
+
+      ZMQ::Device.new(front_end.send(:get_socket), back_end.send(:get_socket))
+
+
+    end
+
 
     private
 
@@ -63,7 +79,7 @@ module Kymera
   class SSocket
 
     def initialize(address, type)
-      @socket_types = %w(request reply dealer router pub sub push pull)
+      @socket_types = %w(request reply dealer router pub sub push pull xpub xsub)
       @context = SZMQ.context
       @address = address
       @socket_type_string = type
@@ -91,12 +107,28 @@ module Kymera
       error_check(@socket.connect(address))
     end
 
-    def subscribe(channel)
+    def subscribe(channel, &block)
       #TODO - This is a prototype and has not been tested yet
-      raise "This socket is not of type SUB and cannot subscribe to a channel" unless @socket_type_string == 'pub'
+      raise "This socket is not of type SUB and cannot subscribe to a channel" unless @socket_type_string == 'sub'
       error_check(@socket.setsockopt(ZMQ::SUBSCRIBE, channel))
       connect
+      channel = ''
+      message = ''
+      loop do
+        @socket.recv_string(channel)
+        @socket.recv_string(message)
+        if block_given?
+          yield(channel, message)
+        else
+          [channel, message]
+        end
+      end
+    end
 
+    def publish_message(channel, message)
+      raise 'this socket is not of type PUB and cannot publish a message' unless @socket_type_string == 'pub'
+      @socket.send_string(channel, ZMQ::SNDMORE)
+      @socket.send_string(message)
     end
 
     def close
@@ -196,6 +228,10 @@ module Kymera
           ZMQ::PUSH
         when 'pull'
           ZMQ::PULL
+        when 'xpub'
+          ZMQ::XPUB
+        when 'xsub'
+          ZMQ::XSUB
         else
           nil
       end

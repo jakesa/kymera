@@ -79,7 +79,7 @@ module Kymera
 
     def run_test(test, options)
       Thread.new {
-        message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"]})
+        message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"], :run_id => options["run_id"]})
         socket = @zmq.socket(@client_address, 'request')
         socket.connect
         puts "Sending: #{message}"
@@ -90,6 +90,7 @@ module Kymera
     def report_test_config(test_run)
       puts "Running test with the following configuration:"
       puts "Runner: #{test_run["runner"]}"
+      puts "Run ID: #{test_run["run_id"]}"
       puts "Runner Options: #{test_run["options"]}"
       puts "Total number tests: #{test_run["tests"].length}"
     end

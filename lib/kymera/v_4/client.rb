@@ -11,21 +11,32 @@ module Kymera
       @results_bus_address = results_bus_address
       @real_time = real_time
       @zmq = Kymera::SZMQ.new
-
+      @client_id = Kymera::host_name
+      Client.run_id +=1
+      @full_run_id = @client_id + (Client.run_id.to_s)
     end
+
+    def self.run_id=(num)
+      @run_id = num
+    end
+
+    def self.run_id
+      @run_id ||= 0
+    end
+
 
     def run_tests(tests, runner, options)
       tests = parse_tests(tests, runner, options)
-      test_run = {:tests => tests, :runner => runner, :options => options}
+      test_run = {:tests => tests, :runner => runner, :run_id => @full_run_id, :options => options }
       socket = @zmq.socket(@broker_address, 'push')
       socket.connect
       message = JSON.generate(test_run)
       socket.send_message(message)
-      #if @real_time
-      #  start_live_feed
-      #end
+      if @real_time
+        start_live_feed
+      end
 
-      #wait_for_results
+      wait_for_results
       socket.close
 
     end
@@ -34,12 +45,14 @@ module Kymera
 
     #TODO - This is a prototype and needs to be tested
     def start_live_feed
+      puts "starting results feed..."
+      puts "looking for #{@full_run_id}..."
       Thread.new {
         results_feed = @zmq.socket(@results_bus_address, 'sub')
-        results_feed.subscribe('test_run_id')
-        results_feed.receive do |message|
+        results_feed.subscribe(@full_run_id) do |channel, message|
           puts message
         end
+
       }
     end
 

@@ -4,15 +4,18 @@ require 'json'
 module Kymera
   class Worker
 
-    def initialize(test_address, results_address)
+    def initialize(test_address, results_address, result_bus_address)
       @test_address = test_address
       @results_address = results_address
+      @result_bus_address = result_bus_address
       @zmq = SZMQ.new
       #For the moment I am using a push/pull configuration for running of tests.  Initial runs indicated that this may not work as all tests are being sent to just one
       #worker at a time instead of load balancing them.  It may be more advantageous to use a request/reply structure for sending tests and managing the test run queue
       #manually.
       @test_socket = @zmq.socket(@test_address, 'reply')
       @results_socket = @zmq.socket(@results_address, 'push')
+      @result_bus_socket = @zmq.socket(@result_bus_address, 'pub')
+      @result_bus_socket.connect
       @test_socket.connect
       #Even though this is a push socket, I am connecting instead of binding because the static point is going to be the pull socket where the results are aggregated
       #Static points are bound, dynamic points are connected
@@ -39,7 +42,7 @@ module Kymera
     #This is why passing in the runner on worker instantiation isnt really an option
     def run_test(test)
       test = JSON.parse(test)
-      runner = get_runner(test["runner"], test["options"])
+      runner = get_runner(test["runner"], test["options"], test["run_id"])
       runner.run_test(test["test"])
     end
 
@@ -52,9 +55,9 @@ module Kymera
 
     #TODO - I would like to add a way to dynamically add runners so that a user can custom build a runner and use it with this gem.
     #Right now I am just doing some simple if/then logic to get predefined runners.
-    def get_runner(runner, options)
+    def get_runner(runner, options, run_id)
       if runner.downcase == 'cucumber'
-        Kymera::Cucumber::Runner.new(options)
+        Kymera::Cucumber::Runner.new(options, run_id, @result_bus_socket)
       else
         nil
       end

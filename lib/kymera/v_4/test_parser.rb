@@ -36,7 +36,7 @@ module Kymera
         tr = Thread.new(cmd) { |c| `#{c}`}
         tr.join
         #output
-        $stdout << tr.value
+        #$stdout << tr.value
         tr.value
       end
     end

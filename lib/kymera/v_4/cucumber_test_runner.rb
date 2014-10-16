@@ -2,12 +2,14 @@ require 'cucumber'
 module Kymera
   module Cucumber
     class Runner
-      def initialize(options)
+      def initialize(options, run_id, result_bus = nil)
         @options = options
+        @result_bus = result_bus
+        @run_id = run_id
         ENV["AUTOTEST"] = "1" if $stdout.tty?
       end
 
-      def run_test(test, options = @options)
+      def run_test(test, options = @options, run_id = @run_id)
         _results = ''
         _options = ''
         options.each do |option|
@@ -18,8 +20,9 @@ module Kymera
         io = Object::IO.popen("bundle exec cucumber #{test} #{_options}")
         until io.eof? do
           result = io.gets
-          #puts result
-          #a publish to the results bus here would give the real-time results
+          unless @result_bus.nil?
+            @result_bus.publish_message(run_id, result)
+          end
           _results += result
         end
         Process.wait2(io.pid)

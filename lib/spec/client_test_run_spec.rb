@@ -28,5 +28,5 @@ require_relative '../../lib/kymera/v_4/kymera'
 #socket.connect('tcp://127.0.0.1:5556')
 #socket.send_string("This is a message")
 
-client = Kymera::Client.new('tcp://127.0.0.1:5550','tcp://127.0.0.1:5556', 'tcp://127.0.0.1:6000')
-client.run_tests('c:/apollo/source/integration_tests/features/posting', 'cucumber', ['-p default'])
+client = Kymera::Client.new('tcp://127.0.0.1:5550','tcp://127.0.0.1:5556', 'tcp://127.0.0.1:7001')
+client.run_tests('c:/apollo/source/integration_tests/features/login_and_session', 'cucumber', ['-p default'])
