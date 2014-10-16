@@ -21,11 +21,12 @@ module Kymera
       socket.connect
       message = JSON.generate(test_run)
       socket.send_message(message)
-      if @real_time
-        start_live_feed
-      end
+      #if @real_time
+      #  start_live_feed
+      #end
 
-      wait_for_results
+      #wait_for_results
+      socket.close
 
     end
 
@@ -43,7 +44,15 @@ module Kymera
     end
 
     def wait_for_results
+      trap ("INT") do
+        puts "\nReceived interrupt..."
+        socket.close
+      end
       socket = @zmq.socket(@results_address, 'pull')
+      socket.connect
+      socket.receive do |results|
+        puts results
+      end
     end
 
     def parse_tests(tests, runner, options)
