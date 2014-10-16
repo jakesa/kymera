@@ -11,7 +11,7 @@ module Kymera
       #For the moment I am using a push/pull configuration for running of tests.  Initial runs indicated that this may not work as all tests are being sent to just one
       #worker at a time instead of load balancing them.  It may be more advantageous to use a request/reply structure for sending tests and managing the test run queue
       #manually.
-      @test_socket = @zmq.socket(@test_address, 'pull')
+      @test_socket = @zmq.socket(@test_address, 'reply')
       @results_socket = @zmq.socket(@results_address, 'push')
       @test_socket.connect
       #Even though this is a push socket, I am connecting instead of binding because the static point is going to be the pull socket where the results are aggregated
@@ -28,6 +28,7 @@ module Kymera
         else
           results = run_test(message)
           @results_socket.send_message(results)
+          @test_socket.send_message ''
         end
       end
 

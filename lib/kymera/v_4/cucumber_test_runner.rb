@@ -19,6 +19,7 @@ module Kymera
         until io.eof? do
           result = io.gets
           #puts result
+          #a publish to the results bus here would give the real-time results
           _results += result
         end
         Process.wait2(io.pid)

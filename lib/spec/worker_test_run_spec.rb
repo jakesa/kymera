@@ -1,4 +1,15 @@
 require_relative '../../lib/kymera/v_4/kymera'
 
-worker = Kymera::Worker.new('tcp://127.0.0.1:5555', 'tcp://127.0.0.1:5556')
+worker = Kymera::Worker.new('tcp://127.0.0.1:5552', 'tcp://127.0.0.1:5556')
 worker.listen
+
+#zmq = Kymera::SZMQ.new
+#socket = zmq.socket('tcp://127.0.0.1:5556', 'reply')
+#socket.connect
+#
+#
+#socket.receive do |message|
+#  sleep rand(20)
+#  puts message
+#  socket.send_message('')
+#end

@@ -31,19 +31,19 @@ module Kymera
       frontend_socket.bind
       backend_socket.bind
 
-      Thread.new{ZMQ::Device.new(backend_socket.send(:get_socket), frontend_socket.send(:get_socket))}
+      ZMQ::Device.new(backend_socket.send(:get_socket), frontend_socket.send(:get_socket))
 
-      while !@close do
-        text = "\r"
-        text << "Online"
-        space = " "
-        0.upto(2) do
-          STDOUT.print text
-          sleep 0.5
-          STDOUT.print "\r#{space * (text.length - 1)}"
-          sleep 0.5
-        end
-      end
+      #while !@close do
+      #  text = "\r"
+      #  text << "Online"
+      #  space = " "
+      #  0.upto(2) do
+      #    STDOUT.print text
+      #    sleep 0.5
+      #    STDOUT.print "\r#{space * (text.length - 1)}"
+      #    sleep 0.5
+      #  end
+      #end
     end
 
 
@@ -82,7 +82,6 @@ module Kymera
         raise "An address must be set or passed"
       end
       error_check(@socket.bind(address))
-      #@socket.bind(address)
     end
 
     def connect(address = @address)
