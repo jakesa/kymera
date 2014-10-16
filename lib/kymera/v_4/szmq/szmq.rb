@@ -91,6 +91,14 @@ module Kymera
       error_check(@socket.connect(address))
     end
 
+    def subscribe(channel)
+      #TODO - This is a prototype and has not been tested yet
+      raise "This socket is not of type SUB and cannot subscribe to a channel" unless @socket_type_string == 'pub'
+      error_check(@socket.setsockopt(ZMQ::SUBSCRIBE, channel))
+      connect
+
+    end
+
     def close
       error_check(@socket.close)
     end

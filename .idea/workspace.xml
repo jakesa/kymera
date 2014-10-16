@@ -6,14 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe8b228f-39c5-4d1c-a114-7c0c9683636f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/v_4/broker.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/spec/broker_spec.rb" afterPath="$PROJECT_DIR$/lib/spec/broker_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/spec/client_test_run_spec.rb" afterPath="$PROJECT_DIR$/lib/spec/client_test_run_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_4/cucumber_test_runner.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_4/cucumber_test_runner.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_4/kymera.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_4/kymera.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/v_4/client.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/v_4/dry_run_formatter.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_4/szmq/szmq.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_4/szmq/szmq.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_4/worker.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_4/worker.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/spec/worker_test_run_spec.rb" afterPath="$PROJECT_DIR$/lib/spec/worker_test_run_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/v_4/test_parser.rb" afterPath="$PROJECT_DIR$/lib/kymera/v_4/test_parser.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="kymera.iws" />
@@ -46,10 +42,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="szmq.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="szmq.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/szmq/szmq.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="40" selection-start="2202" selection-end="2202" vertical-scroll-proportion="0.31522897" vertical-offset="1115" max-vertical-offset="3468">
+            <state line="94" column="61" selection-start="2470" selection-end="2470" vertical-scroll-proportion="0.0" vertical-offset="1084" max-vertical-offset="3604">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/client.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="38" selection-start="495" selection-end="495" vertical-scroll-proportion="0.25346112" vertical-offset="68" max-vertical-offset="1122">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_parser.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/test_parser.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dry_run_formatter.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/dry_run_formatter.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="6" selection-start="129" selection-end="129" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
               <folding />
             </state>
           </provider>
@@ -67,16 +90,7 @@
       <file leaf-file-name="worker.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/worker.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="29" selection-start="1850" selection-end="1850" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1224">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="worker_test_run_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/spec/worker_test_run_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="49" selection-start="97" selection-end="97" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
+            <state line="0" column="0" selection-start="0" selection-end="43" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
               <folding />
             </state>
           </provider>
@@ -95,24 +109,6 @@
         <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/broker.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="70" column="28" selection-start="2137" selection-end="2137" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1785">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="actor.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/kymera/actor.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="0" selection-start="1152" selection-end="1689" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1955">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cucumber_test_runner.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/cucumber_test_runner.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="32" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
               <folding />
             </state>
           </provider>
@@ -179,6 +175,9 @@
         <option value="$PROJECT_DIR$/lib/spec/client_test_run_spec.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/v_4/broker.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/v_4/szmq/szmq.rb" />
+        <option value="$PROJECT_DIR$/lib/kymera/v_4/test_parser.rb" />
+        <option value="$PROJECT_DIR$/lib/kymera/v_4/dry_run_formatter.rb" />
+        <option value="$PROJECT_DIR$/lib/kymera/v_4/client.rb" />
       </list>
     </option>
   </component>
@@ -714,20 +713,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/worker.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="27" selection-start="965" selection-end="965" vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="799">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/spec/json_message_example.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="4" selection-start="123" selection-end="123" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/test_runner.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="133" column="0" selection-start="3880" selection-end="3880" vertical-scroll-proportion="0.0" vertical-offset="2261" max-vertical-offset="5355">
@@ -945,13 +930,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/test_parser.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="21" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/test_parser.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="21" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
@@ -1001,13 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/worker.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="29" selection-start="1850" selection-end="1850" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1224">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/cucumber_test_runner.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="32" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
@@ -1029,6 +1000,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/worker.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="43" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/szmq/szmq.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="61" selection-start="2470" selection-end="2470" vertical-scroll-proportion="0.0" vertical-offset="1084" max-vertical-offset="3604">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/broker.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="70" column="28" selection-start="2137" selection-end="2137" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1785">
@@ -1036,9 +1021,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/szmq/szmq.rb">
+    <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/dry_run_formatter.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="40" selection-start="2202" selection-end="2202" vertical-scroll-proportion="0.31522897" vertical-offset="1115" max-vertical-offset="3468">
+        <state line="6" column="6" selection-start="129" selection-end="129" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/test_parser.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/kymera/v_4/client.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="38" selection-start="495" selection-end="495" vertical-scroll-proportion="0.25346112" vertical-offset="68" max-vertical-offset="1122">
           <folding />
         </state>
       </provider>
