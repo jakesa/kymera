@@ -43,7 +43,8 @@ module Kymera
     def run_test(test)
       test = JSON.parse(test)
       runner = get_runner(test["runner"], test["options"], test["run_id"])
-      runner.run_test(test["test"])
+      results = runner.run_test(test["test"])
+      JSON.generate({:run_id => test["run_id"], :test_count => test["test_count"], :runner => test["runner"], :results => results})
     end
 
     def stop

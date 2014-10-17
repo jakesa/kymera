@@ -27,16 +27,8 @@ module Kymera
       def dry_run(cmd)
         $stdout << "Preprocessing test files"
         $stdout << "\n"
-        #r, w = IO.pipe
-        #cmd_pid = spawn(cmd, :out => w, :err=>:out)
-        #Process.waitpid2(cmd_pid)
-        #w.close
-        #output = r.read
-        #r.close
         tr = Thread.new(cmd) { |c| `#{c}`}
         tr.join
-        #output
-        #$stdout << tr.value
         tr.value
       end
     end

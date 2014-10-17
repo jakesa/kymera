@@ -22,6 +22,7 @@ module Kymera
       @proxy = Thread.new {@zmq.start_proxy(@front_end, @back_end)}
     end
 
+    #This brings up the broker so that it can receive test run requests.
     def start_broker
       @test_socket.receive do |tests|
         puts "Received test run request.."
@@ -31,6 +32,7 @@ module Kymera
 
     private
 
+    #This is the start of the test run and is called when the broker receives a test run request
     def start_test_run(test_run)
       test_run = JSON.parse(test_run)
       tests = test_run["tests"]
@@ -63,6 +65,7 @@ module Kymera
 
     end
 
+    #If there are tests left over after the inital test start up, they are placed into a queue.  The queue is then worked until all tests in the queue have been executed
     def work_queue(threads, tests, options)
       until tests.empty?
         threads.delete_if {|t| !t.alive?}
@@ -77,9 +80,10 @@ module Kymera
       end
     end
 
+    #This runs each test individually
     def run_test(test, options)
       Thread.new {
-        message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"], :run_id => options["run_id"]})
+        message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"], :run_id => options["run_id"], :test_count => options["tests"].length})
         socket = @zmq.socket(@client_address, 'request')
         socket.connect
         puts "Sending: #{message}"
@@ -87,6 +91,7 @@ module Kymera
         socket.close}
     end
 
+    #This gives a print out of the test run that was received
     def report_test_config(test_run)
       puts "Running test with the following configuration:"
       puts "Runner: #{test_run["runner"]}"
