@@ -7,6 +7,8 @@ require_relative 'client'
 require_relative 'cucumber/test_parser'
 require_relative 'results_bus'
 require_relative 'platform_utils'
+require_relative 'test_results_collector'
+require_relative 'cucumber/cucumber_results_parser'
 
 module Kymera
 

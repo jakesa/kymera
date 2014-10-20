@@ -7,12 +7,10 @@ module Kymera
 
     #The client is responsible for sending the run to the distributed network. It is responsible for parsing the tests and sending all needed information to the
     #test broker
-    #The initializer take in a broker_address(String) identifying the location of the broker on the network, a results_address(String) identifying the location
-    #where it can look for the completed results of the test run, a results_bus_address(String) identifying the latching point of the bus where the client and get
+    #The initializer take in a broker_address(String) identifying the location of the broker on the network, a results_bus_address(String) identifying the latching point of the bus where the client and get
     #real-time test output as the tests are being executed and real_time(Boolean) indicating whether or not this client wants to get real-time updates. This is defaulted to true
-    def initialize(broker_address, results_address, results_bus_address, real_time = true)
+    def initialize(broker_address,results_bus_address, real_time = true)
       @broker_address = broker_address
-      @results_address = results_address
       @results_bus_address = results_bus_address
       @real_time = real_time
       @zmq = Kymera::SZMQ.new
@@ -41,42 +39,25 @@ module Kymera
       message = JSON.generate(test_run)
       socket.send_message(message)
 
+      channels = ["end_#{@full_run_id}"]
+      results_feed = @zmq.socket(@results_bus_address, 'sub')
       if @real_time
-        start_live_feed
+        channels << @full_run_id
       end
-
-      wait_for_results
-      socket.close
+      results_feed.subscribe(channels) do |channel, results|
+        if channel == "end_#{@full_run_id}"
+          puts "###########Test Run Results########################"
+          puts results
+          results_feed.close
+          exit
+        else
+          puts results
+        end
+      end
 
     end
 
     private
-
-    #This starts the listening for real-time updates.  Updates received will be printed to the console.
-    def start_live_feed
-      puts "starting results feed..."
-      puts "looking for #{@full_run_id}..."
-      Thread.new {
-        results_feed = @zmq.socket(@results_bus_address, 'sub')
-        results_feed.subscribe(@full_run_id) do |channel, message|
-          puts message
-        end
-
-      }
-    end
-
-    #This waits for the reply from the system with the completed test result summary
-    def wait_for_results
-      trap ("INT") do
-        puts "\nReceived interrupt..."
-        socket.close
-      end
-      socket = @zmq.socket(@results_address, 'pull')
-      socket.connect
-      socket.receive do |results|
-        puts results
-      end
-    end
 
     #This method is what parses the test directory into runnable tests. It takes in 3 parameters, the first being tests(String). This is the location for which the system looks for
     #executable tests. This can also be a single test. The system will still parse it to make sure that it should be run based on the passed in options.  The runner(String) tells the
@@ -88,7 +69,6 @@ module Kymera
         parser.parse_tests
       end
     end
-
 
   end
 

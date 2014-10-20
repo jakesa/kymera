@@ -60,7 +60,7 @@ module Kymera
       end
 
       def self.sum_up_failed_scenarios(results)
-        results = results.select{|l| l.include?('cucumber -p')}
+        results = results.select{|l| l.include?('[31mcucumber')}
         if results.empty?
           ''
         else
