@@ -31,9 +31,10 @@ module Kymera
     #This is the kick off point for the test run. The tests parameter is the directory location of the tests you wish to run. This will be passed into a test parser that will determine
     #which of the tests in the directory need to be run based on the options passed in.  The runner parameter tells the system which test runner the system should use. Right now, the only
     #supported test runner is Cucumber, but I would like to expand this at the very least to also support Rspec.  The options parameter are the options to be passed into the specified runner
-    def run_tests(tests, runner, options)
+    def run_tests(tests, runner, options, branch = 'develop')
+      @start_time = Time.now
       tests = parse_tests(tests, runner, options)
-      test_run = {:tests => tests, :runner => runner, :run_id => @full_run_id, :options => options }
+      test_run = {:tests => tests, :runner => runner, :run_id => @full_run_id, :options => options, :branch => branch }
       socket = @zmq.socket(@broker_address, 'push')
       socket.connect
       message = JSON.generate(test_run)
@@ -49,6 +50,7 @@ module Kymera
           puts "###########Test Run Results########################"
           puts results
           results_feed.close
+          report_time_taken
           exit
         else
           puts results
@@ -68,6 +70,11 @@ module Kymera
         parser = Kymera::Cucumber::TestParser.new(tests, options)
         parser.parse_tests
       end
+    end
+
+    def report_time_taken
+      run_time = ((Time.now - @start_time)/60).to_s.match(/(\d+.\d{2})/)[0]
+      puts "Took #{run_time}m"
     end
 
   end

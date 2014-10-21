@@ -84,7 +84,7 @@ module Kymera
     #This runs each test individually
     def run_test(test, options)
       Thread.new {
-        message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"], :run_id => options["run_id"], :test_count => @test_count})
+        message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"], :run_id => options["run_id"], :test_count => @test_count, :branch => options["branch"]})
         socket = @zmq.socket(@client_address, 'request')
         socket.connect
         puts "Sending: #{message}"
@@ -95,6 +95,7 @@ module Kymera
     #This gives a print out of the test run that was received
     def report_test_config(test_run)
       puts "Running test with the following configuration:"
+      puts "Branch: #{test_run["branch"]}"
       puts "Runner: #{test_run["runner"]}"
       puts "Run ID: #{test_run["run_id"]}"
       puts "Runner Options: #{test_run["options"]}"
