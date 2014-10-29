@@ -133,28 +133,16 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.2, ruby-1.9.3-p545) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.5.3, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="celluloid (v0.15.2, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="celluloid-io (v0.15.0, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="celluloid-redis (v0.0.2, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="celluloid-zmq (v0.15.0, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="cucumber (v1.3.11, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="dcell (v0.15.0, ruby-1.9.3-p545) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber (v1.3.17, ruby-1.9.3-p545) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.2.5, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="ffi (v1.9.3, ruby-1.9.3-p545) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ffi (v1.9.6, ruby-1.9.3-p545) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi-rzmq (v2.0.1, ruby-1.9.3-p545) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi-rzmq-core (v1.0.3, ruby-1.9.3-p545) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="gherkin (v2.12.2, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="http (v0.6.0.pre, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="http_parser.rb (v0.6.0, ruby-1.9.3-p545) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="json (v1.8.1, ruby-1.9.3-p545) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.9.2, ruby-1.9.3-p545) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_test (v0.1.1, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="nio4r (v1.0.0, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rake (v10.2.2, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="redis (v3.0.7, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="redis-namespace (v1.4.1, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="reel (v0.5.0, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="timers (v1.1.0, ruby-1.9.3-p545) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="websocket_parser (v0.1.6, ruby-1.9.3-p545) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rake (v10.3.2, ruby-1.9.3-p545) [gem]" level="application" />
   </component>
 </module>
 

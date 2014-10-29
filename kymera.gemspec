@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Kymera::VERSION
   spec.authors       = ["jakesa"]
   spec.email         = ["jakes55214@yahoo.com"]
-  spec.description   = 'Execute cucumber tests in parallel'
-  spec.summary       = 'Execute cucumber tests in parallel'
+  spec.description   = 'Distributed Cucumber test runner'
+  spec.summary       = 'Execute cucumber tests across a network'
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_dependency 'cucumber'
-  spec.add_dependency 'dcell'
-  spec.add_dependency 'celluloid'
+  spec.add_dependency 'ffi-rzmq'
+  spec.add_dependency 'json'
 
 end
