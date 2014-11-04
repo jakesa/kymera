@@ -43,7 +43,13 @@ module Kymera
     def run_test(test)
       test = JSON.parse(test)
       runner = get_runner(test["runner"], test["options"], test["run_id"])
-      results = runner.run_test(test["test"], test['branch'])
+      if Kymera.is_linux?
+        test_path = test["test"].downcase.gsub('c:','~')
+      else
+        test_path = test["test"]
+      end
+
+      results = runner.run_test(test_path, test['branch'])
       JSON.generate({:run_id => test["run_id"], :test_count => test["test_count"], :runner => test["runner"], :results => results})
     end
 

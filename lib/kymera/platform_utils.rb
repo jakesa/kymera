@@ -25,6 +25,16 @@ module Kymera
      end
   end
 
+  def self.is_linux?
+    case RbConfig::CONFIG['host_os']
+      when /linux/
+        true
+      else
+        false
+    end
+
+  end
+
 
   def self.ip_address
     ips = Socket.ip_address_list

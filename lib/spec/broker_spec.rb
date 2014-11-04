@@ -18,7 +18,7 @@ require_relative '../../lib/kymera'
 #front_end = context.socket(ZMQ::ROUTER)
 #back_end = context.socket(ZMQ::DEALER)
 
-broker = Kymera::Broker.new('tcp://*:5550', 'tcp://127.0.0.1:5551', 'tcp://127.0.0.1:5552', 20)
+broker = Kymera::Broker.new('tcp://*:5550', 'tcp://127.0.0.1:5551', 'tcp://*:5552', 20)
 broker.start_broker
 
 
