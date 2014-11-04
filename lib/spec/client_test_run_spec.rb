@@ -1,4 +1,4 @@
-require_relative '../../lib/kymera/v_4/kymera'
+require_relative '../../lib/kymera'
 
 #zmq = Kymera::SZMQ.new
 #socket = zmq.socket('tcp://127.0.0.1:5550', 'push')

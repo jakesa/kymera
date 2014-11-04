@@ -1,4 +1,4 @@
-require_relative '../../lib/kymera/v_4/kymera'
+require_relative '../../lib/kymera'
 
 bus = Kymera::ResultsBus.new('tcp://*:7000', 'tcp://*:7001')
 bus.start_bus

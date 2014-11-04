@@ -1,5 +1,5 @@
 require 'ffi-rzmq'
-require_relative '../../lib/kymera/v_4/kymera'
+require_relative '../../lib/kymera'
 #require_relative '../../lib/kymera/v_3/kymera'
 #
 #broker = Kymera::Broker.new
