@@ -31,7 +31,8 @@ module Kymera
       frontend_socket.bind
       backend_socket.bind
 
-      ZMQ::Device.new(backend_socket.send(:get_socket), frontend_socket.send(:get_socket))
+      ZMQ::Device.new(frontend_socket.send(:get_socket), backend_socket.send(:get_socket))
+      #ZMQ::Device.new(backend_socket.send(:get_socket), frontend_socket.send(:get_socket))
 
       #while !@close do
       #  text = "\r"

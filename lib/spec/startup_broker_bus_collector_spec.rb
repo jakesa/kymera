@@ -16,13 +16,13 @@ threads << Thread.new {
 
 #Broker thread
 threads << Thread.new {
-  broker = Kymera::Broker.new('tcp://*:5550', 'tcp://127.0.0.1:5551', 'tcp://*:5552', 20)
+  broker = Kymera::Broker.new('tcp://*:5550', 'tcp://*:5551', 'tcp://*:5552', 20)
   broker.start_broker
 }
 
 #Results collector thread
 threads << Thread.new {
-  results_collector = Kymera::TestResultsCollector.new('tcp://*:5556', 'tcp://127.0.0.1:7000')
+  results_collector = Kymera::TestResultsCollector.new('tcp://*:5556', 'tcp://10.6.49.60:7000')
   results_collector.listen
 }
 
