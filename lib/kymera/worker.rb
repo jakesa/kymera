@@ -43,8 +43,13 @@ module Kymera
     def run_test(test)
       test = JSON.parse(test)
       runner = get_runner(test["runner"], test["options"], test["run_id"])
+      test_path = nil
       if Kymera.is_linux?
-        test_path = test["test"].downcase.gsub('c:','~')
+        if test["test"].include? 'c:'
+          test_path = test["test"].gsub('c:','~')
+        else
+          test_path = test["test"].gsub('C:','~')
+        end
       else
         test_path = test["test"]
       end
