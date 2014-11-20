@@ -9,6 +9,7 @@ require_relative 'kymera/results_bus'
 require_relative 'kymera/platform_utils'
 require_relative 'kymera/test_results_collector'
 require_relative 'kymera/cucumber/cucumber_results_parser'
+require_relative '../lib/kymera/mongo_driver'
 
 module Kymera
 

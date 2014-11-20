@@ -8,6 +8,7 @@ module Kymera
       end
 
       def self.summarize_results(results)
+        p results
         results_array = results.split("\n")
         sort_order = %w[scenario step]
         aggregate_results = sort_order.map do |group|
@@ -70,6 +71,10 @@ module Kymera
           formatted_results << "\e[0m"
           formatted_results
         end
+      end
+
+      def self.to_html(results)
+        "<div>#{results}</div>"
       end
     end
 

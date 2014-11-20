@@ -1,4 +1,5 @@
 require_relative 'szmq/szmq'
+require_relative 'mongo_driver'
 require 'json'
 
 module Kymera
@@ -37,7 +38,7 @@ module Kymera
         end
 
         if test_count <= 0
-          finalize_results(results, runner)
+          finalize_results(test_count, @run_id, results, runner)
           test_count = ''
           @run_id = ''
           results = ''
@@ -52,12 +53,24 @@ module Kymera
 
     private
 
-    def finalize_results(results, runner)
+    def finalize_results(test_count, run_id, results, runner)
       if runner.downcase == 'cucumber'
         r_results = Kymera::Cucumber::ResultsParser.summarize_results(results)
+        #html_results = Kymera::Cucumber::ResultsParser.to_html(results)
+        #puts html_results
+        Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, results, r_results))
         run_id = "end_#{@run_id}"
         @out_socket.publish_message(run_id, r_results)
       end
+    end
+
+    def build_test_log(test_count, run_id, results, summary)
+      log_message = {}
+      log_message["run_id"] = run_id
+      log_message["test_count"] = test_count
+      log_message["results"] = results
+      log_message["summary"] = summary
+      JSON.generate log_message
     end
 
 
