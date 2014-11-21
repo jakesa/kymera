@@ -1,0 +1,31 @@
+1. take the results and parse them into an array with new line (\n) as the delimiter
+2. iterate over the array
+3. if line starts with "Using"
+    3a. create a string variable with an open div hmtl tag with the class feature
+    3b. append a open paragraph html tag to that variable
+    3c. append the line to the variable
+
+4. until line starts with "Using"
+    4a. move to the next line
+    4b. if the line contains \e
+        4c. iterate over the line and for every \e do the following
+            4d. if the next 3 characters match 36m
+                4e. append an open span tag to the string variable with the style color blue
+            4f. if the next 3 characters match 90m
+                4g.append an open span tag to the string variable with the style color gray
+            4h. if the next 3 characters match 31m
+                    4i. append an open span tag to the string variable with the style color red
+            4j  if the next 3 characters match 0m
+                    4k. append a closing span tag to the string variable and start again at step 4a
+            4l. if there are no other instances of \e
+                    4m. append the remainder of the line and a close span tag to the string variable
+            4n. if there are more instances of \e
+                    4o. until you reach the next instance of \e
+                        4p. continue iterating over the line, appending each character to the sting variable
+                    4q. when you reach the next instance of \e start again at step 4d
+
+                    add check for characters after 0m
+
+
+
+

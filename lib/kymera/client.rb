@@ -66,8 +66,21 @@ module Kymera
     #parser which test parser to use. Currently there is only support for a cucumber parser.  I hope to expand support for Rspec as well. The options(Array), are the options that the
     #test parser should use for parsing out the tests.
     def parse_tests(tests, runner, options)
+
+      test_path = nil
+      if Kymera.is_linux?
+        if tests.include? 'c:'
+          test_path = tests.gsub('c:','~')
+        else
+          test_path = tests.gsub('C:','~')
+        end
+      else
+        test_path = tests
+      end
+
+
       if runner.downcase == 'cucumber'
-        parser = Kymera::Cucumber::TestParser.new(tests, options)
+        parser = Kymera::Cucumber::TestParser.new(test_path, options)
         parser.parse_tests
       end
     end

@@ -27,7 +27,7 @@ module Kymera
 
   def self.is_linux?
     case RbConfig::CONFIG['host_os']
-      when /linux/
+      when /linux|darwin/
         true
       else
         false
