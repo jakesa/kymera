@@ -58,7 +58,7 @@ module Kymera
         r_results = Kymera::Cucumber::ResultsParser.summarize_results(results)
         #html_results = Kymera::Cucumber::ResultsParser.to_html(results)
         #puts html_results
-        Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, results, r_results))
+        Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, results, r_results), '10.6.49.83', 27017, 'apollo', 'test_runs')
         run_id = "end_#{@run_id}"
         @out_socket.publish_message(run_id, r_results)
       end
