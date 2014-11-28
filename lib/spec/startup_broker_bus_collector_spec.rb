@@ -22,7 +22,8 @@ threads << Thread.new {
 
 #Results collector thread
 threads << Thread.new {
-  results_collector = Kymera::TestResultsCollector.new('tcp://*:5556', 'tcp://10.6.49.60:7000')
+  results_collector = Kymera::TestResultsCollector.new('tcp://*:5556', 'tcp://127.0.0.1:7000')
+  # results_collector = Kymera::TestResultsCollector.new('tcp://*:5556', 'tcp://10.6.49.60:7000')
   results_collector.listen
 }
 
