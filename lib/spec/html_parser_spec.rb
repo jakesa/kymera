@@ -58,9 +58,4 @@ Scenario: c. valid username, invalid password[90m            # c:\apollo\source
 
 
 parsed_results = Kymera::Cucumber::HTMLResultsParser.to_html(results)
-p parsed_results.length
-parsed_results.each do |result|
-  puts "#############################"
-  puts result
-  puts "#############################"
-end
+puts parsed_results
