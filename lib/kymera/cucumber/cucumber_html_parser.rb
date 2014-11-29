@@ -21,12 +21,14 @@ module Kymera
             #\e[36m blue
             #\e[90m gray
             #\e[31m red
+            #\e[32m green
             #\e[0m
             line.gsub!("\e[36m", "<span class='skip'>")
             line.gsub!("\e[90m", "<span class='text'>")
-            line.gsub!("\e[31m", "<span class='error>'")
+            line.gsub!("\e[31m", "<span class='error'>")
+            line.gsub!("\e[32m", "<span class='pass'>")
             line.gsub!("\e[0m", "</span>")
-            html_results << line
+            html_results << "#{line}<br/>"
 
           end
         end

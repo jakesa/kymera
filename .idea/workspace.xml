@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe8b228f-39c5-4d1c-a114-7c0c9683636f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/spec/html_parser_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_results_parser.rb" afterPath="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_results_parser.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/kymera.iml" afterPath="$PROJECT_DIR$/.idea/kymera.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera.rb" afterPath="$PROJECT_DIR$/lib/kymera.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/test_results_collector.rb" afterPath="$PROJECT_DIR$/lib/kymera/test_results_collector.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb" afterPath="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb" />
     </list>
     <ignored path="kymera.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,21 +57,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_results_collector.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_results_collector.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/test_results_collector.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44444445" vertical-offset="591" max-vertical-offset="1335">
+            <state vertical-scroll-proportion="0.0" vertical-offset="591" max-vertical-offset="1335">
               <caret line="61" column="49" selection-start-line="61" selection-start-column="49" selection-end-line="61" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cucumber_html_parser.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="cucumber_html_parser.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
-              <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.61728394" vertical-offset="0" max-vertical-offset="729">
+              <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -164,9 +158,9 @@
       <list>
         <option value="$PROJECT_DIR$/lib/kymera.rb" />
         <option value="$PROJECT_DIR$/lib/spec/html_parser_spec.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_results_parser.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/test_results_collector.rb" />
+        <option value="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb" />
       </list>
     </option>
   </component>
@@ -1054,14 +1048,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/spec/html_parser_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1065">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/kymera/cucumber/cucumber_results_parser.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="546" max-vertical-offset="1275">
@@ -1070,10 +1056,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb">
+    <entry file="file://$PROJECT_DIR$/lib/kymera/test_results_collector.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
-          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="591" max-vertical-offset="1335">
+          <caret line="61" column="49" selection-start-line="61" selection-start-column="49" selection-end-line="61" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/spec/html_parser_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1065">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1086,10 +1080,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/test_results_collector.rb">
+    <entry file="file://$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44444445" vertical-offset="591" max-vertical-offset="1335">
-          <caret line="61" column="49" selection-start-line="61" selection-start-column="49" selection-end-line="61" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.61728394" vertical-offset="0" max-vertical-offset="729">
+          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
           <folding />
         </state>
       </provider>
