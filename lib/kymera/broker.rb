@@ -85,7 +85,8 @@ module Kymera
     def run_test(test, options)
       port = @client_address.split(':')[2]
       Thread.new {
-        message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"], :run_id => options["run_id"], :test_count => @test_count, :branch => options["branch"]})
+        message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"], :run_id => options["run_id"],
+                                 :test_count => @test_count, :branch => options["branch"], :start_time => options["start_time"]})
         socket = @zmq.socket("tcp://127.0.0.1:#{port}", 'request')
         socket.connect
         puts "Sending: #{message}"

@@ -27,11 +27,13 @@ module Kymera
             line.gsub!("\e[90m", "<span class='text'>")
             line.gsub!("\e[31m", "<span class='error'>")
             line.gsub!("\e[32m", "<span class='pass'>")
+            line.gsub!("\e[1m", "<span class='example'>")
             line.gsub!("\e[0m", "</span>")
             line.gsub!("[36m", "<span class='skip'>")
             line.gsub!("[90m", "<span class='text'>")
             line.gsub!("[31m", "<span class='error'>")
             line.gsub!("[32m", "<span class='pass'>")
+            line.gsub!("[1m", "<span class='example'>")
             line.gsub!("[0m", "</span>")
             html_results << "#{line}<br/>"
 

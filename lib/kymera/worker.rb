@@ -55,7 +55,7 @@ module Kymera
       end
 
       results = runner.run_test(test_path, test['branch'])
-      JSON.generate({:run_id => test["run_id"], :test_count => test["test_count"], :runner => test["runner"], :results => results})
+      JSON.generate({:run_id => test["run_id"], :test_count => test["test_count"], :runner => test["runner"], :results => results}, :start_time => test["start_time"])
     end
 
     def stop

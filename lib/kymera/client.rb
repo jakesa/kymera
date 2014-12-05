@@ -34,7 +34,7 @@ module Kymera
     def run_tests(tests, runner, options, branch = 'develop')
       @start_time = Time.now
       tests = parse_tests(tests, runner, options)
-      test_run = {:tests => tests, :runner => runner, :run_id => @full_run_id, :options => options, :branch => branch }
+      test_run = {:tests => tests, :runner => runner, :run_id => @full_run_id, :options => options, :branch => branch, :start_time => @start_time.to_s }
       socket = @zmq.socket(@broker_address, 'push')
       socket.connect
       message = JSON.generate(test_run)
