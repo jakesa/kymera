@@ -30,7 +30,6 @@ module Kymera
           start_test_count = parsed_message["test_count"]
           runner = parsed_message["runner"]
           results << parsed_message["results"]
-          puts "This is the start time at the test collector #{parsed_message["start_time"]}"
           start_time = parsed_message["start_time"]
           puts 'Results run started with the following configuration:'
           puts "Run ID: #{@run_id}"
@@ -67,7 +66,6 @@ module Kymera
         end_time = Time.now
         # puts html_results
         # Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, results, r_results), '10.6.49.83', 27017, 'apollo', 'test_runs')
-        puts "This is the start time as it is sent to the database #{start_time}"
         Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time), '10.6.49.83', 27017, 'apollo', 'test_runs')
         run_id = "end_#{@run_id}"
         @out_socket.publish_message(run_id, r_results)

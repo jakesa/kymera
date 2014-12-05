@@ -55,10 +55,7 @@ module Kymera
       end
 
       results = runner.run_test(test_path, test['branch'])
-      puts "This is the start time at the worker #{test["start_time"]}"
-      puts "This is the test hash #{test}"
-      puts "These are the keys on the hash #{test.keys}"
-      JSON.generate({:run_id => test["run_id"], :test_count => test["test_count"], :runner => test["runner"], :results => results}, :start_time => test["start_time"])
+      JSON.generate({:run_id => test["run_id"], :test_count => test["test_count"], :runner => test["runner"], :results => results, :start_time => test["start_time"]} )
     end
 
     def stop
