@@ -84,6 +84,7 @@ module Kymera
     #This runs each test individually
     def run_test(test, options)
       port = @client_address.split(':')[2]
+      puts "This is the start time at the broker #{options["start_time"]}"
       Thread.new {
         message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"], :run_id => options["run_id"],
                                  :test_count => @test_count, :branch => options["branch"], :start_time => options["start_time"]})

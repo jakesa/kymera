@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fe8b228f-39c5-4d1c-a114-7c0c9683636f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/broker.rb" afterPath="$PROJECT_DIR$/lib/kymera/broker.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/client.rb" afterPath="$PROJECT_DIR$/lib/kymera/client.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb" afterPath="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/test_results_collector.rb" afterPath="$PROJECT_DIR$/lib/kymera/test_results_collector.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/kymera/worker.rb" afterPath="$PROJECT_DIR$/lib/kymera/worker.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="kymera.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,7 +71,7 @@
       <file leaf-file-name="test_results_collector.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/test_results_collector.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="1470">
+            <state vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="1470">
               <caret line="78" column="38" selection-start-line="78" selection-start-column="38" selection-end-line="78" selection-end-column="38" />
               <folding />
             </state>
@@ -92,10 +88,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client_test_run_spec.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="client_test_run_spec.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/spec/client_test_run_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7201646" vertical-offset="0" max-vertical-offset="729">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
               <caret line="35" column="61" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
               <folding />
             </state>
@@ -122,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="broker.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="broker.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/kymera/broker.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="930" max-vertical-offset="1725">
-              <caret line="89" column="66" selection-start-line="89" selection-start-column="66" selection-end-line="89" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.6995885" vertical-offset="780" max-vertical-offset="1740">
+              <caret line="86" column="70" selection-start-line="86" selection-start-column="70" selection-end-line="86" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -135,8 +131,8 @@
       <file leaf-file-name="worker.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/kymera/worker.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1305">
-              <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="1320">
+              <caret line="57" column="65" selection-start-line="57" selection-start-column="65" selection-end-line="57" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -166,9 +162,9 @@
         <option value="$PROJECT_DIR$/lib/spec/html_parser_spec.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/cucumber/cucumber_html_parser.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/client.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/broker.rb" />
-        <option value="$PROJECT_DIR$/lib/kymera/worker.rb" />
         <option value="$PROJECT_DIR$/lib/kymera/test_results_collector.rb" />
+        <option value="$PROJECT_DIR$/lib/kymera/worker.rb" />
+        <option value="$PROJECT_DIR$/lib/kymera/broker.rb" />
       </list>
     </option>
   </component>
@@ -1047,26 +1043,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/client.rb">
+    <entry file="file://$PROJECT_DIR$/lib/spec/startup_broker_bus_collector_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="351" max-vertical-offset="1530">
-          <caret line="36" column="150" selection-start-line="36" selection-start-column="150" selection-end-line="36" selection-end-column="150" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
+          <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/broker.rb">
+    <entry file="file://$PROJECT_DIR$/lib/spec/client_test_run_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="930" max-vertical-offset="1725">
-          <caret line="89" column="66" selection-start-line="89" selection-start-column="66" selection-end-line="89" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/kymera/worker.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1305">
-          <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
+          <caret line="35" column="61" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
           <folding />
         </state>
       </provider>
@@ -1079,18 +1067,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/spec/startup_broker_bus_collector_spec.rb">
+    <entry file="file://$PROJECT_DIR$/lib/kymera/client.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
-          <caret line="31" column="3" selection-start-line="31" selection-start-column="3" selection-end-line="31" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="351" max-vertical-offset="1530">
+          <caret line="36" column="150" selection-start-line="36" selection-start-column="150" selection-end-line="36" selection-end-column="150" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/spec/client_test_run_spec.rb">
+    <entry file="file://$PROJECT_DIR$/lib/kymera/worker.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7201646" vertical-offset="0" max-vertical-offset="729">
-          <caret line="35" column="61" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="1320">
+          <caret line="57" column="65" selection-start-line="57" selection-start-column="65" selection-end-line="57" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/kymera/broker.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6995885" vertical-offset="780" max-vertical-offset="1740">
+          <caret line="86" column="70" selection-start-line="86" selection-start-column="70" selection-end-line="86" selection-end-column="70" />
           <folding />
         </state>
       </provider>
