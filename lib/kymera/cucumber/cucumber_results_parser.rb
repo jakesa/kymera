@@ -8,7 +8,6 @@ module Kymera
       end
 
       def self.summarize_results(results)
-        p results
         results_array = results.split("\n")
         sort_order = %w[scenario step]
         aggregate_results = sort_order.map do |group|
@@ -41,13 +40,17 @@ module Kymera
           _group += 's'
         end
 
+        line = ''
         if failed_scenarios.empty?
-          "#{group_count} #{_group} (\e[32m#{passed_count} #{passed}\e[0m)"
+          line << "#{group_count} #{_group} (\e[32m#{passed_count} #{passed}\e[0m)"
         elsif passed_scenarios.empty?
-          "#{group_count} #{_group} (\e[31m#{failed_count} #{failed}\e[0m)"
+          line << "#{group_count} #{_group} (\e[31m#{failed_count} #{failed}\e[0m)"
         else
-          "#{group_count} #{_group} (\e[31m#{failed_count} #{failed}\e[0m, \e[32m#{passed_count} #{passed}\e[0m)"
+          line << "#{group_count} #{_group} (\e[31m#{failed_count} #{failed}\e[0m, \e[32m#{passed_count} #{passed}\e[0m)"
         end
+
+        [line, passed_count, failed_count]
+
       end
 
       def self.count(lines)

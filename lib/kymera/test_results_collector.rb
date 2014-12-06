@@ -60,19 +60,20 @@ module Kymera
 
     def finalize_results(test_count, run_id, results, runner, start_time)
       if runner.downcase == 'cucumber'
-        r_results = Kymera::Cucumber::ResultsParser.summarize_results(results)
+        r_results, pass_count, fail_count = Kymera::Cucumber::ResultsParser.summarize_results(results)
+        # r_results = Kymera::Cucumber::ResultsParser.summarize_results(results)
         html_results = Kymera::Cucumber::HTMLResultsParser.to_html(results)
         html_summary = Kymera::Cucumber::HTMLResultsParser.to_html(r_results)
         end_time = Time.now
         # puts html_results
         # Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, results, r_results), '10.6.49.83', 27017, 'apollo', 'test_runs')
-        Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time), '10.6.49.83', 27017, 'apollo', 'test_runs')
+        Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time, pass_count, fail_count), '10.6.49.83', 27017, 'apollo', 'test_runs')
         run_id = "end_#{@run_id}"
         @out_socket.publish_message(run_id, r_results)
       end
     end
 
-    def build_test_log(test_count, run_id, results, summary, start_time, end_time)
+    def build_test_log(test_count, run_id, results, summary, start_time, end_time, pass_count, fail_count)
       log_message = {}
       log_message["run_id"] = run_id
       log_message["test_count"] = test_count
@@ -80,6 +81,10 @@ module Kymera
       log_message["summary"] = summary
       log_message["start_time"] = start_time
       log_message["end_time"] = end_time
+      log_message["duration"] = Chronic.parse(end_time) - Chronic.parse(start_time)
+      log_message["pass_count"] = pass_count
+      log_message["fail_count"] = fail_count
+
       JSON.generate log_message
     end
 
