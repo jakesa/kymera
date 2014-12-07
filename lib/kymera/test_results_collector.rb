@@ -1,5 +1,6 @@
 require_relative 'szmq/szmq'
 require_relative 'mongo_driver'
+require 'chronic'
 require 'json'
 
 module Kymera
@@ -85,7 +86,7 @@ module Kymera
           puts "Sending results to client..."
           @out_socket.publish_message(run_id, r_results)
         rescue => e
-          raise e
+          puts e
         ensure
           puts "These are the summarized results:\n#{r_results}"
 
@@ -94,18 +95,23 @@ module Kymera
     end
 
     def build_test_log(test_count, run_id, results, summary, start_time, end_time, pass_count, fail_count)
-      log_message = {}
-      log_message["run_id"] = run_id
-      log_message["test_count"] = test_count
-      log_message["results"] = results
-      log_message["summary"] = summary
-      log_message["start_time"] = start_time
-      log_message["end_time"] = end_time
-      log_message["duration"] = Chronic.parse(end_time) - Chronic.parse(start_time)
-      log_message["pass_count"] = pass_count
-      log_message["fail_count"] = fail_count
+      begin
+        log_message = {}
+        log_message["run_id"] = run_id
+        log_message["test_count"] = test_count
+        log_message["results"] = results
+        log_message["summary"] = summary
+        log_message["start_time"] = start_time
+        log_message["end_time"] = end_time
+        log_message["duration"] = Chronic.parse(end_time) - Chronic.parse(start_time)
+        log_message["pass_count"] = pass_count
+        log_message["fail_count"] = fail_count
 
-      JSON.generate log_message
+        JSON.generate log_message
+      rescue => e
+        puts e
+      end
+
     end
 
 
