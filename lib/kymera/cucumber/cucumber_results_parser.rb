@@ -40,18 +40,28 @@ module Kymera
           _group += 's'
         end
 
-        line = ''
-        if failed_scenarios.empty?
-          line << "#{group_count} #{_group} (\e[32m#{passed_count} #{passed}\e[0m)"
-        elsif passed_scenarios.empty?
-          line << "#{group_count} #{_group} (\e[31m#{failed_count} #{failed}\e[0m)"
-        else
-          line << "#{group_count} #{_group} (\e[31m#{failed_count} #{failed}\e[0m, \e[32m#{passed_count} #{passed}\e[0m)"
+        if _group.downcase.include? 'scenario'
+          @@p_count = ''
+          @@f_count = ''
+          @@p_count = passed_count unless passed_count.nil?
+          @@f_count = failed_count unless failed_count.nil?
         end
 
-        [line, passed_count, failed_count]
+        if failed_scenarios.empty?
+          "#{group_count} #{_group} (\e[32m#{passed_count} #{passed}\e[0m)"
+        elsif passed_scenarios.empty?
+          "#{group_count} #{_group} (\e[31m#{failed_count} #{failed}\e[0m)"
+        else
+          "#{group_count} #{_group} (\e[31m#{failed_count} #{failed}\e[0m, \e[32m#{passed_count} #{passed}\e[0m)"
+        end
 
       end
+
+      #These variables are reset every time the sum_up_lines method is called
+      def self.scenario_counts
+        {pass: @@p_count, fail: @@f_count}
+      end
+
 
       def self.count(lines)
         count = 0
