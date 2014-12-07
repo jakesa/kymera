@@ -79,7 +79,7 @@ module Kymera
           # puts html_results
           # Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, results, r_results), '10.6.49.83', 27017, 'apollo', 'test_runs')
           puts "Starting database logging processes..."
-          Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time, pass_count, fail_count), '10.6.49.83', 27017, 'apollo', 'test_runs')
+          Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time.to_s, pass_count, fail_count), '10.6.49.83', 27017, 'apollo', 'test_runs')
           puts "Setting run id..."
           run_id = "end_#{@run_id}"
           puts "Sending results to client..."
@@ -101,7 +101,7 @@ module Kymera
       log_message["summary"] = summary
       log_message["start_time"] = start_time
       log_message["end_time"] = end_time
-      #log_message["duration"] = Chronic.parse(end_time) - Chronic.parse(start_time)
+      log_message["duration"] = Chronic.parse(end_time) - Chronic.parse(start_time)
       log_message["pass_count"] = pass_count
       log_message["fail_count"] = fail_count
 
