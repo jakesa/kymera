@@ -24,6 +24,7 @@ module Kymera
 
     #This brings up the broker so that it can receive test run requests.
     def start_broker
+      puts "Broker started..."
       @test_socket.receive do |tests|
         puts "Received test run request.."
         start_test_run(tests)

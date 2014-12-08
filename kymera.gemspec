@@ -24,5 +24,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ffi-rzmq'
   spec.add_dependency 'json'
   spec.add_dependency 'mongo'
+  spec.add_dependency 'bson'
+  spec.add_dependency 'bson_ext'
+  spec.add_dependency 'chronic'
 
 end

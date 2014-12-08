@@ -1,5 +1,6 @@
 require_relative 'szmq/szmq'
 require_relative 'mongo_driver'
+require 'chronic'
 require 'json'
 
 module Kymera
@@ -15,6 +16,7 @@ module Kymera
     end
 
     def listen
+      puts "Test collector started..."
       test_count = ''
       start_test_count = ''
       @run_id = ''
@@ -81,12 +83,13 @@ module Kymera
           puts "Starting database logging processes..."
           Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time.to_s, pass_count, fail_count), '10.6.49.83', 27017, 'apollo', 'test_runs')
           puts "Setting run id..."
+        rescue => e
+          puts "There was an error in the logging process:"
+          puts e
+        ensure
           run_id = "end_#{@run_id}"
           puts "Sending results to client..."
           @out_socket.publish_message(run_id, r_results)
-        rescue => e
-          raise e
-        ensure
           puts "These are the summarized results:\n#{r_results}"
 
         end

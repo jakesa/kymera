@@ -23,6 +23,7 @@ module Kymera
     end
 
     def listen
+      puts "Worker started..."
       @test_socket.receive do |message|
         #This is a preliminary kill command. I will need to give more thought into the life cycle of the workers
         if message == 'STOP'

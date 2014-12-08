@@ -12,6 +12,7 @@ module Kymera
     end
 
     def start_bus
+      puts "Results bus started..."
       @zmq.start_pub_sub_proxy(@incoming_socket, @outgoing_socket)
     end
 
