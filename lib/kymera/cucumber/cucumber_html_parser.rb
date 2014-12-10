@@ -21,7 +21,7 @@ module Kymera
             line.gsub!("[32m", "<span class='pass'>")
             line.gsub!("[1m", "<span class='example'>")
             line.gsub!("[0m", "</span>")
-            html_results << "#{line}<br/>"
+            html_results << "#{line}<br>"
           end
           html_results << "</div>"
           html_results
@@ -39,6 +39,14 @@ module Kymera
                 html_results << "<p>"
                 html_results << "#{line}"
               end
+            elsif line.start_with?("Feature")
+              html_results << "<span class='featureTitle'>#{line}</span><br>"
+            elsif line.lstrip.start_with?("Scenario")
+              line.gsub!("\e[90m", "<span class='text'>")
+              line.gsub!("[90m", "<span class='text'>")
+              line.gsub!("\e[0m", "</span>")
+              line.gsub!("[0m", "</span>")
+              html_results << "<span class='scenarioTitle'>#{line}</span><br>"
             else
               #\e[36m blue
               #\e[90m gray
@@ -57,7 +65,7 @@ module Kymera
               line.gsub!("[32m", "<span class='pass'>")
               line.gsub!("[1m", "<span class='example'>")
               line.gsub!("[0m", "</span>")
-              html_results << "#{line}<br/>"
+              html_results << "#{line}<br>"
             end
           end
           html_results << "</div>"

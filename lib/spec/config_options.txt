@@ -1,0 +1,5 @@
+This is a list of different config options for the kymera gem
+
+Broker address: ip address and port where the test broker is located
+Results bus address: the ip address and port where the results bus is located
+Results Collector address: the ip address and port where the results bus is located

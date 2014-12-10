@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "kymera"
   spec.version       = Kymera::VERSION
   spec.authors       = ["jakesa"]
-  spec.email         = ["jakes55214@yahoo.com"]
+  spec.email         = ["jakes.sarate@dat.com"]
   spec.description   = 'Distributed Cucumber test runner'
   spec.summary       = 'Execute cucumber tests across a network'
   spec.homepage      = ""
