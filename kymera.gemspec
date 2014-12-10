@@ -23,9 +23,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'cucumber'
   spec.add_dependency 'ffi-rzmq'
   spec.add_dependency 'json'
-  spec.add_dependency 'mongo'
-  spec.add_dependency 'bson'
-  spec.add_dependency 'bson_ext'
+  spec.add_dependency 'mongo', '1.10.2'
+  spec.add_dependency 'bson', '1.10.2'
+  spec.add_dependency 'bson_ext', '~> 1.10.0'
   spec.add_dependency 'chronic'
 
 end

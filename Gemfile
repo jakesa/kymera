@@ -4,9 +4,9 @@ source 'http://rubygems.org'
 gem 'cucumber'
 gem 'ffi-rzmq'
 gem 'chronic'
-gem 'mongo'
-gem 'bson'
-gem 'bson_ext'
+gem 'mongo', '1.10.2'
+gem 'bson', '1.10.2'
+gem 'bson_ext', '1.10.2'
 
 gemspec
 
