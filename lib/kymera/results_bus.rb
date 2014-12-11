@@ -5,10 +5,11 @@ module Kymera
 
   class ResultsBus
 
-    def initialize(incoming_address, outgoing_address)
+    def initialize
+      config = Kymera::Config.new
       @zmq = Kymera::SZMQ.new
-      @incoming_socket = @zmq.socket(incoming_address, 'xsub')
-      @outgoing_socket = @zmq.socket(outgoing_address, 'xpub')
+      @incoming_socket = @zmq.socket("tcp://*:#{config.result_bus["pub_port"]}", 'xsub')
+      @outgoing_socket = @zmq.socket("tcp://*:#{config.result_bus["sub_port"]}", 'xpub')
     end
 
     def start_bus

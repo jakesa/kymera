@@ -9,10 +9,11 @@ module Kymera
     #test broker
     #The initializer take in a broker_address(String) identifying the location of the broker on the network, a results_bus_address(String) identifying the latching point of the bus where the client and get
     #real-time test output as the tests are being executed and real_time(Boolean) indicating whether or not this client wants to get real-time updates. This is defaulted to true
-    def initialize(broker_address,results_bus_address, real_time = true)
-      @broker_address = broker_address
-      @results_bus_address = results_bus_address
-      @real_time = real_time
+    def initialize(real_time = true)
+      config = Kymera::Config.new
+      @broker_address = config.client["broker_address"]
+      @results_bus_address = config.client["results_bus_address"]
+      @real_time = real_time.to_s
       @zmq = Kymera::SZMQ.new
       @client_id = Kymera::host_name
       Client.run_id +=1
@@ -42,7 +43,7 @@ module Kymera
 
       channels = ["end_#{@full_run_id}"]
       results_feed = @zmq.socket(@results_bus_address, 'sub')
-      if @real_time
+      if @real_time == "true"
         channels << @full_run_id
       end
       results_feed.subscribe(channels) do |channel, results|

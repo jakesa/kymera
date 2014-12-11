@@ -10,21 +10,24 @@ end
 
 #Results bus thread
 threads << Thread.new {
-  bus = Kymera::ResultsBus.new('tcp://*:7000', 'tcp://*:7001')
-  bus.start_bus
+  # bus = Kymera::ResultsBus.new('tcp://*:7000', 'tcp://*:7001')
+  # bus.start_bus
+  Kymera.start_bus
 }
 
 #Broker thread
 threads << Thread.new {
-  broker = Kymera::Broker.new('tcp://*:5550', 'tcp://*:5551', 'tcp://*:5552', 20)
-  broker.start_broker
+  # broker = Kymera::Broker.new('tcp://*:5550', 'tcp://*:5551', 'tcp://*:5552', 20)
+  # broker.start_broker
+  Kymera.start_broker
 }
 
 #Results collector thread
 threads << Thread.new {
-  results_collector = Kymera::TestResultsCollector.new('tcp://*:5556', 'tcp://127.0.0.1:7000')
+  # results_collector = Kymera::TestResultsCollector.new('tcp://*:5556', 'tcp://127.0.0.1:7000')
   # results_collector = Kymera::TestResultsCollector.new('tcp://*:5556', 'tcp://10.6.49.60:7000')
-  results_collector.listen
+  # results_collector.listen
+  Kymera.start_collector
 }
 
 loop do

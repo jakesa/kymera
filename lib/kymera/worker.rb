@@ -4,10 +4,11 @@ require 'json'
 module Kymera
   class Worker
 
-    def initialize(test_address, results_address, result_bus_address)
-      @test_address = test_address
-      @results_address = results_address
-      @result_bus_address = result_bus_address
+    def initialize
+      config = Kymera::Config.new
+      @test_address = config.worker["broker_address"]
+      @results_address = config.worker["result_collector_address"]
+      @result_bus_address = config.worker["result_bus_address"]
       @zmq = SZMQ.new
       #For the moment I am using a push/pull configuration for running of tests.  Initial runs indicated that this may not work as all tests are being sent to just one
       #worker at a time instead of load balancing them.  It may be more advantageous to use a request/reply structure for sending tests and managing the test run queue

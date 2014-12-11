@@ -7,10 +7,11 @@ module Kymera
 
   class TestResultsCollector
 
-    def initialize(inc_address, out_address )
+    def initialize
+      @config = Kymera::Config.new
       @zmq = Kymera::SZMQ.new
-      @inc_socket = @zmq.socket(inc_address, 'pull')
-      @out_socket = @zmq.socket(out_address, 'pub')
+      @inc_socket = @zmq.socket("tcp://*:#{@config.result_collector["inc_listening_port"]}", 'pull')
+      @out_socket = @zmq.socket(@config.result_collector["result_bus_address"], 'pub')
       @inc_socket.bind
       @out_socket.connect
     end
@@ -81,7 +82,8 @@ module Kymera
           # puts html_results
           # Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, results, r_results), '10.6.49.83', 27017, 'apollo', 'test_runs')
           puts "Starting database logging processes..."
-          Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time.to_s, pass_count, fail_count), '10.6.49.83', 27017, 'apollo', 'test_runs')
+          Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time.to_s, pass_count, fail_count), @config.result_collector["mongodb_address"],
+                                          @config.result_collector["mongodb_port"].to_i, @config.result_collector["mongodb_database_name"], @config.result_collector["mongodb_collection_name"])
           puts "Setting run id..."
         rescue => e
           puts "There was an error in the logging process:"

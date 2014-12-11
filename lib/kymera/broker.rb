@@ -8,17 +8,18 @@ module Kymera
     #test_address is the port you want to listen on for incoming test runs. client_address is the internal address used for sending tests to the proxy
     #worker_address is the port that the workers will connect to for test distribution. num_of_con is the number of concurrent requests you want running at any given time
     #This number can be tuned depending on the machine the broker is running on.
-    def initialize(test_address, client_address, worker_address, num_of_con)
+    def initialize
+      config = Kymera::Config.new
       @zmq = Kymera::SZMQ.new
-      @num_of_connections = num_of_con
+      @num_of_connections = config.broker["number_of_connections"]
       #This socket is for getting tests from the client
-      @test_address = test_address
-      @client_address = client_address
-      @worker_address = worker_address
-      @test_socket = @zmq.socket(test_address, 'pull')
+      @client_address = "tcp://*:#{config.broker["client_listening_port"]}"
+      @internal_address = "tcp://*:#{config.broker["internal_worker_port"]}"
+      @worker_address = "tcp://*:#{config.broker["worker_listening_port"]}"
+      @test_socket = @zmq.socket(@client_address, 'pull')
       @test_socket.bind
-      @front_end = @zmq.socket(client_address, 'router')
-      @back_end = @zmq.socket(worker_address, 'dealer')
+      @front_end = @zmq.socket(@internal_address, 'router')
+      @back_end = @zmq.socket(@worker_address, 'dealer')
       @proxy = Thread.new {@zmq.start_proxy(@front_end, @back_end)}
     end
 
@@ -42,7 +43,7 @@ module Kymera
 
       report_test_config(test_run)
 
-      if tests.length > @num_of_connections
+      if tests.length > @num_of_connections.to_i
         1.upto @num_of_connections do
           test = tests.pop
           break if test.nil?
@@ -84,7 +85,7 @@ module Kymera
 
     #This runs each test individually
     def run_test(test, options)
-      port = @client_address.split(':')[2]
+      port = @internal_address.split(':')[2]
       Thread.new {
         message = JSON.generate({:test => test, :runner => options["runner"], :options => options["options"], :run_id => options["run_id"],
                                  :test_count => @test_count, :branch => options["branch"], :start_time => options["start_time"]})

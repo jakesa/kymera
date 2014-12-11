@@ -1,5 +1,51 @@
 This is a list of different config options for the kymera gem
 
-Broker address: ip address and port where the test broker is located
-Results bus address: the ip address and port where the results bus is located
-Results Collector address: the ip address and port where the results bus is located
+Client -
+    Broker address: ip address and port where the test broker is located
+    Results bus address: the ip address and port where the results bus is located
+
+Broker -
+    Client Listening Port: what port to listen to for incoming test run requests
+    Worker Listening Port: What port to listen to for incoming worker connections
+    Number of Connections: This parameter is used to set the number of threads the broker will spawn for running tests. It is important to note that this number
+                           needs to be larger than the number of connected workers. If not, the workers connected in excess of the number of threads will not be utilized
+                           There are plans to change this behavior in the future
+
+Worker -
+    Broker address: the ip address and port where the broker is located
+    Results Collector Address: the ip address and port where the results collector is located
+    Results Bus Address: the ip address and port where the results bus is located
+
+Results Collector -
+    Incoming Listening Port: The port number where results will be coming in
+    Results Bus Address: The ip address and port where the outgoing aggregated results will be sent
+    Use Mongo DB: This is a bool telling the collector whether or not to send the results to a mongodb instance
+    MongoDB Address: The ip address and port number where the completed results will be sent for archiving
+    MongoDB Name: The name of the database that test collector will send the results to
+    MongoDB Collection Name: The name of the collection that the results will belong to
+
+Results Bus -
+    Publish Port: The port which will be used for publishers to publish messages to the bus
+    Subscription Port: The port which will be used for subscribers to subscribe to
+
+
+Passable arguments for each component of Kymera
+
+Client -
+    real_time          : This parameter is used to tell the client whether or not to display the realtime output from all of the test workers
+    tests              : The file or director that contains the tests that need to be run
+    test_runner        : This is the runner that Kymera will used to run the tests. Currently only Cucumber is supported. There are plans to extend that later
+    test_runner_options: These are the options specific to the test runner.
+    branch             : This is the branch that the Kymera Workers should pull from to get the code that the user wishes to execute or test against
+
+Broker -
+    none
+
+Worker -
+    none
+
+Results Collector -
+    none
+
+Results Bus -
+    none
