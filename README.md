@@ -1,6 +1,6 @@
 # Kymera
 
-Kymera is a distributed system build on ZeroMQ for running Cucumber tests across a network.
+Kymera is a distributed system built on ZeroMQ for running Cucumber tests across a network.
 If you are at this page, first let me say Thank You for your interest.  That being said, the Kymera gem
 is in a very early stage of development and is currently build specifically for use in DAT Solutions© internal testing infrastructure.
 I plan to make this more generic so it can be used with other systems, but for now the goal is to get something working for DAT Solutions©
@@ -80,7 +80,7 @@ The run_tests method takes the following parameters
 * Branch name -
      When a test is started on a worker, it pulls the specified branch for any changes and updates before running the test. This parameter tells it the branch
      name
-* Live results - 
+* Live results -
      This parameter tells the system whether or not to display real time results. By default it is set to true. If set to false, there will be no console output
      to the client until the run has been completed
 
