@@ -36,7 +36,7 @@ Please note that at the time of this writing, this gem has not been published. Y
 
     $ gem install kymera
 
-This gem is also zeroMQ. So that will need to be installed from their website [here](http://zeromq.org/intro:get-the-software)
+This gem uses ZeroMQ. It will need to be installed. You can find the installation instructions on their website [here](http://zeromq.org/intro:get-the-software)
 
 ## Usage
 
