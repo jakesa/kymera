@@ -71,18 +71,18 @@ Once all the necessary processes are started, you can start the a test run by ca
 
 The run_tests method takes the following parameters
 * Test path
-    This can be a path to a specific test or a path to a directory of tests. The system will parse all of the feature files for
-    tests it is supposed to run based on the run options passed in.
+     This can be a path to a specific test or a path to a directory of tests. The system will parse all of the feature files for
+     tests it is supposed to run based on the run options passed in.
 * Test runner
-    This is the runner that they system is to use for running the tests. At the time of this writing, the only supported running is cucumber
+     This is the runner that they system is to use for running the tests. At the time of this writing, the only supported running is cucumber
 * Runner options
-    These are the options to be passed to the runner and what will be used to parse the tests to be executed.
+     These are the options to be passed to the runner and what will be used to parse the tests to be executed.
 * Branch name
-    When a test is started on a worker, it pulls the specified branch for any changes and updates before running the test. This parameter tells it the branch
-    name
+     When a test is started on a worker, it pulls the specified branch for any changes and updates before running the test. This parameter tells it the branch
+     name
 * Live results
-    This parameter tells the system whether or not to display real time results. By default it is set to true. If set to false, there will be no console output
-    to the client until the run has been completed
+     This parameter tells the system whether or not to display real time results. By default it is set to true. If set to false, there will be no console output
+     to the client until the run has been completed
 
 ## Contributing
 
