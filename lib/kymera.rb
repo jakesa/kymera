@@ -64,7 +64,7 @@ module Kymera
         'result_collector' =>{
             'inc_listening_port' => '5556',
             'result_bus_address' => 'tcp://127.0.0.1:7000',
-            'send_mongo_results' => true,
+            'send_mongo_results' => false,
             'mongodb_address' => '127.0.0.1',
             'mongodb_port' => 27017,
             'mongodb_database_name' => 'default_db',
