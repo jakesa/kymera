@@ -47,40 +47,40 @@ as you Cucumber project. For convenience, there is a command line tool included 
 
 By default, the gem is setup to run everything locally and has the mongodb feature turned off.  Before you can use the Kymera system, the following components
 must be running:
-*Broker
-*Results Collector
-*Results Bus
-*At least one worker
+* Broker
+* Results Collector
+* Results Bus
+* At least one worker
 
 They can be started individually or all at once:
 
 All at once
 
-    $kymera broker collector bus worker
+    $ kymera broker collector bus worker
 
 Individually
 
-    $kymera broker
-    $kymera collector
+    $ kymera broker
+    $ kymera collector
 
 
 Once all the necessary processes are started, you can start the a test run by calling the #run_tests method on the Kymera module
 
-    $Kymera.run_tests('\Path\to\tests', 'cucumber', [-p default], 'develop', false)
+    $ Kymera.run_tests('\Path\to\tests', 'cucumber', [-p default], 'develop', false)
 
 
 The run_tests method takes the following parameters
-*Test path
+* Test path
     This can be a path to a specific test or a path to a directory of tests. The system will parse all of the feature files for
     tests it is supposed to run based on the run options passed in.
-*Test runner
+* Test runner
     This is the runner that they system is to use for running the tests. At the time of this writing, the only supported running is cucumber
-*Runner options
+* Runner options
     These are the options to be passed to the runner and what will be used to parse the tests to be executed.
-*Branch name
+* Branch name
     When a test is started on a worker, it pulls the specified branch for any changes and updates before running the test. This parameter tells it the branch
     name
-*Live results
+* Live results
     This parameter tells the system whether or not to display real time results. By default it is set to true. If set to false, there will be no console output
     to the client until the run has been completed
 
