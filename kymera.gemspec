@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jakes.sarate@dat.com"]
   spec.description   = 'Distributed Cucumber test runner'
   spec.summary       = 'Execute cucumber tests across a network'
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/jakesa/kymera"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

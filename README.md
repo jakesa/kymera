@@ -27,7 +27,7 @@ The worker is the component that is responsible for actually running the tests. 
 the test is completed it will send the entire output of that run to the test results collector for processing
 
 ###Results Collector
-The result collector is responsible for taking all of the results from a test run, aggregating them and sending those results back to the client
+The result collector is responsible for taking all of the results from a test run, aggregating them and sending those results back to the client.
 Optionally, the collector can also send a complete version of the results, parsed into html, to a mongodb database for reporting purposes.
 
 ###Results Bus
@@ -35,7 +35,6 @@ The Results Bus is where all the results are published. The Client listens on th
 that the test run has completed.
 
 ## Installation
-Please note that at the time of this writing, this gem has not been published. You will need to pull a copy of the repo and build the gem yourself
 
     $ gem install kymera
 
@@ -77,7 +76,7 @@ The run_tests method takes the following parameters
      This can be a path to a specific test or a path to a directory of tests. The system will parse all of the feature files for
      tests it is supposed to run based on the run options passed in.
 * Test runner -
-     This is the runner that they system is to use for running the tests. At the time of this writing, the only supported running is cucumber
+     This is the runner that the system is to use for running the tests. At the time of this writing, the only supported running is cucumber
 * Runner options -
      These are the options to be passed to the runner and what will be used to parse the tests to be executed.
 * Branch name -
