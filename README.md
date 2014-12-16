@@ -6,7 +6,8 @@ is in a very early stage of development and is currently build specifically for 
 I plan to make this more generic so it can be used with other systems, but for now the goal is to get something working for DAT Solutions©
 If you are still are interested, please download the source code and hack away.
 
-Also, please note that there are no reliable unit tests for this code yet.  It is on my TODO list but not a very high priority.
+Also, please note that there are no reliable unit tests for this code yet.  It is on my TODO list but not a very high priority. In addition, the code is rather
+poorly annotated. My apologies for this. I will get to that as soon as I can.
 
 
 
