@@ -47,7 +47,7 @@ as you Cucumber project. For convenience, there is a command line tool included 
 
     $ kymera config
 
-To find more detailed information about the different options available in the kymera_config.yaml, please see the config page [here relative link](config.md)
+To find more detailed information about the different options available in the kymera_config.yaml, please see the config page [here](config.md)
 
 By default, the gem is setup to run everything locally and has the mongodb feature turned off.  Before you can use the Kymera system, the following components
 must be running:

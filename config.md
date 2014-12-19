@@ -2,7 +2,7 @@
 
 This page describes all of the options available in the kymera_config.yaml. The options are grouped by their relation to each of the different Kymera components.
 The config file can be manipulated by in two different ways, either directly by changing the contents of the kymera_config.yaml or programatically using
-the the Kymera::Config class. More on its usuage can be found [here relative link](config_class.md)
+the the Kymera::Config class. More on its usuage can be found [here](config_class.md)
 
 ###Client
 
