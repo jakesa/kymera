@@ -44,7 +44,7 @@ module Kymera
       report_test_config(test_run)
 
       if tests.length > @num_of_connections.to_i
-        1.upto @num_of_connections do
+        1.upto @num_of_connections.to_i do
           test = tests.pop
           break if test.nil?
           threads << run_test(test, test_run)
