@@ -11,12 +11,13 @@ require_relative 'kymera/test_results_collector'
 require_relative 'kymera/cucumber/cucumber_results_parser'
 require_relative '../lib/kymera/cucumber/cucumber_html_parser'
 require_relative 'kymera/config/config'
+require_relative 'kymera/array_exten'
 
 module Kymera
 
   #Start a test run
-  def self.run_tests(tests, test_runner, options, branch, real_time = true)
-    Kymera::Client.new(real_time).run_tests(tests, test_runner, options, branch)
+  def self.run_tests(tests, test_runner, options, branch, grouped = false, real_time = true)
+    Kymera::Client.new(real_time).run_tests(tests, test_runner, options, grouped, branch)
 
   end
 
@@ -76,8 +77,6 @@ module Kymera
             'sub_port' => '7001'
         }
     }
-    puts Dir.pwd
-    puts File.join(Dir.pwd, '/kymera_config.yaml')
     config_file = File.open(File.join(Dir.pwd, '/kymera_config.yaml'), 'w+')
     config_options.to_yaml.split('\n').each do |line|
       config_file.write(line)

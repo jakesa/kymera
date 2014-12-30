@@ -25,6 +25,16 @@ module Kymera
      end
   end
 
+  def self.hwprefs_available?
+    avail = true
+    begin
+      `hwprefs`
+    rescue
+      avail = false
+    end
+    avail
+  end
+
   def self.is_linux?
     case RbConfig::CONFIG['host_os']
       when /linux|darwin/

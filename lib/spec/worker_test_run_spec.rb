@@ -1,5 +1,5 @@
-# require_relative '../../lib/kymera'
-require 'kymera'
+require_relative '../../lib/kymera'
+# require 'kymera'
 
 # args = ARGV
 # if args[0] == 'remote'

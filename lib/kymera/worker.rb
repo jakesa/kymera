@@ -9,6 +9,7 @@ module Kymera
       @test_address = config.worker["broker_address"]
       @results_address = config.worker["result_collector_address"]
       @result_bus_address = config.worker["result_bus_address"]
+      @max_threads = Kymera.processor_count * 2
       @zmq = SZMQ.new
       #For the moment I am using a push/pull configuration for running of tests.  Initial runs indicated that this may not work as all tests are being sent to just one
       #worker at a time instead of load balancing them.  It may be more advantageous to use a request/reply structure for sending tests and managing the test run queue
@@ -21,6 +22,8 @@ module Kymera
       #Even though this is a push socket, I am connecting instead of binding because the static point is going to be the pull socket where the results are aggregated
       #Static points are bound, dynamic points are connected
       @results_socket.connect
+      @threads = []
+      @runner_id = Kymera.host_name
     end
 
     def listen
@@ -31,8 +34,10 @@ module Kymera
           stop
           break
         else
-          results = run_test(message)
-          @results_socket.send_message(results)
+          # results = run_test(message)
+          # @results_socket.send_message(results)
+          puts "Received tests to run"
+          run_test(message, @results_socket)
           @test_socket.send_message ''
         end
       end
@@ -42,22 +47,52 @@ module Kymera
     #I need to pass in the runner and runner options. Thinking about using JSON to get those options and instantiate a runner object based on that information
     #The idea is to be able to take in any number of different test runners (cucumber/rspec) without having the restart the worker object
     #This is why passing in the runner on worker instantiation isnt really an option
-    def run_test(test)
+    def run_test(test, results_socket)
+      puts "Setting up tests..."
       test = JSON.parse(test)
       runner = get_runner(test["runner"], test["options"], test["run_id"])
-      test_path = nil
+      tests = !test["test"].is_a?(Array) ? [test["test"]] : test["test"]
       if Kymera.is_linux?
-        if test["test"].include? 'c:'
-          test_path = test["test"].gsub('c:','~')
-        else
-          test_path = test["test"].gsub('C:','~')
+        puts "This is a linux/unix based machine. Making adjustments...."
+        begin
+          tests.each do |_test|
+            if _test.include? 'c:'
+              _test.gsub!('c:', '~')
+            else
+              _test.gsub!('C:', '~')
+            end
+          end
+        rescue => e
+          puts e
         end
-      else
-        test_path = test["test"]
       end
 
-      results = runner.run_test(test_path, test['branch'])
-      JSON.generate({:run_id => test["run_id"], :test_count => test["test_count"], :runner => test["runner"], :results => results, :start_time => test["start_time"]} )
+      puts "Received #{tests.length} test(s). Running those tests with a max number of threads of #{@max_threads}"
+
+      #TODO: Right now I am passing around a reference to a socket that is created on instantiation, I really should be creating and destroying a socket
+      #for each thread I am creating not passing one in.
+      0.upto @max_threads do
+        _test = tests.pop
+        break if _test.nil?
+        @threads << Thread.new {send_results(runner.run_test(_test, test['branch']), test, results_socket)}
+      end
+
+      puts "Created #{thread_count} threads...."
+
+      if tests.length > 0
+        puts "There were more tests than could be run at one time. Starting test queue."
+      end
+      while tests.length > 0
+        if thread_count < @max_threads
+          _test = tests.pop
+          @threads << Thread.new {send_results(runner.run_test(_test, test['branch']), test, results_socket)}
+        end
+      end
+
+      @threads.each do |t|
+        t.join
+      end unless @threads.empty?
+
     end
 
     def stop
@@ -66,6 +101,19 @@ module Kymera
     end
 
     private
+
+    def send_results(results, message, socket)
+      begin
+        socket.send_message(JSON.generate({:run_id => message["run_id"], :runner_id => @runner_id, :test_count => message["test_count"], :runner => message["runner"], :results => results, :start_time => message["start_time"]} ))
+      rescue => e
+        puts e
+      end
+
+    end
+
+    def thread_count
+      @threads.delete_if {|th| !th.alive?}.length
+    end
 
     #TODO - I would like to add a way to dynamically add runners so that a user can custom build a runner and use it with this gem.
     #Right now I am just doing some simple if/then logic to get predefined runners.

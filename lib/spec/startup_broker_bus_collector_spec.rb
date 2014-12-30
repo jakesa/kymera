@@ -1,4 +1,4 @@
-require 'kymera'
+require_relative '../../lib/kymera'
 threads = []
 
 trap('INT') do

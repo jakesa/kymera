@@ -11,6 +11,8 @@ module Kymera
     def initialize
       config = Kymera::Config.new
       @zmq = Kymera::SZMQ.new
+      #This will change once I get the worker registry up and running. When that is up, there will be one connection spawned for
+      #each of the workers that are connected
       @num_of_connections = config.broker["number_of_connections"]
       #This socket is for getting tests from the client
       @client_address = "tcp://*:#{config.broker["client_listening_port"]}"
@@ -37,11 +39,19 @@ module Kymera
     #This is the start of the test run and is called when the broker receives a test run request
     def start_test_run(test_run)
       test_run = JSON.parse(test_run)
-      @test_count = test_run["tests"].length
-      tests = test_run["tests"]
+      tests = test_run["tests"].copy
       threads = []
 
+      if test_run["grouped"] || test_run["grouped"].to_s.downcase == 'true'
+        tests = group_tests(tests)
+      end unless test_run["grouped"].nil?
+
+      @test_count = test_run["tests"].length
       report_test_config(test_run)
+      # puts "###############################################"
+      # puts "These are the tests"
+      # p tests
+      # puts "#" * 25
 
       if tests.length > @num_of_connections.to_i
         1.upto @num_of_connections.to_i do
@@ -67,6 +77,27 @@ module Kymera
 
 
     end
+
+    def group_tests(tests)
+      #This creates a group for each of the available connection as specified by the @num_of_connections variable
+      #It will then iterate over all of the tests and add a test to each of the groups
+      #at the end of the iteration, if any groups are left empty, they are deleted and the trimmed array is returned
+      groups = []
+
+      1.upto @num_of_connections do
+        groups << []
+      end
+
+      while tests.length > 0
+        groups.each do |group|
+          test = tests.pop
+          group << test unless test.nil?
+          break if test.nil?
+        end
+      end
+      groups.delete_if {|group| group.empty?}
+    end
+
 
     #If there are tests left over after the initial test start up, they are placed into a queue.  The queue is then worked until all tests in the queue have been executed
     def work_queue(threads, tests, options)
