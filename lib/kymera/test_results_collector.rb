@@ -42,6 +42,7 @@ module Kymera
         elsif test_count > 0
           results << parsed_message["results"]
           test_count -= 1
+          puts "Count: #{test_count}"
         end
 
         if test_count <= 0
