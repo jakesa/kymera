@@ -59,7 +59,7 @@ module Kymera
         rescue => e
           puts e
         end
-      elsif Kymera.windows?
+      elsif Kymera.is_windows?
         puts "This is a windows machine. Making adjustments if needed..."
         tests.each do |_test|
           if _test.include? '~'
