@@ -15,13 +15,7 @@ module Kymera
       #worker at a time instead of load balancing them.  It may be more advantageous to use a request/reply structure for sending tests and managing the test run queue
       #manually.
       @test_socket = @zmq.socket(@test_address, 'reply')
-      @results_socket = @zmq.socket(@results_address, 'push')
-      @result_bus_socket = @zmq.socket(@result_bus_address, 'pub')
-      @result_bus_socket.connect
       @test_socket.connect
-      #Even though this is a push socket, I am connecting instead of binding because the static point is going to be the pull socket where the results are aggregated
-      #Static points are bound, dynamic points are connected
-      @results_socket.connect
       @threads = []
       @runner_id = Kymera.host_name
     end
@@ -37,7 +31,7 @@ module Kymera
           # results = run_test(message)
           # @results_socket.send_message(results)
           puts "Received tests to run"
-          run_test(message, @results_socket)
+          run_test(message)
           @test_socket.send_message ''
         end
       end
@@ -47,7 +41,7 @@ module Kymera
     #I need to pass in the runner and runner options. Thinking about using JSON to get those options and instantiate a runner object based on that information
     #The idea is to be able to take in any number of different test runners (cucumber/rspec) without having the restart the worker object
     #This is why passing in the runner on worker instantiation isnt really an option
-    def run_test(test, results_socket)
+    def run_test(test)
       puts "Setting up tests..."
       test = JSON.parse(test)
       runner = get_runner(test["runner"], test["options"], test["run_id"])
@@ -65,16 +59,27 @@ module Kymera
         rescue => e
           puts e
         end
+      elsif Kymera.windows?
+        puts "This is a windows machine. Making adjustments if needed..."
+        tests.each do |_test|
+          if _test.include? '~'
+            _test.gsub!('~', 'c:')
+          end
+        end
+
       end
 
       puts "Received #{tests.length} test(s). Running those tests with a max number of threads of #{@max_threads}"
 
-      #TODO: Right now I am passing around a reference to a socket that is created on instantiation, I really should be creating and destroying a socket
-      #for each thread I am creating not passing one in.
-      0.upto @max_threads do
+      1.upto @max_threads do
         _test = tests.pop
         break if _test.nil?
-        @threads << Thread.new {send_results(runner.run_test(_test, test['branch']), test, results_socket)}
+        @threads << Thread.new {
+          results_socket = SZMQ.new.socket(@results_address, 'push')
+          results_socket.connect
+          send_results(runner.run_test(_test, test['branch']), test, results_socket)
+          results_socket.close
+        }
       end
 
       puts "Created #{thread_count} threads...."
@@ -83,21 +88,34 @@ module Kymera
         puts "There were more tests than could be run at one time. Starting test queue."
       end
       while tests.length > 0
+        $stdout <<  "\rTest Remaining: #{tests.length} | Active Thread Count: #{thread_count}"
+        $stdout.flush
         if thread_count < @max_threads
           _test = tests.pop
-          @threads << Thread.new {send_results(runner.run_test(_test, test['branch']), test, results_socket)}
+          break if _test.nil?
+          @threads << Thread.new {
+            results_socket = SZMQ.new.socket(@results_address, 'push')
+            results_socket.connect
+            send_results(runner.run_test(_test, test['branch']), test, results_socket)
+            results_socket.close
+          }
         end
       end
 
-      @threads.each do |t|
-        t.join
-      end unless @threads.empty?
+      until @threads.empty?
+        text = "Remaining thread count: #{thread_count}"
+        $stdout << "\r" + (" " * text.length)
+        $stdout << "\r#{text}"
+      end
+
+      puts "\nTest run complete"
+
+      @threads = []
 
     end
 
     def stop
       @test_socket.close
-      @results_socket.close
     end
 
     private
@@ -119,7 +137,7 @@ module Kymera
     #Right now I am just doing some simple if/then logic to get predefined runners.
     def get_runner(runner, options, run_id)
       if runner.downcase == 'cucumber'
-        Kymera::Cucumber::Runner.new(options, run_id, @result_bus_socket)
+        Kymera::Cucumber::Runner.new(options, run_id, @result_bus_address)
       else
         nil
       end

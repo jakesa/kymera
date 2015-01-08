@@ -5,9 +5,6 @@ module Kymera
 
   class Broker
 
-    #test_address is the port you want to listen on for incoming test runs. client_address is the internal address used for sending tests to the proxy
-    #worker_address is the port that the workers will connect to for test distribution. num_of_con is the number of concurrent requests you want running at any given time
-    #This number can be tuned depending on the machine the broker is running on.
     def initialize
       config = Kymera::Config.new
       @zmq = Kymera::SZMQ.new
@@ -38,22 +35,24 @@ module Kymera
 
     #This is the start of the test run and is called when the broker receives a test run request
     def start_test_run(test_run)
+      puts 'Starting test run...'
       test_run = JSON.parse(test_run)
+      puts 'Copying over tests..'
       tests = test_run["tests"].copy
       threads = []
-
+      puts "Checking for group configuration...#{test_run['grouped']}"
+      puts "This is the test run message:\n"
+      puts "#{test_run}"
       if test_run["grouped"] || test_run["grouped"].to_s.downcase == 'true'
+        puts 'Grouping tests....'
         tests = group_tests(tests)
       end unless test_run["grouped"].nil?
 
       @test_count = test_run["tests"].length
       report_test_config(test_run)
-      # puts "###############################################"
-      # puts "These are the tests"
-      # p tests
-      # puts "#" * 25
 
       if tests.length > @num_of_connections.to_i
+        puts "Test count was higher than connections. Starting tests and initiating run queue"
         1.upto @num_of_connections.to_i do
           test = tests.pop
           break if test.nil?
@@ -63,6 +62,7 @@ module Kymera
         puts "Tests Complete"
 
       else
+        puts "Test count was not higher than the connections. Starting all tests."
         1.upto tests.length do
           test = tests.pop
           break if test.nil?
@@ -84,10 +84,12 @@ module Kymera
       #at the end of the iteration, if any groups are left empty, they are deleted and the trimmed array is returned
       groups = []
 
-      1.upto @num_of_connections do
+      puts "Setting group containers..."
+      1.upto @num_of_connections.to_i do
         groups << []
       end
 
+      puts "Distributing tests..."
       while tests.length > 0
         groups.each do |group|
           test = tests.pop

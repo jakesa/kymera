@@ -6,9 +6,9 @@ module Kymera
       #This is the test runner. It is responsible for the actual running of the test.  It takes in 3 parameters. The first being options(Array). These are the options to be used
       #for the cucumber test run. The run_id(String), this is a unique id identifying the test run that this test is for.  It is used as the channel name for publishing results
       #on the results bus.  And lastly results_bus(SSocket), this is a socket object representing the results bus. This is what is used for publishing results to that bus
-      def initialize(options, run_id, result_bus = nil)
+      def initialize(options, run_id, result_address = nil)
         @options = options
-        @result_bus = result_bus
+        @result_address = result_address
         @run_id = run_id
         ENV["AUTOTEST"] = "1" if $stdout.tty?
       end
@@ -17,6 +17,12 @@ module Kymera
       #it uses the options passed in with the constructor. run_id(String) is the id of test run that this test is associated with. This is also defaulted with what was passed in
       #with the constructor
       def run_test(test, branch, options = @options, run_id = @run_id)
+        result_bus = nil
+        unless @result_address.nil?
+          result_bus = SZMQ.new.socket(@result_address, 'pub')
+          result_bus.connect
+        end
+
         _results = ''
         _options = ''
         options.each do |option|
@@ -29,12 +35,13 @@ module Kymera
         io = Object::IO.popen("bundle exec cucumber #{test} #{_options}")
         until io.eof? do
           result = io.gets
-          unless @result_bus.nil?
-            @result_bus.publish_message(run_id, result)
+          unless result_bus.nil?
+            result_bus.publish_message(run_id, result)
           end
           _results += result
         end
         Process.wait2(io.pid)
+        result_bus.close unless result_bus.nil?
         _results
       end
 

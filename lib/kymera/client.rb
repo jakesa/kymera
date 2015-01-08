@@ -39,6 +39,8 @@ module Kymera
       socket = @zmq.socket(@broker_address, 'push')
       socket.connect
       message = JSON.generate(test_run)
+      # puts "Sending the following message: \n"
+      # puts message
       socket.send_message(message)
 
       channels = ["end_#{@full_run_id}"]
@@ -68,6 +70,7 @@ module Kymera
     #test parser should use for parsing out the tests.
     def parse_tests(tests, runner, options)
 
+      #This needs to be here for the parsing of the tests. I should probably push this task off to the broker. Will keep it here for now.
       test_path = nil
       if Kymera.is_linux?
         if tests.include? 'c:'

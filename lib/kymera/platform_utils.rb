@@ -45,6 +45,15 @@ module Kymera
 
   end
 
+  def self.is_windows?
+    case RbConfig::CONFIG['host_os']
+      when /mswin|mingw/
+        true
+      else
+        false
+    end
+  end
+
 
   def self.ip_address
     ips = Socket.ip_address_list
