@@ -18,8 +18,11 @@ module Kymera
       #with the constructor
       def run_test(test, branch, options = @options, run_id = @run_id)
         result_bus = nil
+        puts "Checking to see if a results bus address was passed in..."
         unless @result_address.nil?
+          puts "A results bus address was passed in...generating socket..."
           result_bus = SZMQ.new.socket(@result_address, 'pub')
+          puts "Connecting to bus..."
           result_bus.connect
         end
 
@@ -29,7 +32,8 @@ module Kymera
           _options += " #{option}"
         end
 
-        switch_to_branch(branch)
+        puts "Switching to specified branch..."
+        # switch_to_branch(branch)
 
         puts "Running test: #{test}"
         io = Object::IO.popen("bundle exec cucumber #{test} #{_options}")
