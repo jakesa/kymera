@@ -2,10 +2,11 @@ require_relative '../../lib/kymera'
 
 zmq = Kymera::SZMQ.new
 sub_socket = zmq.socket('tcp://127.0.0.1:7001', 'sub')
-
+# sub_socket.connect
 #sub_socket2 = zmq.socket('tcp://127.0.0.1:7001', 'sub')
 
   sub_socket.subscribe('results') do |channel, message|
+    puts "got a meesage!"
     $stdout << "."
     puts channel
     puts message

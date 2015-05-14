@@ -7,7 +7,8 @@ gem 'chronic'
 gem 'mongo', '1.10.2'
 gem 'bson', '1.10.2'
 gem 'bson_ext', '1.10.2'
-
+gem 'rspec'
+gem 'pry', :group => :development
 gemspec
 
 

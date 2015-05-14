@@ -4,4 +4,4 @@ You are allowed to:
 1. Remove rake task
 2. Add existing rake tasks
 To add existing rake tasks automatically delete this file and reload the project.
---><RakeGroup description="" fullCmd="" taksId="rake"><RakeTask description="Build kymera-0.0.5.gem into the pkg directory" fullCmd="build" taksId="build" /><RakeTask description="Build and install kymera-0.0.5.gem into system gems" fullCmd="install" taksId="install" /><RakeTask description="Create tag v0.0.5 and build and push kymera-0.0.5.gem to Rubygems" fullCmd="release" taksId="release" /></RakeGroup></Settings>
+--><RakeGroup description="" fullCmd="" taksId="rake"><RakeTask description="Build kymera-0.1.7.gem into the pkg directory" fullCmd="build" taksId="build" /><RakeTask description="Build and install kymera-0.1.7.gem into system gems" fullCmd="install" taksId="install" /><RakeTask description="Create tag v0.1.7 and build and push kymera-0.1.7.gem to Rubygems" fullCmd="release" taksId="release" /></RakeGroup></Settings>

@@ -64,6 +64,13 @@ module Kymera
     ip
   end
 
+  def self.ruby_version
+    RbConfig::CONFIG["RUBY_VERSION_NAME"]
+  end
+
+  def self.os
+    "#{RbConfig::CONFIG["host_vendor"]} #{RbConfig::CONFIG["host_os"]} #{RbConfig::CONFIG["host_cpu"]}"
+  end
 
 
   def self.host_name
