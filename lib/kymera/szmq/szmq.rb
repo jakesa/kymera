@@ -47,7 +47,7 @@ module Kymera
       #end
     end
 
-    def start_pub_sub_proxy(front_end, back_end)
+    def start_pub_sub_proxy(front_end, back_end, capture = nil)
       trap ("INT") do
         puts "\nStopping proxy..."
         front_end.close
@@ -58,7 +58,14 @@ module Kymera
       front_end.bind
       back_end.bind
 
-      ZMQ::Device.new(front_end.send(:get_socket), back_end.send(:get_socket))
+      if capture.nil?
+        p "No capture"
+        ZMQ::Device.new(front_end.send(:get_socket), back_end.send(:get_socket))
+      else
+        p "Capture"
+        capture.bind
+        ZMQ::Device.new(front_end.send(:get_socket), back_end.send(:get_socket), capture.send(:get_socket))
+      end
 
 
     end

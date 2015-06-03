@@ -21,8 +21,13 @@ module Kymera
     # @todo need to add a check for the nodes existance before trying to register. We dont want multiple nodes of the same name in the database
     def register_node(node)
       mongo_driver = Kymera::MongoDriver.new(address, port, database, 'nodes')
+      if mongo_driver.exists?("node_id" => node[:node_id])
+        puts "#{node[:node_id]} is already registered"
+        return true
+      end
       register = {}
       register[:node_id] = node[:node_id]
+      register[:status] = node[:status]
       register[:ip_address] = node[:ip_address]
       register[:port] = node[:port]
       register[:register_date] = Time.now.to_datetime
@@ -101,6 +106,11 @@ module Kymera
     # @return [Array<Hash>] an array of hashes with the information of the registered nodes
     def get_registered_nodes
       @registered_nodes
+    end
+
+    def update_node_value(node_id, attribute_hash)
+      mongo_driver = Kymera::MongoDriver.new(address, port, database, 'nodes')
+      mongo_driver.update(node_id, attribute_hash)
     end
 
 

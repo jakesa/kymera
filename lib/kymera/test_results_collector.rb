@@ -37,6 +37,12 @@ module Kymera
     def finalize_results(test_count, run_id, results, runner, start_time)
       if runner.downcase == 'cucumber'
 
+        puts test_count
+        puts run_id
+        puts results
+        puts runner
+        puts start_time
+
         begin
           puts "Summarizing results.."
           r_results = Kymera::Cucumber::ResultsParser.summarize_results(results)
@@ -57,6 +63,7 @@ module Kymera
         rescue => e
           puts "There was an error in the logging process:"
           puts e
+          puts e.backtrace
         ensure
           run_id = "end_#{run_id}"
           puts "Sending results to client...#{run_id}"

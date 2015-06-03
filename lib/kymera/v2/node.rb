@@ -65,6 +65,7 @@ module Kymera
         test = tests.pop
         break if test.nil?
         log_id = Time.now.to_s
+        log_id << rand(999).to_s
         log[log_id] = {:status => "in progress", :worker => worker[:worker].id, :results =>''}
         tasks << Thread.new(worker, log, test, log_id, test_run) { |wkr, _log, _test, _log_id, _test_run|
           puts "sending test to the worker"
@@ -127,7 +128,7 @@ module Kymera
       # worker_id/hostname
       # RAM?
       # Ruby version?
-     {:node_id => @host_name, :ip_address => Kymera.ip_address, :port => @port, :processor_count => @num_of_workers, :node_os => Kymera.os, :ruby_version => Kymera.ruby_version}
+     {:node_id => @host_name, :ip_address => Kymera.ip_address, :port => @port, :processor_count => @num_of_workers, :node_os => Kymera.os, :ruby_version => Kymera.ruby_version, :status => @status}
     end
 
     def listen
@@ -137,6 +138,8 @@ module Kymera
         puts "The node is already listening"
         return
       end
+
+      puts "Warning: This node does not appear to be registered. Please make sure to register the node in order to properly receive messages from the test syste" unless @registered
 
       @listening_thread = Thread.new(@context) { |szmq_context|
         @sub_socket = szmq_context.socket("tcp://127.0.0.1:7001", "sub")
@@ -149,11 +152,11 @@ module Kymera
         @sub_socket.subscribe(@host_name) { |channel, message|
           # puts "got message.....parsing it..."
           begin
-            puts "This is the message as it came in:"
-            puts message
+            # puts "This is the message as it came in:"
+            # puts message
             message = JSON.parse message
-            puts "This is the message after it was parsed: "
-            puts message
+            # puts "This is the message after it was parsed: "
+            # puts message
             if message.has_key?("test")
               puts "got message"
               puts message["test"]["run_id"]
@@ -163,16 +166,20 @@ module Kymera
               @pub_socket.publish_message(message["config"]["run_id"], JSON.generate({:config=>{:message=>"ready"}}))
             elsif message.has_key?("test_run")
               @status = "busy"
-              puts "This is the message when it gets inside the test_run condition:"
-              puts message
-              results = JSON.generate({:results => {:run_id => message["test_run"]["run_id"], :text => start_test_run(message)}})
-              @pub_socket.publish_message(message["test_run"]["run_id"], results)
+              @registry.update_node_value(@host_name, {:status => "busy"})
+              # puts "This is the message when it gets inside the test_run condition:"
+              # puts message
+              results = JSON.generate({:results => {:run_id => message["test_run"]["run_id"], :bundle_id => message["test_run"]["bundle_id"], :text => start_test_run(message)}})
               @status = "ready"
+              @registry.update_node_value(@host_name, {:status => "ready"})
+              @pub_socket.publish_message(message["test_run"]["sender_id"], results)
             elsif message.has_key?("stop")
+              p "Received shutdown signal. Shutting down."
               @status = 'stopped'
+              @registry.update_node_value(@host_name, {:status => "stopped"})
               Thread.kill(Thread.current)
             else
-              puts "Got the following message:"
+              puts "Got the following message on the node:"
               puts "message: #{message}"
               @pub_socket.publish_message(message[message.keys[0]]["run_id"], "test received")
             end
@@ -267,30 +274,6 @@ module Kymera
   end
 end
 
-# class Test
-#
-#   attr_accessor :test, :worker, :status
-#
-#   def initialize(test, worker)
-#     @test = test
-#     @worker = worker
-#   end
-#
-#
-#   def self.assign_test(test, worker)
-#     Test.new(test, worker)
-#   end
-#
-#   def to_hash
-#     {:test => @test, :worker => @worker, :status => status}
-#   end
-#
-#   def to_json
-#     JSON.generate(self.to_hash)
-#   end
-#
-#
-# end
 
 
 

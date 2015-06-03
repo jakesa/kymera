@@ -87,6 +87,12 @@ module Kymera
       docs
     end
 
+    def update(id, attribute_hash)
+      coll = @db_client["#{@collection}"]
+      # binding.pry
+      coll.update({"#{@collection.chop}_id".to_sym => id}, {"$set" => attribute_hash})
+    end
+
 
   end
 

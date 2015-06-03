@@ -3,7 +3,7 @@ require_relative 'kymera/szmq/szmq'
 # require_relative 'kymera/cucumber/cucumber_test_runner'
 require_relative 'kymera/v2/cucumber/cucumber_test_runner'
 # require_relative 'kymera/worker'
-require_relative 'kymera/broker'
+# require_relative 'kymera/broker'
 require_relative 'kymera/client'
 # require_relative 'kymera/cucumber/test_parser'
 require_relative 'kymera/v2/cucumber/test_parser'
@@ -19,6 +19,7 @@ require_relative 'kymera/array_exten'
 require_relative '../lib/kymera/v2/worker_v2'
 require_relative '../lib/kymera/v2/registry'
 require_relative '../lib/kymera/v2/node'
+require_relative '../lib/kymera/v2/broker'
 
 module Kymera
 

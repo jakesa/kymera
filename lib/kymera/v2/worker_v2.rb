@@ -55,7 +55,7 @@ module Kymera
               @socket.close
               # need to kill thread?
               @status = "stopped"
-              return
+              break
             elsif message.has_key? "test_run"
               @status = "running test"
               @socket.send_message run_test(message)

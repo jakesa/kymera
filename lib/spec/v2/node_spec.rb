@@ -113,6 +113,7 @@ describe Kymera::Node do
     # sleep 4
     socket.publish_message(Kymera.host_name, JSON.generate({:test => {:run_id=>"test"}}))
     t.join(10)
+    Thread.kill(t)
     expect(result).to eq true
     node.shutdown_node
   end
@@ -149,12 +150,55 @@ describe Kymera::Node do
 
     }
     sleep 1
-    message = JSON.generate ({:config => {:branch => "default", :run_id => 'test'}})
+    message = JSON.generate ({:config => {:branch => "develop", :run_id => 'test'}})
     puts "sending config..."
     socket.publish_message(Kymera.host_name, message)
     puts "Sending test run..."
     t.join(90)
     socket.close
+    node.shutdown_node
+    expect(@results).to eq true
+  end
+
+  it 'should accept a multiple tests in a run' do
+    context = Kymera::SZMQ.new
+    node = Kymera::Node.new(Kymera::Config.new)
+    node.register_node
+    node.listen
+    socket = context.socket("tcp://127.0.0.1:7000", "pub")
+    socket.connect
+    @results = false
+    t = Thread.new(socket) { |p_socket|
+      ctx = Kymera::SZMQ.new
+      sub_socket = ctx.socket("tcp://127.0.0.1:7001", "sub")
+      # puts "waiting for reply"
+      sub_socket.subscribe("test") {|channel, message|
+        # puts "got reply"
+        # puts channel
+        puts message
+        message = JSON.parse message
+        if message.keys.include? "config"
+          puts "Sending test..."
+          test = JSON.generate({:test_run => {:test => ['~/apollo/source/integration_tests/features/login_and_session/login.feature:9', '~/apollo/source/integration_tests/features/login_and_session/login.feature:13', '~/apollo/source/integration_tests/features/login_and_session/login.feature:17'], :runner => "cucumber", :options => ['-p default'], :sender_id => "test"}})
+          puts test
+          p_socket.publish_message(Kymera.host_name, test)
+        elsif message.keys.include? "results"
+          puts message["results"]["text"]
+          @results = true
+          sub_socket.close
+          Thread.kill(Thread.current)
+        end
+      }
+
+    }
+    sleep 1
+    message = JSON.generate ({:config => {:branch => "develop", :run_id => 'test'}})
+    puts "sending config..."
+    socket.publish_message(Kymera.host_name, message)
+    puts "Sending test run..."
+    t.join(180)
+    socket.close
+    node.shutdown_node
     expect(@results).to eq true
   end
 
