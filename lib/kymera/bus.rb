@@ -3,20 +3,20 @@ require 'json'
 
 module Kymera
 
-  class ResultsBus
+  class Bus
 
     def initialize
       @config = Kymera::Config.new
       @zmq = Kymera::SZMQ.new
       # @incoming_socket = @zmq.socket("tcp://*:7000", 'xsub')
-      @incoming_socket = @zmq.socket("tcp://*:#{@config.result_bus["pub_port"]}", 'xsub')
-      @outgoing_socket = @zmq.socket("tcp://*:#{@config.result_bus["sub_port"]}", 'xpub')
+      @incoming_socket = @zmq.socket("tcp://*:#{@config.bus["pub_port"]}", 'xsub')
+      @outgoing_socket = @zmq.socket("tcp://*:#{@config.bus["sub_port"]}", 'xpub')
       # @outgoing_socket = @zmq.socket("tcp://*:7001", 'xpub')
     end
 
     def start_bus(logging = false)
-      puts @config.result_bus["pub_port"]
-      puts @config.result_bus["sub_port"]
+      puts @config.bus["pub_port"]
+      puts @config.bus["sub_port"]
       if logging
         puts "Results bus started..."
         puts "Listening for stuff"

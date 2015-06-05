@@ -1,6 +1,6 @@
 require_relative '../../lib/kymera'
 
-bus = Kymera::ResultsBus.new('tcp://*:7000', 'tcp://*:7001')
+bus = Kymera::Bus.new('tcp://*:7000', 'tcp://*:7001')
 bus.start_bus
 
 #context = ZMQ::Context.new

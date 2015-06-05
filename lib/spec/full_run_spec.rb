@@ -9,7 +9,7 @@ end
 
 #Results bus thread
 threads << Thread.new {
-  bus = Kymera::ResultsBus.new('tcp://*:7000', 'tcp://*:7001')
+  bus = Kymera::Bus.new('tcp://*:7000', 'tcp://*:7001')
   bus.start_bus
 }
 

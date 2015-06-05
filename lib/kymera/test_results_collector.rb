@@ -10,7 +10,7 @@ module Kymera
     def initialize
       @config = Kymera::Config.new
       @zmq = Kymera::SZMQ.new
-      @out_socket = @zmq.socket(@config.result_collector["result_bus_address"], 'pub')
+      @out_socket = @zmq.socket("tcp://#{@config.bus['address']}:#{@config.bus['pub_port']}", 'pub')
       @out_socket.connect
     end
 
@@ -57,17 +57,18 @@ module Kymera
           puts "Setting end time"
           end_time = Time.now
           puts "Starting database logging processes..."
-          Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time.to_s, pass_count, fail_count), @config.result_collector["mongodb_address"],
-                                          @config.result_collector["mongodb_port"].to_i, @config.result_collector["mongodb_database_name"], @config.result_collector["mongodb_collection_name"])
+          Kymera::MongoDriver.log_results(build_test_log(test_count, run_id, html_results, html_summary, start_time, end_time.to_s, pass_count, fail_count), @config.mongo["address"],
+                                          @config.mongo["port"].to_i, @config.results["apollo"]["results_db_name"], @config.results["apollo"]["collection_name"])
           puts "Setting run id..."
         rescue => e
           puts "There was an error in the logging process:"
           puts e
           puts e.backtrace
         ensure
-          run_id = "end_#{run_id}"
+          run_id = "#{run_id}"
           puts "Sending results to client...#{run_id}"
-          @out_socket.publish_message(run_id, r_results)
+          message = JSON.generate({:results => {:run_id => run_id, :text => r_results}})
+          @out_socket.publish_message(run_id, message)
         end
       end
     end

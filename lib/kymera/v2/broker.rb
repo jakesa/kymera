@@ -34,9 +34,9 @@ module Kymera
       # p 10
       @listening_thread = Thread.new(@context) { |szmq_context|
         # p 11
-        @sub_socket = szmq_context.socket("tcp://127.0.0.1:7001", "sub")
+        @sub_socket = szmq_context.socket("tcp://#{@config.bus["address"]}:#{@config.bus["sub_port"]}", "sub")
         # p 12
-        @pub_socket = szmq_context.socket("tcp://127.0.0.1:7000", "pub")
+        @pub_socket = szmq_context.socket("tcp://#{@config.bus["address"]}:#{@config.bus["pub_port"]}", "pub")
         # p 13
         @pub_socket.connect
         sleep 1
@@ -55,6 +55,10 @@ module Kymera
             if message.has_key?("test")
               # puts "got message"
               # puts message["test"]["run_id"]
+              p "##############################################################"
+              p "Received a test message from #{message["test"]["sender_id"]}"
+              p message
+              p "##############################################################"
               @pub_socket.publish_message message["test"]["sender_id"], 'test received'
             # p 18
             elsif message.has_key?("test_run")
@@ -63,6 +67,7 @@ module Kymera
               @log[run_id] = {}
               @log[run_id]["results"] = ''
               @log[run_id]["test_count"] = message["test_run"]["test"].length
+              p "The number of tests expected to run: #{@log[run_id]['test_count']}"
               @log[run_id]["runner"] = message["test_run"]["runner"]
               @log[run_id]["start_time"] = message["test_run"]["start_time"]
               @run_ids << run_id
@@ -72,7 +77,7 @@ module Kymera
               # possibly add functionality for queuing test runs later
               # need to add a check to see if there are any nodes actually registered in the system. If there are not, I need to inform the client
               if @status == 'busy'
-                # p 20
+                #TODO: I need to add functionality for test_run queuing
                 @pub_socket.publish_message(message["test_run"]["sender_id"], JSON.generate(:error => "There is currently a test run in progress"))
               else
                 # p 21
@@ -120,14 +125,6 @@ module Kymera
                 @log[message["results"]["run_id"]][message["results"]["bundle_id"].to_i][:results] = message["results"]["text"]
                 @log[message["results"]["run_id"]][message["results"]["bundle_id"].to_i][:end_time] = Time.now
               end
-              # p 30
-            else
-              # p 31
-              # p "These are the keys########################################"
-              # p message.keys
-              # puts "Got the following message:"
-              # puts "message: #{message}"
-              @pub_socket.publish_message(message[message.keys[0]]["run_id"], "test received")
             end
 
               # p 32
@@ -239,6 +236,7 @@ module Kymera
       # p run_id
       # p socket
       # p nodes
+      #TODO: I need to figure out what I want to do when there are no nodes available (either all are busy or there are none registered)
       nodes ||= @registry.get_registered_nodes
       # p nodes
       nodes.each do |node|
@@ -264,31 +262,8 @@ module Kymera
           @bundle_id +=1
           # p 107
         end
-
       end
     end
-
-    # #This is the start of the test run and is called when the broker receives a test run request
-    # def start_test_run(test_run)
-    #   puts 'Starting test run...'
-    #   test_run = JSON.parse(test_run)
-    #
-    #   Kymera::TestResultsCollector.new.finalize_results(test_run["test_count"], test_run["run_id"], results, test_run["runner"], test_run["start_time"])
-    #
-    # end
-    #
-    #
-    # #This gives a print out of the test run that was received
-    # def report_test_config(test_run)
-    #   puts "Running test with the following configuration:"
-    #   puts "Branch: #{test_run["branch"]}"
-    #   puts "Runner: #{test_run["runner"]}"
-    #   puts "Run ID: #{test_run["run_id"]}"
-    #   puts "Runner Options: #{test_run["options"]}"
-    #   puts "Total number tests: #{test_run["tests"].length}"
-    # end
-
-
   end
 
 end

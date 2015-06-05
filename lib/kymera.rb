@@ -4,17 +4,17 @@ require_relative 'kymera/szmq/szmq'
 require_relative 'kymera/v2/cucumber/cucumber_test_runner'
 # require_relative 'kymera/worker'
 # require_relative 'kymera/broker'
-require_relative 'kymera/client'
+require_relative 'kymera/v2/client'
 # require_relative 'kymera/cucumber/test_parser'
 require_relative 'kymera/v2/cucumber/test_parser'
-require_relative 'kymera/results_bus'
+require_relative 'kymera/bus'
 require_relative 'kymera/platform_utils'
 require_relative 'kymera/test_results_collector'
 # require_relative 'kymera/cucumber/cucumber_results_parser'
 require_relative 'kymera/v2/cucumber/cucumber_results_parser'
 # require_relative '../lib/kymera/cucumber/cucumber_html_parser'
 require_relative '../lib/kymera/v2/cucumber/cucumber_html_parser'
-require_relative 'kymera/config/config'
+require_relative 'kymera/v2/config/config'
 require_relative 'kymera/array_exten'
 require_relative '../lib/kymera/v2/worker_v2'
 require_relative '../lib/kymera/v2/registry'
@@ -46,7 +46,7 @@ module Kymera
 
   # Start the results bus
   def self.start_bus
-    Kymera::ResultsBus.new.start_bus
+    Kymera::Bus.new.start_bus
   end
 
   # Generate the default config.yaml file

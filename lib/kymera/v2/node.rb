@@ -16,7 +16,7 @@ module Kymera
       @port = port
       @status = 'stopped'
       # need to pass in the mongo db config here
-      @registry = Kymera::Registry.new('localhost', 27017, 'kymera', 'nodes')
+      @registry = Kymera::Registry.new(@config.mongo["address"], @config.mongo["port"], @config.node["db_name"], @config.node["collection_name"])
       @context = Kymera::SZMQ.new
       # @socket = @context.socket("inproc://worker", "request")
       # @socket.bind
@@ -142,9 +142,9 @@ module Kymera
       puts "Warning: This node does not appear to be registered. Please make sure to register the node in order to properly receive messages from the test syste" unless @registered
 
       @listening_thread = Thread.new(@context) { |szmq_context|
-        @sub_socket = szmq_context.socket("tcp://127.0.0.1:7001", "sub")
+        @sub_socket = szmq_context.socket("tcp://#{@config.bus["address"]}:#{@config.bus["sub_port"]}", "sub")
         # sleep 3
-        @pub_socket = szmq_context.socket("tcp://127.0.0.1:7000", "pub")
+        @pub_socket = szmq_context.socket("tcp://#{@config.bus["address"]}:#{@config.bus["pub_port"]}", "pub")
         # @sub_socket.connect
         @pub_socket.connect
         # @status = "ready"
@@ -158,8 +158,11 @@ module Kymera
             # puts "This is the message after it was parsed: "
             # puts message
             if message.has_key?("test")
-              puts "got message"
-              puts message["test"]["run_id"]
+              p "#####################################################"
+              p "Got a test message on the Node on channel: #{channel}"
+              p message["test"]["run_id"]
+              p "This is the message: #{message}"
+              p "####################################################"
               @pub_socket.publish_message message["test"]["run_id"], 'test received'
             elsif message.has_key?("config")
               configure(message)
@@ -178,15 +181,13 @@ module Kymera
               @status = 'stopped'
               @registry.update_node_value(@host_name, {:status => "stopped"})
               Thread.kill(Thread.current)
-            else
-              puts "Got the following message on the node:"
-              puts "message: #{message}"
-              @pub_socket.publish_message(message[message.keys[0]]["run_id"], "test received")
             end
 
           rescue => e
             puts "There was an error parsing the message: #{e}"
             puts e.backtrace
+            puts "This is the message that was received:"
+            puts message
           end
 
         }

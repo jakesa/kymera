@@ -1,21 +1,18 @@
 ---
-client:
-  broker_address: tcp://127.0.0.1:5550
-  results_bus_address: tcp://127.0.0.1:7001
+mongo:
+  address: '127.0.0.1'
+  port: 27017
 broker:
-  client_listening_port: '5550'
-  worker_listening_port: '5552'
-  internal_worker_port: '5551'
-  number_of_connections: 1
   channel: 'broker'
-worker:
-  broker_address: tcp://127.0.0.1:5552
-  result_bus_address: tcp://127.0.0.1:7000
   send_mongo_results: false
-  mongodb_address: 127.0.0.1
-  mongodb_port: 27017
-  mongodb_database_name: apollo
-  mongodb_collection_name: test_runs
-result_bus:
+node:
+  db_name: 'kymera'
+  collection_name: 'nodes'
+bus:
+  address: '127.0.0.1'
   pub_port: '7000'
   sub_port: '7001'
+results:
+  apollo:
+    results_db_name: 'apollo'
+    collection_name: 'test_runs'
