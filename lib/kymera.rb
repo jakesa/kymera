@@ -1,4 +1,5 @@
 require 'ffi-rzmq'
+require 'ruby-progressbar'
 require_relative 'kymera/szmq/szmq'
 # require_relative 'kymera/cucumber/cucumber_test_runner'
 require_relative 'kymera/v2/cucumber/cucumber_test_runner'
@@ -20,18 +21,19 @@ require_relative '../lib/kymera/v2/worker_v2'
 require_relative '../lib/kymera/v2/registry'
 require_relative '../lib/kymera/v2/node'
 require_relative '../lib/kymera/v2/broker'
+require_relative '../lib/kymera/v2/progress'
 
 module Kymera
 
   # Start a test run
-  def self.run_tests(tests, test_runner, options, branch, grouped = false, real_time = true)
-    Kymera::Client.new(real_time).run_tests(tests, test_runner, options, grouped, branch)
+  def self.run_tests(tests, test_runner, options, branch)
+    Kymera::Client.new.run_tests(tests, test_runner, options, branch)
 
   end
-
+  #TODO: need to comback and fix these
   # Start the test broker
   def self.start_broker
-    Kymera::Broker.new.start_broker
+    Kymera::Broker.new.listen
   end
 
   # Start a worker

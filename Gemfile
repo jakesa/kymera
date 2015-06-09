@@ -11,6 +11,7 @@ gem 'bson_ext', '1.11.1'
 # gem 'bson'
 # gem 'bson_ext'
 gem 'rspec'
+gem 'ruby-progressbar'
 gem 'pry', :group => :development
 gemspec
 

@@ -198,6 +198,7 @@ module Kymera
       while @listening_thread.status != 'sleep'
         sleep 0.1
       end
+      @registry.update_node_value(@host_name, {:status => "ready"})
       @status = "ready"
     end
 

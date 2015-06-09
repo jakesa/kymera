@@ -27,5 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'bson', '1.11.1'
   spec.add_dependency 'bson_ext', '1.11.1'
   spec.add_dependency 'chronic'
+  spec.add_dependency 'ruby-progressbar'
 
 end

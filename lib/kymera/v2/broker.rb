@@ -71,12 +71,13 @@ module Kymera
               @log[run_id]["runner"] = message["test_run"]["runner"]
               @log[run_id]["start_time"] = message["test_run"]["start_time"]
               @run_ids << run_id
+              monitor_test_runs
               # test_count = message["test_run"]["test"].length
               # check to see if this broker is currently in the middle of a test run (@status == 'busy')
               # if it is busy, send a message back to the user telling them there is currently a test run in progress
               # possibly add functionality for queuing test runs later
               # need to add a check to see if there are any nodes actually registered in the system. If there are not, I need to inform the client
-              if @status == 'busy'
+              if @status == 'busy' || @status == 'stopped'
                 #TODO: I need to add functionality for test_run queuing
                 @pub_socket.publish_message(message["test_run"]["sender_id"], JSON.generate(:error => "There is currently a test run in progress"))
               else
@@ -159,24 +160,24 @@ module Kymera
 
     def monitor_test_runs
       # p "#######################Starting the monitoring of test runs##########################"
-      @monitor_thread = Thread.new {
+      @monitor_thread ||= Thread.new {
         # p "Starting the loop"
         loop do
           # p "Inside the loop"
           # begin
           if @log.empty?
-            # p "Log is empty"
-
+            p "Log is empty"
           else
             # p "This is the log####################"
             # p @log
             # p "###################################"
+            p "The log is not empty"
             begin
             @log.each do |run_id, bundle|
               #if run_id[:status] != "done"
               if @log[run_id][:status] != "complete"
 
-                done = true
+                status = []
                 bundle.each do |k,v|
                   # puts "####################Bundles####################"
                   # puts k
@@ -185,14 +186,16 @@ module Kymera
                   # puts "################################################"
                   if k.class == Fixnum
                     if v[:end_time].nil?
-                      done = false
+                      status << false
+                    else
+                      status << true
                     end
                   end
                 end
 
-                if done
+                if !status.include?(false) && !status.empty?
 
-                  # puts "the log ########################"
+                  # puts "#####################the log reported this item done ########################"
                   # puts @log
                   # puts @log.keys
                   # p 24
@@ -238,7 +241,7 @@ module Kymera
       # p nodes
       #TODO: I need to figure out what I want to do when there are no nodes available (either all are busy or there are none registered)
       nodes ||= @registry.get_registered_nodes
-      # p nodes
+      p nodes
       nodes.each do |node|
         # p 104
         unless node["status"] == "busy"

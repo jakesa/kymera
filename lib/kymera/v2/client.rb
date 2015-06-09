@@ -29,24 +29,39 @@ module Kymera
       socket = @zmq.socket(@pub_address, 'pub')
       socket.connect
       sleep 1
+      progress = Kymera::Progress.new(tests.length)
+      progress.log "There are #{tests.length} to be run. Sending test run request"
       message = JSON.generate(test_run)
       socket.publish_message(@broker_channel, message)
-
       results_feed = @zmq.socket(@sub_address, 'sub')
-      results_feed.subscribe(@client_id) do |channel, results|
-          puts "###########Test Run Results########################"
-          results = JSON.parse(results)
-          if results.has_key?("error")
-            puts results["error"]
-            results_feed.close
-            report_time_taken
-            return false
-          end
-          puts results["results"]["text"]
-          results_feed.close
-          report_time_taken
-          return true
+      result = nil
+
+      t = Thread.new {
+          results_feed.subscribe(@client_id) do |channel, results|
+            results = JSON.parse(results)
+            if results.has_key?("error")
+              progress.log "There was an error with the test run request: "
+              progress.log results["error"]
+              results_feed.close
+              # report_time_taken(progress)
+              result = false
+              Thread.kill Thread.current
+            else
+              progress.log "################### Test Results #########################"
+              progress.log "Test run complete. Here are the results: "
+              progress.log results["results"]["text"]
+              results_feed.close
+              # report_time_taken(progress)
+              result = true
+              Thread.kill Thread.current
+            end
       end
+      }
+      while t.alive?
+        progress.refresh
+      end
+      $stdout.print "\n"
+      result
     end
 
 
@@ -77,9 +92,9 @@ module Kymera
       end
     end
 
-    def report_time_taken
+    def report_time_taken(progress)
       run_time = ((Time.now - @start_time)/60).to_s.match(/(\d+.\d{2})/)[0]
-      puts "Took #{run_time}m"
+      progress.log "Took #{run_time}m"
     end
 
   end
