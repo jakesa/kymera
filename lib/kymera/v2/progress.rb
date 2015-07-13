@@ -38,6 +38,14 @@ module Kymera
       end
     end
 
+    def finished?
+      @bar.finished?
+    end
+
+    def finish
+      @bar.finish
+    end
+
     private
 
     def colorize(status, &block)

@@ -11,7 +11,7 @@ module Kymera
       end
 
       def parse_tests
-        tests = dry_run(["cucumber", @tests, '--dry-run -f DryRunFormatter', @options].compact.join(" ")).split("\n")
+        tests = dry_run(["cucumber", @tests, '--dry-run -f DryRunFormatterByExample', @options].compact.join(" ")).split("\n")
         refined_tests =[]
         tests.delete_at(0) if tests[0].downcase.include?('using')
         tests.each do |test|

@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
-  spec.add_dependency 'cucumber'
+  spec.add_dependency 'cucumber', '1.3.17'
   spec.add_dependency 'ffi-rzmq', '2.0.1'
   spec.add_dependency 'json'
   spec.add_dependency 'mongo', '1.11.1'

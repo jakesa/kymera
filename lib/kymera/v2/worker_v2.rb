@@ -114,7 +114,7 @@ module Kymera
 
     def run_test(test_run)
       # execute the test_run passed in
-      puts test_run
+      # puts test_run
       runner = get_runner(test_run['test_run']["runner"], test_run['test_run']['options'], test_run['test_run']["run_id"])
       runner.run_test(test_run['test_run']['test'])
     end

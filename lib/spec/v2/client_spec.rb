@@ -25,7 +25,9 @@ describe Kymera::Client do
 
   it 'should start a test run with just the client' do
     client = Kymera::Client.new
-    results = client.run_tests('~/apollo/source/integration_tests/features/login_and_session', 'cucumber', ['-p default'], 'develop')
+    results = client.run_tests('~/apollo/source/integration_tests/features/login_and_session/login.feature', 'cucumber', ['-p default'], 'develop')
+    # results = client.run_tests('~/apollo/source/integration_tests/features/login_and_session', 'cucumber', ['-p default'], 'develop', true)
+    # results = client.run_tests('~/apollo/source/integration_tests/features/posting/list/postList_group_view.feature', 'cucumber', ['-p default'], 'develop', true)
     expect(results).to eq true
   end
 

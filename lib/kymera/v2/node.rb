@@ -101,9 +101,12 @@ module Kymera
       # This will likely be a string saying "ready" or "failed" depending on the out come if the branch update
       begin
         switch_to_branch(options["config"]["branch"])
+        @registry.update_node_value(@host_name, {:current_run_id => options["config"]["run_id"]})
+        @registry.update_node_value(@host_name, {:configured => true})
+        true
       rescue => e
         puts e
-        return "failed"
+        false
       end
     end
 
@@ -128,7 +131,8 @@ module Kymera
       # worker_id/hostname
       # RAM?
       # Ruby version?
-     {:node_id => @host_name, :ip_address => Kymera.ip_address, :port => @port, :processor_count => @num_of_workers, :node_os => Kymera.os, :ruby_version => Kymera.ruby_version, :status => @status}
+     {:node_id => @host_name, :ip_address => Kymera.ip_address, :port => @port, :processor_count => @num_of_workers,
+      :node_os => Kymera.os, :ruby_version => Kymera.ruby_version, :status => @status, :current_run_id => nil, :configured => false}
     end
 
     def listen
@@ -166,7 +170,7 @@ module Kymera
               @pub_socket.publish_message message["test"]["run_id"], 'test received'
             elsif message.has_key?("config")
               configure(message)
-              @pub_socket.publish_message(message["config"]["run_id"], JSON.generate({:config=>{:message=>"ready"}}))
+              # @pub_socket.publish_message(message["config"]["run_id"], JSON.generate({:config=>{:message=>"ready"}}))
             elsif message.has_key?("test_run")
               @status = "busy"
               @registry.update_node_value(@host_name, {:status => "busy"})
@@ -181,6 +185,8 @@ module Kymera
               @status = 'stopped'
               @registry.update_node_value(@host_name, {:status => "stopped"})
               Thread.kill(Thread.current)
+            else
+              #make an entry into the log that an unhandled message was received
             end
 
           rescue => e
@@ -188,6 +194,9 @@ module Kymera
             puts e.backtrace
             puts "This is the message that was received:"
             puts message
+            #put this here to restart the listening after a crash
+            #want to add an entry in the log here when I implement the logging feature
+            listen
           end
 
         }

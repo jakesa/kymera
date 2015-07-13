@@ -20,6 +20,7 @@ module Kymera
       @bundle_id = 0
       @run_ids = []
       @host_name = Kymera.host_name
+      @current_tests
     end
 
 
@@ -71,6 +72,7 @@ module Kymera
               @log[run_id]["runner"] = message["test_run"]["runner"]
               @log[run_id]["start_time"] = message["test_run"]["start_time"]
               @run_ids << run_id
+
               monitor_test_runs
               # test_count = message["test_run"]["test"].length
               # check to see if this broker is currently in the middle of a test run (@status == 'busy')
@@ -83,13 +85,20 @@ module Kymera
               else
                 # p 21
                 @status = "busy"
+                @current_tests = message["test_run"]["test"]
+                configure_nodes(message, run_id, @context, @config)
                 bundle_and_run_tests(message, run_id, @pub_socket)
                 # p 22
-                while !message["test_run"]["test"].empty? do
-                  # p 23
-                  # binding.pry
-                  bundle_and_run_tests(message, run_id, @pub_socket)
-                  sleep 5
+                if !message["test_run"]["test"].empty?
+                  Thread.new {
+                    while !message["test_run"]["test"].empty? do
+                      # p 23
+                      # binding.pry
+                      # p "trying to run tests"
+                      bundle_and_run_tests(message, run_id, @pub_socket)
+                      sleep 5
+                    end
+                  }
                 end
                   # sleep 20
               end
@@ -122,9 +131,13 @@ module Kymera
               #   p @log[message["results"]["run_id"]][message["results"]["bundle_id"].to_i]
               #   p message
               if @log.has_key?(message["results"]["run_id"])
-                # p "############Got results, Processing them part 2#################"
+                p "############Got results, Processing them part 2#################"
                 @log[message["results"]["run_id"]][message["results"]["bundle_id"].to_i][:results] = message["results"]["text"]
                 @log[message["results"]["run_id"]][message["results"]["bundle_id"].to_i][:end_time] = Time.now
+                p "###############"
+                p "sending update"
+                p "###############"
+                @pub_socket.publish_message message["results"]["run_id"],  JSON.generate({:status_update => Kymera::TestResultsCollector.new.summarize_results(message["results"]["text"])})
               end
             end
 
@@ -166,18 +179,19 @@ module Kymera
           # p "Inside the loop"
           # begin
           if @log.empty?
-            p "Log is empty"
+            # p "Log is empty"
           else
             # p "This is the log####################"
             # p @log
             # p "###################################"
-            p "The log is not empty"
+            # p "The log is not empty"
             begin
             @log.each do |run_id, bundle|
               #if run_id[:status] != "done"
               if @log[run_id][:status] != "complete"
 
                 status = []
+                # p bundle
                 bundle.each do |k,v|
                   # puts "####################Bundles####################"
                   # puts k
@@ -193,7 +207,7 @@ module Kymera
                   end
                 end
 
-                if !status.include?(false) && !status.empty?
+                if !status.include?(false) && !status.empty? && @current_tests.empty?
 
                   # puts "#####################the log reported this item done ########################"
                   # puts @log
@@ -211,6 +225,7 @@ module Kymera
                   end unless @log[run_id].nil?
                   # p "#################################These are the results ##################################"
                   # p @log[run_id]["results"]
+                  # if rerun == true, send all of the results to the test collector to be analysed. If there are any failures, send those tests off to get ran
                   Kymera::TestResultsCollector.new.finalize_results(@log[run_id]["test_count"],
                                                                     run_id,
                                                                     @log[run_id]["results"],
@@ -233,6 +248,22 @@ module Kymera
 
     end
 
+    def configure_nodes(test_run, run_id, context, config)
+      # pub_socket = context.socket("tcp://#{config.bus["address"]}:#{config.bus["pub_socket"]}", "pub")
+      pub_socket = context.socket("tcp://#{config.bus["address"]}:#{config.bus["pub_port"]}", "pub")
+      sleep 1
+      pub_socket.connect
+      sleep 3
+      nodes = @registry.get_registered_nodes
+      nodes.each do |node|
+        unless node["status"] == "busy"
+          message = JSON.generate ({:config => {:branch => test_run["test_run"]["branch"], :run_id => run_id}})
+          pub_socket.publish_message(node["node_id"], message)
+        end
+      end
+      pub_socket.close
+    end
+
     def bundle_and_run_tests(test_run, run_id, socket, nodes=nil)
       # p 103
       # p test_run
@@ -240,8 +271,9 @@ module Kymera
       # p socket
       # p nodes
       #TODO: I need to figure out what I want to do when there are no nodes available (either all are busy or there are none registered)
-      nodes ||= @registry.get_registered_nodes
-      p nodes
+      # nodes = nil
+      nodes = @registry.get_registered_nodes
+      # p nodes
       nodes.each do |node|
         # p 104
         unless node["status"] == "busy"
@@ -251,18 +283,24 @@ module Kymera
           # p node
           # p node["num_of_workers"]
           # p '################################'
-          0.upto node["num_of_workers"].to_i do
-            test = test_run["test_run"]["test"].pop
-            break if test.nil?
-            bundle << test
+          p node["current_run_id"]
+          p node["configured"]
+          p run_id
+          if node["current_run_id"] == run_id && node["configured"] == true
+            0.upto node["num_of_workers"].to_i do
+              test = test_run["test_run"]["test"].pop
+              break if test.nil?
+              bundle << test
+            end
+            # p 105
+            start_time = Time.now
+            socket.publish_message(node["node_id"], JSON.generate(:test_run => {:test => bundle, :run_id => run_id, :bundle_id => @bundle_id, :sender_id => @channel,
+                                                                             :options => test_run["test_run"]["options"], :runner => test_run["test_run"]["runner"]}))
+            # p 106
+            @log[run_id][@bundle_id] = {:node_id => node["node_id"], :start_time => start_time, :end_time => nil, :test_count => bundle.length, :test_bundle => bundle, :results => '', :status => "in progress"}
+            @bundle_id +=1
           end
-          # p 105
-          start_time = Time.now
-          socket.publish_message(node["node_id"], JSON.generate(:test_run => {:test => bundle, :run_id => run_id, :bundle_id => @bundle_id, :sender_id => @channel,
-                                                                           :options => test_run["test_run"]["options"], :runner => test_run["test_run"]["runner"]}))
-          # p 106
-          @log[run_id][@bundle_id] = {:node_id => node["node_id"], :start_time => start_time, :end_time => nil, :test_count => bundle.length, :test_bundle => bundle, :results => '', :status => "in progress"}
-          @bundle_id +=1
+
           # p 107
         end
       end

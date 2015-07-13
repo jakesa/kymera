@@ -86,6 +86,24 @@ module Kymera
         end
       end
 
+      def self.failed_scenarios(results)
+        results_array = results.split("\n")
+        # p results_array
+        sort_order = %w[scenario step]
+        sort_order.map do |group|
+          r_group_results = results_array.select {|l| l2 = l.scan(/^\d+ #{group}/); !l2.empty?}
+          sum_up_lines(r_group_results, group)
+        end.compact.join("\n")
+        scenarios = sum_up_failed_scenarios(results_array)
+        scenario_array = scenarios.split("\n")
+        scenario_array.delete_at 0
+        clean_scenarios = []
+        scenario_array.each do |scenario|
+          clean_scenarios << scenario.slice(/\/features\/.*:\d*/)
+        end
+        clean_scenarios
+      end
+
     end
 
   end

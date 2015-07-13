@@ -153,10 +153,10 @@ module Kymera
     end
 
     def send_message(message)
-      trap ("INT") do
-        puts "Received interrupt..."
-        @socket.close
-      end
+      # trap ("INT") do
+      #   puts "Received interrupt..."
+      #   @socket.close
+      # end
       if @socket_type == ZMQ::REQ
         @socket.send_string(message)
         reply = ''
@@ -176,10 +176,11 @@ module Kymera
     #TODO - add support for SUB sockets
     def receive(&block)
 
-      trap ("INT") do
-        puts "Received interrupt..."
-        @close = true
-      end
+      # trap ("INT") do
+      #   puts "\nReceived interrupt...inside szmq"
+      #   # @close = true
+      #   exit 0
+      # end
       received_message = ''
 
       if @socket_type == ZMQ::PULL
@@ -194,7 +195,7 @@ module Kymera
       elsif @socket_type == ZMQ::REP
         reply_message = ''
         loop do
-          break if @close
+          # break if @close
           unless @socket.recv_string(received_message) == -1
             @socket.recv_string(received_message)
             if block_given?

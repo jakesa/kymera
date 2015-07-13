@@ -34,6 +34,8 @@ module Kymera
       register[:num_of_workers] = node[:processor_count]
       register[:os] = node[:node_os]
       register[:ruby_version] = node[:ruby_version]
+      register[:current_run_id] = node[:current_run_id]
+      register[:configured] = node[:configured]
 
       mongo_driver.write_log(JSON.generate(register))
       if mongo_driver.exists?("node_id" => register[:node_id])
@@ -105,12 +107,15 @@ module Kymera
     # get the list of registered nodes
     # @return [Array<Hash>] an array of hashes with the information of the registered nodes
     def get_registered_nodes
+      update_nodes
       @registered_nodes
     end
 
     def update_node_value(node_id, attribute_hash)
       mongo_driver = Kymera::MongoDriver.new(address, port, database, 'nodes')
       mongo_driver.update(node_id, attribute_hash)
+      # update_nodes
+      # p @registered_nodes
     end
 
 
